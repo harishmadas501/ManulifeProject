@@ -272,10 +272,10 @@ sub {
 
 .player__iframe {
     position: relative;
-    width: 73%;
-    height: 72.9%;
+    width: 960px;
+    height: 540px;
     top: 0%;
-    left: 3%;
+    left: 0%;
     box-shadow: 0 10px 22px -5px black;
 }
 
@@ -777,8 +777,8 @@ div.promo__item.promo__item--bottom {
     }
 
     .player__wrapper {
-        width: 1184px;
-        height: 666px;
+        width: 1190px;
+        height: 665px;
     }
 
     .timeline,

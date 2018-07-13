@@ -48,7 +48,7 @@ var Translations = {
     "CtaButtonSettings": {
         "button1": {
             "card": "0598b6a6",
-            "label": "Contact",
+            "label": "Contact Me",
             "icon": "contact"
         },
         "button2": {
@@ -107,25 +107,25 @@ var Translations = {
      */
     "ChapterSettings": [
         {
-            "label": "introduction",
+            "label": "INTRODUCTION",
             "states": [
                 {
                     "cardId": "START",
-                    "width": 10
+                    "width": 13
                 }
             ]
         },
         {
-            "label": "helping you",
+            "label": "HELPING YOU",
             "states": [
                 {
                     "cardId": "26f3539e",
-                    "width": 10
+                    "width": 13
                 }    
             ]
         },
          {
-            "label": "personilization",
+            "label": "PERSONALIZATION",
             "states": [
                 {
                     "cardId": "129c0e3c",
@@ -140,7 +140,7 @@ var Translations = {
         },
         
         {
-            "label": "service tour",
+            "label": "SERVICE TOUR",
             "states": [
                 {
                     "cardId": "8af5f097",
@@ -153,7 +153,7 @@ var Translations = {
             ]
         },
         {
-            "label": "optional information",
+            "label": "OPTIONAL INFORMATION",
             "states": [
                 {
                     "cardId": "f4824bf8",
@@ -167,7 +167,7 @@ var Translations = {
             ]
         },
         {
-            "label": "questions",
+            "label": "QUESTIONS",
             "states": [
                 {
                     "cardId": "ddc44336",
@@ -184,7 +184,7 @@ var Translations = {
             ]
         },
         {
-            "label": "thanks",
+            "label": "THANKS",
             "states": [
                 {
                     "cardId": "End",

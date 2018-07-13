@@ -275,7 +275,7 @@ sub {
     width: 960px;
     height: 540px;
     top: 0%;
-    left: 0%;
+    left: 4%;
     box-shadow: 0 10px 22px -5px black;
 }
 
@@ -308,7 +308,7 @@ div.promo__item.promo__item--bottom {
 .promo--side .promo__item {
     width: 130px;
     height: 536px;
-    margin-left: -131%;
+    margin-left: -147%;
     margin-top: 91px;
 }
 
@@ -750,8 +750,8 @@ div.promo__item.promo__item--bottom {
 
     .cta--side.cta--2 .cta__button {
         height: 67px;
-		width: 76px;
-    }
+        width: 76px;
+     }
 
     .cta--side.cta--3 .cta__button {
         height: 67px;

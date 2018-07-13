@@ -752,8 +752,7 @@ border-bottom-right-radius: 6%;
     .promo--side .promo__image{
 		width:100%;
 		height:100%;
-	    	      
-    margin-top: -597px;
+	    	margin-top: 0px;
 	}
     
     .cta__icon {

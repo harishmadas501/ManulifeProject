@@ -226,7 +226,7 @@ border-bottom-right-radius: 6%;
     margin-bottom: 25px;
     width: 60px;
     height: 60px;
-    background: url("../images/cta_icons.png") no-repeat;
+    background: url("../images/side_buttons3.png") no-repeat;
     background-position: var(--cta-bgX) var(--cta-bgY);
     background-size: 500% 300%;
 }

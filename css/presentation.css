@@ -742,7 +742,7 @@ border-bottom-right-radius: 6%;
 /** 720p **/
 @media screen and (max-width: 2460px) {
     .header__preparedfor {
-        font-size: 14px;
+        font-size: 2px;
     }
 
     .fullscreen .cta--side .cta__label {

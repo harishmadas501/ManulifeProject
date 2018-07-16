@@ -384,11 +384,13 @@ border-bottom-right-radius: 6%;
 .timeline__button-icon {
     --timeline-bgX: 0%;
     --timeline-bgY: 50%;
-
+    
     display: block;
     margin: 0 auto;
-    width: 30px;
-    height: 30px;
+    margin-left: 21px;
+    margin-bottom: 7px;
+    width: 38px;
+    height: 37px;
     background: url("../images/timeline_controls.png") no-repeat;
     background-position-y: 50%;
     background-position: var(--timeline-bgX) var(--timeline-bgY);

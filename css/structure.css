@@ -272,10 +272,10 @@ sub {
 
 .player__iframe {
     position: relative;
-    width: 73%;
-    height: 72.9%;
+    width: 960px;
+    height: 540px;
     top: 0%;
-    left: 3%;
+    left: 6%;
     box-shadow: 0 10px 22px -5px black;
 }
 
@@ -306,10 +306,10 @@ div.promo__item.promo__item--bottom {
 }
 
 .promo--side .promo__item {
-    width: 100%;
+    width: 130px;
     height: 536px;
-    margin-left: -55%;
-	margin-top: 30px;
+    margin-left: -132%;
+    margin-top: 671px;
 }
 
 .promo--side .promo__item--top {

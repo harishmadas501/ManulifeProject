@@ -158,7 +158,7 @@ sub {
     width: 270px;
     min-height: 1px;
     position: relative;
-    left: 1%;
+    left: 23px;
     margin-top: 121px;
     margin-right: 2%;
 }
@@ -275,7 +275,7 @@ sub {
     width: 960px;
     height: 540px;
     top: 0%;
-    left: 4%;
+    left: 5%;
     box-shadow: 0 10px 22px -5px black;
 }
 
@@ -308,7 +308,7 @@ div.promo__item.promo__item--bottom {
 .promo--side .promo__item {
     width: 130px;
     height: 536px;
-    margin-left: -147%;
+    margin-left: -139%;
     margin-top: 91px;
 }
 

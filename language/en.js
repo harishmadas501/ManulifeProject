@@ -48,7 +48,7 @@ var Translations = {
     "CtaButtonSettings": {
         "button1": {
             "card": "0598b6a6",
-            "label": "Contact Me",
+            "label": "Contact",
             "icon": "contact"
         },
         "button2": {
@@ -107,88 +107,88 @@ var Translations = {
      */
     "ChapterSettings": [
         {
-            "label": "INTRODUCTION",
+            "label": "introduction",
             "states": [
                 {
                     "cardId": "START",
-                    "width": 12%
+                    "width": 10
                 }
             ]
         },
         {
-            "label": "HELPING YOU",
+            "label": "helping you",
             "states": [
                 {
                     "cardId": "26f3539e",
-                    "width": 12%
+                    "width": 10
                 }    
             ]
         },
          {
-            "label": "PERSONALIZATION",
+            "label": "personilization",
             "states": [
                 {
                     "cardId": "129c0e3c",
-                    "width": 7%
+                    "width": 10
                 },
                 {
                     "cardId": "fc8d1a3a"
                     ,
-                    "width": 7%%
+                    "width": 10
                 }
             ]
         },
         
         {
-            "label": "SERVICE TOUR",
+            "label": "service tour",
             "states": [
                 {
                     "cardId": "8af5f097",
-                    "width": 7%
+                    "width": 10
                 },
                  {
                     "cardId": "04ae54c4",
-                    "width": 7%
+                    "width": 10
                 }
             ]
         },
         {
-            "label": "OPTIONAL INFORMATION",
+            "label": "optional information",
             "states": [
                 {
                     "cardId": "f4824bf8",
-                    "width": 12%
+                    "width": 7
                 },
                 {
                     "cardId": "784e106c",
-                    "width": 12%
+                    "width": 8
                 }
                
             ]
         },
         {
-            "label": "QUESTIONS",
+            "label": "questions",
             "states": [
                 {
                     "cardId": "ddc44336",
-                    "width": 5%
+                    "width": 6
                 },
                 {
                     "cardId": "ccec9820",
-                    "width": 5%
+                    "width": 6
                 },
                 {
                     "cardId": "d0bc6b55",
-                    "width": 5%
+                    "width": 5
                 }
             ]
         },
         {
-            "label": "THANKS",
+            "label": "thanks",
             "states": [
                 {
                     "cardId": "End",
-                    "width": 7%
+                    "width": 8
                 }
             ]
         }

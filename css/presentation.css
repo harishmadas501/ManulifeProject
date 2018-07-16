@@ -349,7 +349,7 @@ border-bottom-right-radius: 6%;
 
 .timeline__controls {
     background-color:#0a0a0a;
-    border-color: #1f1919;
+    border-color: #dbdbdb;
 }
 
 .timeline__button {
@@ -384,13 +384,11 @@ border-bottom-right-radius: 6%;
 .timeline__button-icon {
     --timeline-bgX: 0%;
     --timeline-bgY: 50%;
-    
+
     display: block;
     margin: 0 auto;
-    margin-left: 8px;
-    margin-bottom: 7px;
-    width: 38px;
-    height: 37px;
+    width: 30px;
+    height: 30px;
     background: url("../images/timeline_controls.png") no-repeat;
     background-position-y: 50%;
     background-position: var(--timeline-bgX) var(--timeline-bgY);
@@ -416,8 +414,8 @@ border-bottom-right-radius: 6%;
 }
 
 .timeline__button-icon--play {
-    width: 19px;
-    height: 30px;
+    width: 25px;
+    height: 26px;
     background-position-x: calc((100%/26) * 0);
     --timeline-bgX: calc((100%/26) * 0);
 }
@@ -536,11 +534,11 @@ border-bottom-right-radius: 6%;
 }
 
 .timeline-progress-hover {
-    background-color: black;
+    background-color: #5e3820;
 }
 
 .timeline-progress {
-    background-color: black;
+    background-color: #704a1e;
 }
 
 .timeline-chapters--seen {
@@ -561,13 +559,12 @@ border-bottom-right-radius: 6%;
 
 .timeline-chapters__chapter,
 .fullscreen .timeline-chapters__chapter {
-    border-right: 1px solid #6b6a6a;
-    width: 9%;
+    border-right: 2px solid #c0c0c0;
 }
 
 .timeline-chapters__chapter:last-child {
     border: none;
- }
+}
 
 .timeline-volume__bg {
     background-color: #717171;
@@ -755,7 +752,8 @@ border-bottom-right-radius: 6%;
     .promo--side .promo__image{
 		width:100%;
 		height:100%;
-	    	margin-top: 0px;
+	    	      
+    margin-top: -597px;
 	}
     
     .cta__icon {
@@ -779,19 +777,18 @@ border-bottom-right-radius: 6%;
     }
 
     .timeline {
-        font-size: 14px;
+        font-size: 16px;
         width:1420px;
         height:60px;
     }
 
     .timeline__button--skip-back,
     .timeline__button--skip-forward {
-        margin-right: -2px;
-    	width: 57px;
+        width: 47px;
     }
 
     .timeline__button--play-pause {
-            width: 28px;
+        width: 45px;
     }
 
     .fullscreen .timeline__button-icon {
@@ -832,7 +829,7 @@ border-bottom-right-radius: 6%;
     .timeline__settings-quality,
     .timeline__settings-language,
     .timeline__settings-cc {
-        right: -12px;
+        right: 200px;
     }
 
     .timeline--no-volume .timeline__settings-popout,

@@ -43,7 +43,7 @@ sub {
 
 .header__logo {
     padding: 0px 0px 20px 10px;
-	margin-top:5px;
+	margin-top:17px;
     max-width: 100%;
 }
 
@@ -158,8 +158,8 @@ sub {
     width: 270px;
     min-height: 1px;
     position: relative;
-    left: 24px;
-    margin-top: 112px;
+    left: 1%;
+    margin-top: 121px;
     margin-right: 2%;
 }
 
@@ -272,10 +272,10 @@ sub {
 
 .player__iframe {
     position: relative;
-    width: 960px;
-    height: 540px;
+    width: 73%;
+    height: 72.9%;
     top: 0%;
-    left: 5%;
+    left: 3%;
     box-shadow: 0 10px 22px -5px black;
 }
 
@@ -306,10 +306,10 @@ div.promo__item.promo__item--bottom {
 }
 
 .promo--side .promo__item {
-    width: 130px;
+    width: 100%;
     height: 536px;
-    margin-left: -140%;
-    margin-top: 108px;
+    margin-left: -55%;
+	margin-top: 30px;
 }
 
 .promo--side .promo__item--top {
@@ -380,7 +380,7 @@ div.promo__item.promo__item--bottom {
 
 .timeline__controls--left {
     width: 335px;
-    border-right: 1px solid;
+    border-right: 5px solid;
 }
 
 .fullscreen .timeline__controls--left {
@@ -412,7 +412,7 @@ div.promo__item.promo__item--bottom {
 
 .timeline__controls--right {
     width: 405px;
-    border-left: 2px solid;
+    border-left: 5px solid;
 }
 
 .fullscreen .timeline__controls--right {
@@ -524,8 +524,6 @@ div.promo__item.promo__item--bottom {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    font-family: DINMedium, Arial, sans-serif; 
-    font-size: 13px;
     user-select: none;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -752,8 +750,8 @@ div.promo__item.promo__item--bottom {
 
     .cta--side.cta--2 .cta__button {
         height: 67px;
-        width: 76px;
-     }
+		width: 76px;
+    }
 
     .cta--side.cta--3 .cta__button {
         height: 67px;
@@ -771,7 +769,7 @@ div.promo__item.promo__item--bottom {
     }
 
     .promo--side .promo__item {
-        height: 167px;
+        height: 220px;
     }
 
     .promo--side .promo__item--top {
@@ -779,8 +777,8 @@ div.promo__item.promo__item--bottom {
     }
 
     .player__wrapper {
-        width: 1190px;
-        height: 617px;
+        width: 1184px;
+        height: 666px;
     }
 
     .timeline,
@@ -793,11 +791,11 @@ div.promo__item.promo__item--bottom {
     }
 
     .timeline__controls--left {
-        width: 140px;
+        width: 153px;
     }
 
     .timeline__controls--center {
-        width: 1167px;
+        width: 1150px;
     }
 
     .timeline--no-volume .timeline__controls--center {

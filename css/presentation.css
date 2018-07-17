@@ -774,6 +774,7 @@ border-bottom-right-radius: 6%;
         margin-top: calc((100% * (9/16)) / 2 - (130px / 2)); /* Calculate the margin-top based on half the video height, minus half the height of the splash icon */
         width: 125px;
         height: 130px;
+	background : url("../images/splash-play.png") no-repeat;
     }
 
     .timeline {

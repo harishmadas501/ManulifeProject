@@ -380,7 +380,7 @@ div.promo__item.promo__item--bottom {
 
 .timeline__controls--left {
     width: 335px;
-    border-right: 5px solid;
+    border-right: 1px solid;
 }
 
 .fullscreen .timeline__controls--left {
@@ -793,7 +793,7 @@ div.promo__item.promo__item--bottom {
     }
 
     .timeline__controls--left {
-        width: 153px;
+        width: 140px;
     }
 
     .timeline__controls--center {

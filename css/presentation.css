@@ -592,13 +592,13 @@ border-bottom-right-radius: 6%;
 .timeline__settings-language,
 .timeline__settings-cc {
     position: absolute;
-    top: -209px;
+    top: -158px;
     right: 340px;
     padding: 16px;
-    width: 220px;
-    height: 210px;
-    background-color: #2e2e2e;
-    font-size: 17px;
+    width: 154px;
+    height: 158px;
+    background-color: #0c0c0c;
+    font-size: 14px;
 }
 
 .fullscreen .timeline__settings-popout,
@@ -830,7 +830,7 @@ border-bottom-right-radius: 6%;
     .timeline__settings-quality,
     .timeline__settings-language,
     .timeline__settings-cc {
-        right: 200px;
+        right: -15px;
     }
 
     .timeline--no-volume .timeline__settings-popout,

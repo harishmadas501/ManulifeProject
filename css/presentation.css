@@ -593,13 +593,13 @@ border-bottom-right-radius: 6%;
 .timeline__settings-language,
 .timeline__settings-cc {
     position: absolute;
-    top: -161px;
+    top: -140px;
     right: 340px;
     padding: 8px;
     width: 166px;
-    height: 161px;
+    height: 140px;
     background-color: black;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .fullscreen .timeline__settings-popout,
@@ -631,10 +631,10 @@ border-bottom-right-radius: 6%;
 }
 
 .timeline__settings-heading {
-    margin-bottom: 12px;
+    margin-bottom: 0px;
     padding-bottom: 12px;
     border-bottom: 1px solid #818888;
-    line-height: 18px;
+    line-height: 15px;
 }
 
 .timeline__settings-heading--clickable,
@@ -660,7 +660,7 @@ border-bottom-right-radius: 6%;
 
 .timeline__settings-icon--left {
     float: left;
-    margin-right: 15px;
+    margin-right: 10px;
 }
 
 .timeline__settings-text {

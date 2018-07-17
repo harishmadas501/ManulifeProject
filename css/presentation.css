@@ -278,9 +278,9 @@ border-bottom-right-radius: 6%;
 
     margin: 0 auto;
     margin-top: calc((100% * (9/16)) / 2 - (182px / 2)); /* Calculate the margin-top based on half the video height, minus half the height of the splash icon */
-    width: 175px;
-    height: 182px;
-    background: url("../images/splash_play.png") no-repeat;
+    width: 960px;
+    height: 540px;
+    background: url("../images/splash-play.png") no-repeat;
     background-position: var(--splash-bgX) var(--splash-bgY);
     background-size: 200% 200%;
 }

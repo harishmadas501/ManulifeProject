@@ -527,7 +527,9 @@ div.promo__item.promo__item--bottom {
     user-select: none;
     white-space: nowrap;
     text-overflow: ellipsis;
-
+    font-size: 13px;
+    font-family: DINMedium, Arial, sans-serif;
+    text-transform: uppercase;
     -webkit-touch-callout: none;
     -khtml-user-select: none;
 }

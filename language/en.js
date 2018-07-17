@@ -157,11 +157,11 @@ var Translations = {
             "states": [
                 {
                     "cardId": "f4824bf8",
-                    "width": 11%
+                    "width": 10%
                 },
                 {
                     "cardId": "784e106c",
-                    "width": 11%
+                    "width": 10%
                 }
                
             ]
@@ -188,7 +188,7 @@ var Translations = {
             "states": [
                 {
                     "cardId": "End",
-                    "width": 7%
+                    "width": 9%
                 }
             ]
         }

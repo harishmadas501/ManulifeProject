@@ -349,7 +349,7 @@ border-bottom-right-radius: 6%;
 
 .timeline__controls {
     background-color:#0a0a0a;
-    border-color: #dbdbdb;
+    border-color: #333;
 }
 
 .timeline__button {
@@ -384,7 +384,7 @@ border-bottom-right-radius: 6%;
 .timeline__button-icon {
     --timeline-bgX: 0%;
     --timeline-bgY: 50%;
-
+    margin-right: 5px;
     display: block;
     margin: 0 auto;
     width: 30px;
@@ -559,7 +559,7 @@ border-bottom-right-radius: 6%;
 
 .timeline-chapters__chapter,
 .fullscreen .timeline-chapters__chapter {
-    border-right: 2px solid #c0c0c0;
+    border-right: 1px solid #333;
 }
 
 .timeline-chapters__chapter:last-child {

@@ -111,7 +111,7 @@ var Translations = {
             "states": [
                 {
                     "cardId": "START",
-                    "width": 10
+                    "width": 14%
                 }
             ]
         },
@@ -120,7 +120,7 @@ var Translations = {
             "states": [
                 {
                     "cardId": "26f3539e",
-                    "width": 10
+                    "width": 13%
                 }    
             ]
         },
@@ -129,12 +129,12 @@ var Translations = {
             "states": [
                 {
                     "cardId": "129c0e3c",
-                    "width": 10
+                    "width": 8%
                 },
                 {
                     "cardId": "fc8d1a3a"
                     ,
-                    "width": 10
+                    "width": 8%
                 }
             ]
         },
@@ -144,11 +144,11 @@ var Translations = {
             "states": [
                 {
                     "cardId": "8af5f097",
-                    "width": 10
+                    "width": 7%
                 },
                  {
                     "cardId": "04ae54c4",
-                    "width": 10
+                    "width": 7%
                 }
             ]
         },
@@ -157,11 +157,11 @@ var Translations = {
             "states": [
                 {
                     "cardId": "f4824bf8",
-                    "width": 7
+                    "width": 11%
                 },
                 {
                     "cardId": "784e106c",
-                    "width": 8
+                    "width": 11%
                 }
                
             ]
@@ -171,15 +171,15 @@ var Translations = {
             "states": [
                 {
                     "cardId": "ddc44336",
-                    "width": 6
+                    "width": 4%
                 },
                 {
                     "cardId": "ccec9820",
-                    "width": 6
+                    "width": 5%
                 },
                 {
                     "cardId": "d0bc6b55",
-                    "width": 5
+                    "width": 5%
                 }
             ]
         },
@@ -188,7 +188,7 @@ var Translations = {
             "states": [
                 {
                     "cardId": "End",
-                    "width": 8
+                    "width": 7%
                 }
             ]
         }

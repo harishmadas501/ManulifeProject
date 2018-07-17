@@ -233,7 +233,7 @@ border-bottom-right-radius: 6%;
 
 .fullscreen .cta__icon {
     margin-bottom: 0;
-    margin-right: calc(((50/230) * 100%) - 30px);
+    margin-right: calc(((50/230) * 100%) - 30px); n
     float: right;
 }
 

@@ -763,9 +763,10 @@ border-bottom-right-radius: 6%;
         height: 25px;
     }
 
-    .fullscreen .cta__icon {
+    .fullscreen .cta__icon 
+    {
         margin-right: calc(((50/230) * 100%) - 25px);
-		background: url(side_buttons3.png);
+        background: url("../images/side_button3.png") no-repeat;
     }
 
     .cta--side .cta__button {

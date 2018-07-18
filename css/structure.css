@@ -158,8 +158,8 @@ sub {
     width: 270px;
     min-height: 1px;
     position: relative;
-    left: 32px;
-    margin-top: 110px;
+    left: 1%;
+    margin-top: 121px;
     margin-right: 2%;
 }
 
@@ -661,7 +661,8 @@ div.promo__item.promo__item--bottom {
 
 .footer__links {
     float: right;
-    width: 33%;
+    width: 218px;
+	margin-right:45px;
 }
 
 .footer__copyright,

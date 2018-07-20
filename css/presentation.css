@@ -226,11 +226,7 @@ border-bottom-right-radius: 6%;
     margin-bottom: 25px;
     width: 60px;
     height: 60px;
-    background: url("../images/contact.png") no-repeat;
-	background: url("../images/website.PNG") no-repeat;
-	background: url("../images/Feedback.PNG") no-repeat;
-	background: url("../images/save.PNG") no-repeat;
-	background: url("../images/Share.PNG") no-repeat;
+    background: url("../images/cta_icons.png") no-repeat;
     background-position: var(--cta-bgX) var(--cta-bgY);
     background-size: 500% 300%;
 }

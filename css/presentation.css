@@ -227,6 +227,10 @@ border-bottom-right-radius: 6%;
     width: 60px;
     height: 60px;
     background: url("../images/contact.png") no-repeat;
+	background: url("../images/website.PNG") no-repeat;
+	background: url("../images/Feedback.PNG") no-repeat;
+	background: url("../images/save.PNG") no-repeat;
+	background: url("../images/Share.PNG") no-repeat;
     background-position: var(--cta-bgX) var(--cta-bgY);
     background-size: 500% 300%;
 }

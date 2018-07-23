@@ -555,6 +555,7 @@ div.promo__item.promo__item--bottom {
     float: left;
     width: 235px;
     height: 100%;
+	margin-top:-85px;
 }
 
 .timeline--no-volume .timeline-volume,

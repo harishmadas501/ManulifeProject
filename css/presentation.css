@@ -3,7 +3,7 @@
     font-family: "OpenSans_Regular";
 
     src: url("../fonts/OpenSans/Open_Sans_Normal.eot"); /* IE9 Compat Modes */
-    src: url("../fonts/OpenSans/Open_Sans_Normald41d.eot?#iefix") format("embedded-opentype"),
+    src: url("../fonts/OpenSans/Open_Sans_Normal.eot?#iefix") format("embedded-opentype"),
     url("../fonts/OpenSans/Open_Sans_Normal.woff2") format("woff2"), /* Pretty Modern Browsers */
     url("../fonts/OpenSans/Open_Sans_Normal.woff") format("woff"),
     url("../fonts/OpenSans/Open_Sans_Normal.ttf") format("truetype"), /* Safari, Android, iOS */
@@ -14,7 +14,7 @@
     font-family: "OpenSans_Bold";
 
     src: url("../fonts/OpenSans/Open_Sans_Bold.eot"); /* IE9 Compat Modes */
-    src: url("../fonts/OpenSans/Open_Sans_Boldd41d.eot?#iefix") format("embedded-opentype"),
+    src: url("../fonts/OpenSans/Open_Sans_Bold.eot?#iefix") format("embedded-opentype"),
     url("../fonts/OpenSans/Open_Sans_Bold.woff2") format("woff2"), /* Pretty Modern Browsers */
     url("../fonts/OpenSans/Open_Sans_Bold.woff") format("woff"),
     url("../fonts/OpenSans/Open_Sans_Bold.ttf") format("truetype"), /* Safari, Android, iOS */
@@ -35,14 +35,12 @@
 
 /** Main Styling (for 1080p) **/
 .body {
-    background-color: #cacfd6;
-    font-family: "OpenSans_Regular", Arial;.
+    background-color: #f0f0f0;
+    font-family: "OpenSans_Regular", Arial;
 }
 
 .top-wrapper {
-      background-image: "images/background_tile.jpg";
-   /** background-color: #bababa;**/
-    /**background: linear-gradient(to bottom right, #04c2f2, #8fea6b);**/
+    background: #717171 url("../images/background_tile.png");
 }
 
 .fullscreen .top-wrapper {
@@ -162,30 +160,18 @@
 
 .cta__button {
     color: #fff;
-    background-color: #0a0a0a;
-    border-radius: 0;
+    background-color: #f7d147;  
     border: 0;
     font-family: Arial;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    border-bottom: 0.5px solid #938e8e;
-}
-
-.cta__button--button-1{
-border-top-left-radius: 6%;
-border-top-right-radius: 6%;
-}
-
-.cta__button--button-5{
-border-bottom-left-radius: 6%;
-border-bottom-right-radius: 6%;
 }
 
 .cta__button:hover,
 .cta__button:active,
 .focusable.cta__button:focus {
-    background-color: #0a0a0a;
+    background-color: #F0AB00;
 }
 
 .fullscreen .cta--side .cta__button {
@@ -261,28 +247,13 @@ border-bottom-right-radius: 6%;
     background-position-x: 100%;
     --cta-bgX: 100%;
 }
-#viewerProfile {
-     position: relative;
-    top: -43px;
-    width: 960px;
-    left: 230px;
-    text-align: center;
-    font-family: DINRegular, Arial, sans-serif;
-    font-size: 16px;
-	color: #88a0b7;
-    
-}
-.strong{
-color:#FFFFFF;	
-}
-
 
 .player {
-   /** background-color: #dbdbdb; **/
+    background-color: #dbdbdb;
 }
 
 .player__splash {
-    opacity: 0;
+    opacity: 0.5;
     background-color: #000;
     cursor: pointer;
 }
@@ -318,27 +289,21 @@ color:#FFFFFF;
 }
 
 .promo__item {
-    background-color: #271818a8;
-    border-radius: 3px 3px 3px 3px;
+    background-color: #fff;
 }
-
-.promo__item:hover {
-    background-color: #07070763;
-}
-
 
 .promo--side .promo__image {
     background-size: 100% 100%;
 }
 
-.promo--side .promo__link:hover .promo__image,
-.promo--side .promo__link:active .promo__image,
+/* .promo--side .promo__link:hover .promo__image, */
+/* .promo--side .promo__link:active .promo__image, */
 .promo--side .focusable.promo__link:focus .promo__image {
     background-position: 100% 0;
 }
 
 .promo--bottom .promo__image {
-    background-size: 100% 100%;
+    background-size: 100% 200%;
 }
 
 .promo__link {
@@ -354,21 +319,21 @@ color:#FFFFFF;
 
 .timeline {
     color: #fff;
-    background-color:#0a0a0a;
+    background-color: #1f1f1f;
     font-size: 20px;
 }
 
-/**.timeline__cover {
+.timeline__cover {
     background: #00436e;
-} **/
+}
 
 .timeline__controls {
-    background-color:#0a0a0a;
-    border-color: #333;
+    background-color: #2e2e2e;
+    border-color: #dbdbdb;
 }
 
 .timeline__button {
-    background-color: #0a0a0a;
+    background-color: #2e2e2e;
     cursor: pointer;
 }
 
@@ -393,7 +358,7 @@ color:#FFFFFF;
 }
 
 .timeline__button--volume {
-    width: 52px;
+    width: 45px;
 }
 
 .timeline__button-icon {
@@ -402,9 +367,8 @@ color:#FFFFFF;
 
     display: block;
     margin: 0 auto;
-	margin-left:14px;
-    width: 36px;
-    height: 31px;
+    width: 30px;
+    height: 30px;
     background: url("../images/timeline_controls.png") no-repeat;
     background-position-y: 50%;
     background-position: var(--timeline-bgX) var(--timeline-bgY);
@@ -430,8 +394,8 @@ color:#FFFFFF;
 }
 
 .timeline__button-icon--play {
-    width: 25px;
-    height: 26px;
+    width: 35px;
+    height: 35px;
     background-position-x: calc((100%/26) * 0);
     --timeline-bgX: calc((100%/26) * 0);
 }
@@ -550,11 +514,11 @@ color:#FFFFFF;
 }
 
 .timeline-progress-hover {
-    background-color: black;
+    background-color: #00436e;
 }
 
 .timeline-progress {
-    background-color: #060606;
+    background-color: #0072b8;
 }
 
 .timeline-chapters--seen {
@@ -575,7 +539,7 @@ color:#FFFFFF;
 
 .timeline-chapters__chapter,
 .fullscreen .timeline-chapters__chapter {
-    border-right: 1px solid #333;
+    border-right: 2px solid #c0c0c0;
 }
 
 .timeline-chapters__chapter:last-child {
@@ -588,7 +552,7 @@ color:#FFFFFF;
 }
 
 .timeline-volume__level {
-    background-color: #704a1e;
+    background-color: #0072b8;
     border-radius: 5px;
 }
 
@@ -608,13 +572,13 @@ color:#FFFFFF;
 .timeline__settings-language,
 .timeline__settings-cc {
     position: absolute;
-    top: -150px;
+    top: -209px;
     right: 340px;
-    padding: 8px;
-    width: 157px;
-    height: 150px;
-    background-color: black;
-    font-size: 12px;
+    padding: 16px;
+    width: 220px;
+    height: 210px;
+    background-color: #2e2e2e;
+    font-size: 17px;
 }
 
 .fullscreen .timeline__settings-popout,
@@ -732,7 +696,6 @@ color:#FFFFFF;
 
 .footer__copyright {
     text-align: left;
-	margin-left:40px;
 }
 
 .footer__links {
@@ -740,14 +703,14 @@ color:#FFFFFF;
 }
 
 .footer__link {
-    color: #74777d;
+    color: #3d3d3d;
     text-decoration: none;
 }
 
 .footer__link:hover,
 .footer__link:active,
 .focusable.footer__link:focus {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .footer__link--image:hover,
@@ -1336,4 +1299,3 @@ color:#FFFFFF;
         text-decoration: none;
     }
 }
-

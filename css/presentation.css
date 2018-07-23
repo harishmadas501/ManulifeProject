@@ -3,7 +3,7 @@
     font-family: "OpenSans_Regular";
 
     src: url("../fonts/OpenSans/Open_Sans_Normal.eot"); /* IE9 Compat Modes */
-    src: url("../fonts/OpenSans/Open_Sans_Normal.eot?#iefix") format("embedded-opentype"),
+    src: url("../fonts/OpenSans/Open_Sans_Normald41d.eot?#iefix") format("embedded-opentype"),
     url("../fonts/OpenSans/Open_Sans_Normal.woff2") format("woff2"), /* Pretty Modern Browsers */
     url("../fonts/OpenSans/Open_Sans_Normal.woff") format("woff"),
     url("../fonts/OpenSans/Open_Sans_Normal.ttf") format("truetype"), /* Safari, Android, iOS */
@@ -14,7 +14,7 @@
     font-family: "OpenSans_Bold";
 
     src: url("../fonts/OpenSans/Open_Sans_Bold.eot"); /* IE9 Compat Modes */
-    src: url("../fonts/OpenSans/Open_Sans_Bold.eot?#iefix") format("embedded-opentype"),
+    src: url("../fonts/OpenSans/Open_Sans_Boldd41d.eot?#iefix") format("embedded-opentype"),
     url("../fonts/OpenSans/Open_Sans_Bold.woff2") format("woff2"), /* Pretty Modern Browsers */
     url("../fonts/OpenSans/Open_Sans_Bold.woff") format("woff"),
     url("../fonts/OpenSans/Open_Sans_Bold.ttf") format("truetype"), /* Safari, Android, iOS */
@@ -40,7 +40,9 @@
 }
 
 .top-wrapper {
-    background: #717171 url("../images/background_tile.png");
+      background-image: "images/background_tile.jpg";
+   /** background-color: #bababa;**/
+    /**background: linear-gradient(to bottom right, #04c2f2, #8fea6b);**/
 }
 
 .fullscreen .top-wrapper {
@@ -160,18 +162,30 @@
 
 .cta__button {
     color: #fff;
-    background-color: #f7d147;  
+    background-color: #0a0a0a;
+    border-radius: 0;
     border: 0;
     font-family: Arial;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    border-bottom: 1px solid #938e8e;
+}
+
+.cta__button--button-1{
+border-top-left-radius: 6%;
+border-top-right-radius: 6%;
+}
+
+.cta__button--button-5{
+border-bottom-left-radius: 6%;
+border-bottom-right-radius: 6%;
 }
 
 .cta__button:hover,
 .cta__button:active,
 .focusable.cta__button:focus {
-    background-color: #F0AB00;
+    background-color: #0a0a0a;
 }
 
 .fullscreen .cta--side .cta__button {
@@ -249,11 +263,11 @@
 }
 
 .player {
-    background-color: #dbdbdb;
+   /** background-color: #dbdbdb; **/
 }
 
 .player__splash {
-    opacity: 0.5;
+    opacity: 0;
     background-color: #000;
     cursor: pointer;
 }
@@ -289,21 +303,27 @@
 }
 
 .promo__item {
-    background-color: #fff;
+    background-color: #271818a8;
+    border-radius: 3px 3px 3px 3px;
 }
+
+.promo__item:hover {
+    background-color: #07070763;
+}
+
 
 .promo--side .promo__image {
     background-size: 100% 100%;
 }
 
-/* .promo--side .promo__link:hover .promo__image, */
-/* .promo--side .promo__link:active .promo__image, */
+.promo--side .promo__link:hover .promo__image,
+.promo--side .promo__link:active .promo__image,
 .promo--side .focusable.promo__link:focus .promo__image {
     background-position: 100% 0;
 }
 
 .promo--bottom .promo__image {
-    background-size: 100% 200%;
+    background-size: 100% 100%;
 }
 
 .promo__link {
@@ -319,21 +339,21 @@
 
 .timeline {
     color: #fff;
-    background-color: #1f1f1f;
+    background-color:#0a0a0a;
     font-size: 20px;
 }
 
-.timeline__cover {
+/**.timeline__cover {
     background: #00436e;
-}
+} **/
 
 .timeline__controls {
-    background-color: #2e2e2e;
+    background-color:#0a0a0a;
     border-color: #dbdbdb;
 }
 
 .timeline__button {
-    background-color: #2e2e2e;
+    background-color: #0a0a0a;
     cursor: pointer;
 }
 
@@ -394,8 +414,8 @@
 }
 
 .timeline__button-icon--play {
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 26px;
     background-position-x: calc((100%/26) * 0);
     --timeline-bgX: calc((100%/26) * 0);
 }
@@ -514,11 +534,11 @@
 }
 
 .timeline-progress-hover {
-    background-color: #00436e;
+    background-color: #5e3820;
 }
 
 .timeline-progress {
-    background-color: #0072b8;
+    background-color: #704a1e;
 }
 
 .timeline-chapters--seen {
@@ -552,7 +572,7 @@
 }
 
 .timeline-volume__level {
-    background-color: #0072b8;
+    background-color: #704a1e;
     border-radius: 5px;
 }
 
@@ -729,11 +749,15 @@
         line-height: 50px;
         font-size: 20px;
     }
+	.promo--side .promo__image{
+		width:100%;
+		height:100%;
+	}
 
     .cta__icon {
         margin-bottom: 15px;
-        width: 50px;
-        height: 50px;
+        width: 25px;
+        height: 25px;
     }
 
     .fullscreen .cta__icon {
@@ -741,7 +765,7 @@
     }
 
     .cta--side .cta__button {
-        font-size: 24px;
+        font-size: 10px;
     }
 
     .player__splash-image {
@@ -752,15 +776,17 @@
 
     .timeline {
         font-size: 16px;
+        width:1420px;
+        height:60px;
     }
 
     .timeline__button--skip-back,
     .timeline__button--skip-forward {
-        width: 77px;
+        width: 47px;
     }
 
     .timeline__button--play-pause {
-        width: 66px;
+        width: 45px;
     }
 
     .fullscreen .timeline__button-icon {
@@ -847,8 +873,8 @@
 
     .cta__icon {
         margin-bottom: 10px;
-        width: 40px;
-        height: 40px;
+        width: 20px;
+        height: 20px;
     }
 
     .fullscreen .cta__icon {
@@ -856,7 +882,7 @@
     }
 
     .cta--side .cta__button {
-        font-size: 18px;
+        font-size: 10px;
     }
 
     .player__splash-image {
@@ -987,8 +1013,8 @@
 
     .cta__icon {
         margin-bottom: 6px;
-        width: 25px;
-        height: 25px;
+        width: 15px;
+        height: 15px;
     }
 
     .fullscreen .cta__icon {
@@ -996,7 +1022,7 @@
     }
 
     .cta--side .cta__button {
-        font-size: 12px;
+        font-size: 6px;
     }
 
     .player__splash-image {
@@ -1165,8 +1191,8 @@
 /** Mobile devices in landscape and tablet devices in portrait **/
 @media screen and (max-width: 820px) {
     .cta__button {
-        border-right: 1px solid #fff;
-        border-bottom: 1px solid #fff;
+       /** border-right: 1px solid #fff;
+        border-bottom: 1px solid #fff; **/
     }
 }
 
@@ -1191,7 +1217,7 @@
 /** Mobile devices in portrait **/
 @media screen and (max-width: 700px) and (orientation: portrait) {
     .header__logo {
-        width: 300px;
+      /**  width: 300px; **/
     }
 
     .player__splash-image {
@@ -1222,7 +1248,7 @@
     }
 
     .cta--bottom .cta__button {
-        font-size: 15px;
+        font-size: 12px;
     }
 }
 

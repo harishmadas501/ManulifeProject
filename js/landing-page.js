@@ -2108,18 +2108,7 @@ var VolumeSlider = {
             }
         },
 		
-		volumeButtonClickEventHandler: function(e) {
-            var popout = $('#jsVolumeButtonPopout');
-            if ($('#jsCCSelectorPopout').is(':visible') || $('#jsQualitySelectorPopout').is(':visible') ||
-                    $('#jsLanguageSelectorPopout').is(':visible') || popout.is(':visible')){
-                $('#jsCCSelectorPopout').hide();
-                $('#jsQualitySelectorPopout').hide();
-                $('#jsLanguageSelectorPopout').hide();
-                popout.hide();
-            } else {
-                popout.show();
-            }
-        },
+		
 
         /**
          * Set the volume by clicking on the slider

@@ -2057,6 +2057,7 @@ var VolumeSlider = {
     /**
      * Hide the volume button and bar on devices where volume cannot be controlled by the player.
      */
+	 
     disable: function() {
         $("#jsVolume, #jsVolumeButton").hide();
         $("#jsTimeline").addClass("timeline--no-volume");
@@ -2104,6 +2105,19 @@ var VolumeSlider = {
             } else {
                 // Revert back to the original volume value
                 VolumeSlider.setVolume(VolumeSlider.mutedVolume);
+            }
+        },
+		
+		volumeButtonClickEventHandler: function(e) {
+            var popout = $('#jsVolumeButtonPopout');
+            if ($('#jsCCSelectorPopout').is(':visible') || $('#jsQualitySelectorPopout').is(':visible') ||
+                    $('#jsLanguageSelectorPopout').is(':visible') || popout.is(':visible')){
+                $('#jsCCSelectorPopout').hide();
+                $('#jsQualitySelectorPopout').hide();
+                $('#jsLanguageSelectorPopout').hide();
+                popout.hide();
+            } else {
+                popout.show();
             }
         },
 

@@ -593,13 +593,13 @@ border-bottom-right-radius: 6%;
 .timeline__settings-language,
 .timeline__settings-cc {
     position: absolute;
-    top: -209px;
+    top: -158px;
     right: 340px;
-    padding: 16px;
-    width: 220px;
-    height: 210px;
-    background-color: #2e2e2e;
-    font-size: 17px;
+    padding: 10px;
+    width: 161px;
+    height: 158px;
+    background-color: black;
+    font-size: 12px;
 }
 
 .fullscreen .timeline__settings-popout,

@@ -475,7 +475,7 @@ div.promo__item.promo__item--bottom {
 .timeline-progress 
 {
     position: absolute;
-    background: url(images/hi-res/timeline-marker-hi-res.png) 0px 0px no-repeat;
+    background: url(images/timeline-marker-hi-res.png) 0px 0px no-repeat;
     top: 0;
     left: 0;
     margin-left:-12px;

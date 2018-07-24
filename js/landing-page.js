@@ -207,7 +207,7 @@ var BufferStatus = {
     //State is the id of the interaction card as a string.
     updateStateBufferProgress: function(state, percentage) {
         if (typeof state === "string"){
-            $('#jsSectionInner'+state).css('width', percentage + "%");
+            $('#jsSectionInner'+state).css('left', percentage + "%");
         }
     }
 };

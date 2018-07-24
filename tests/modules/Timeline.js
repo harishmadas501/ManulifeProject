@@ -13,7 +13,7 @@
                     "states": [
                         {
                             "cardId": "START",
-                            "width": 10
+                            "left": 10
                         }
                     ]
                 },
@@ -22,11 +22,11 @@
                     "states": [
                         {
                             "cardId": "77a834f0",
-                            "width": 20
+                            "left": 20
                         },
                         {
                             "cardId": "c23a68c9",
-                            "width": 20
+                            "left": 20
                         }
                     ]
                 },
@@ -35,7 +35,7 @@
                     "states": [
                         {
                             "cardId": "7b0123a5",
-                            "width": 30
+                            "left": 30
                         }
                     ]
                 },
@@ -44,7 +44,7 @@
                     "states": [
                         {
                             "cardId": "7b0123a5",
-                            "width": 20
+                            "left": 20
                         }
                     ]
                 }

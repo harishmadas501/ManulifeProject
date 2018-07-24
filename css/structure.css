@@ -471,11 +471,20 @@ div.promo__item.promo__item--bottom {
     height: 100%;
 }
 
+#jsTimelineProgress.ui-slider-handle
+{
+    background: url(images/hi-res/timeline-marker-hi-res.png) 0px 0px no-repeat;
+    height: 82px;
+    top: -22px;
+    width: 24px;
+    border: none;
+    margin-left: -12px !important;
+}
+
 .timeline-progress-hover,
 .timeline-progress 
 {
     position: absolute;
-    background: url(images/timeline-marker-hi-res.png) 0px 0px no-repeat;
     top: 0;
     left: 0;
     height: 82px;

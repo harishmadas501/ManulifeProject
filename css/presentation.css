@@ -343,6 +343,16 @@ border-bottom-right-radius: 6%;
     font-size: 20px;
 }
 
+#jsTimelineProgress.ui-slider-handle
+{
+    background: url(images/hi-res/timeline-marker-hi-res.png) 0px 0px no-repeat;
+    height: 82px;
+    top: -22px;
+    width: 24px;
+    border: none;
+    margin-left: -12px !important;
+}
+
 /**.timeline__cover {
     background: #00436e;
 } **/

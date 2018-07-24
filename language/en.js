@@ -120,7 +120,7 @@ var Translations = {
             "states": [
                 {
                     "cardId": "26f3539e",
-                    "left": 12
+                    "width": 12
                 }    
             ]
         },
@@ -129,12 +129,12 @@ var Translations = {
             "states": [
                 {
                     "cardId": "129c0e3c",
-                    "left": 8
+                    "width": 8
                 },
                 {
                     "cardId": "fc8d1a3a"
                     ,
-                    "left": 8
+                    "width": 8
                 }
             ]
         },
@@ -144,11 +144,11 @@ var Translations = {
             "states": [
                 {
                     "cardId": "8af5f097",
-                    "left": 7
+                    "width": 7
                 },
                  {
                     "cardId": "04ae54c4",
-                    "left": 7
+                    "width": 7
                 }
             ]
         },
@@ -157,11 +157,11 @@ var Translations = {
             "states": [
                 {
                     "cardId": "f4824bf8",
-                    "left": 11
+                    "width": 11
                 },
                 {
                     "cardId": "784e106c",
-                    "left": 11
+                    "width": 11
                 }
                
             ]
@@ -171,15 +171,15 @@ var Translations = {
             "states": [
                 {
                     "cardId": "ddc44336",
-                    "left": 3
+                    "width": 3
                 },
                 {
                     "cardId": "ccec9820",
-                    "left": 6
+                    "width": 6
                 },
                 {
                     "cardId": "d0bc6b55",
-                    "left": 6
+                    "width": 6
                 }
             ]
         },
@@ -188,7 +188,7 @@ var Translations = {
             "states": [
                 {
                     "cardId": "End",
-                    "left": 8
+                    "width": 8
                 }
             ]
         }

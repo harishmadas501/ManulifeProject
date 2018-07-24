@@ -478,7 +478,6 @@ div.promo__item.promo__item--bottom {
     background: url(images/timeline-marker-hi-res.png) 0px 0px no-repeat;
     top: 0;
     left: 0;
-    margin-left:-12px;
     height: 82px;
     width : 24px;
  }

@@ -472,12 +472,15 @@ div.promo__item.promo__item--bottom {
 }
 
 .timeline-progress-hover,
-.timeline-progress {
+.timeline-progress 
+{
     position: absolute;
+    background: url(images/hi-res/timeline-marker-hi-res.png) 0px 0px no-repeat;
     top: 0;
     left: 0;
-    height: 100%;
-}
+    height: 82px;
+    width : 24px;
+ }
 
 .timeline-progress-hover {
     z-index: 10;

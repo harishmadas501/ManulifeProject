@@ -596,10 +596,10 @@ border-bottom-right-radius: 6%;
     top: -158px;
     right: 340px;
     padding: 10px;
-    width: 161px;
+    width: 156px;
     height: 158px;
     background-color: black;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .fullscreen .timeline__settings-popout,
@@ -875,7 +875,7 @@ border-bottom-right-radius: 6%;
     .timeline__settings-quality,
     .timeline__settings-language,
     .timeline__settings-cc {
-        right: 200px;
+        right: -2px;
     }
 
     .timeline--no-volume .timeline__settings-popout,

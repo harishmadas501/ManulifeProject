@@ -165,7 +165,8 @@ var BufferStatus = {
         var color = Timeline.SettingsJsonObject.BufferBarColor;
     },
 
-    updateBuffer: function () {
+    updateBuffer: function () 
+    {
         if(LanguageSelector.currentLanguageObj !== {}){
             try {
                 var videoTimes = VideoPlayerInterface.iframeWindow.rtc.player.getVideoTimes(),
@@ -195,18 +196,24 @@ var BufferStatus = {
         }
     },
 
-    clearOldBuffers: function (currentState) {
-        for (var i=0; i < BufferStatus.seenStates.length; i++){
+    clearOldBuffers: function (currentState) 
+    {
+        for (var i=0; i < BufferStatus.seenStates.length; i++)
+	{
             var state = BufferStatus.seenStates[i];
-            if(state !== currentState) {
+		
+            if(state !== currentState) 
+	    {
                 BufferStatus.updateStateBufferProgress(state,0);
             }
         }
     },
 
     //State is the id of the interaction card as a string.
-    updateStateBufferProgress: function(state, percentage) {
-        if (typeof state === "string"){
+    updateStateBufferProgress: function(state, percentage) 
+    {
+        if (typeof state === "string")
+	{
             $('#jsSectionInner'+state).css('width', percentage + "%");
         }
     }
@@ -214,19 +221,26 @@ var BufferStatus = {
 
 var ClosedCaptionSelector = {
 
-    initialise: function () {
-        ClosedCaptionSelector.events.initialise();
-        $('#jsCCOffTick').show();
-        $('#jsCCOnTick').hide();
-    },
+    initialise: function () 
+	{
+        	ClosedCaptionSelector.events.initialise();
+        	$('#jsCCOffTick').show();
+        	$('#jsCCOnTick').hide();
+    	},
 
-    setClosedCaptions: function(value){
+    setClosedCaptions: function(value)
+     {
         var captionsOn = VideoPlayerInterface.iframeWindow.rtc.player.vars.showCaptions;
-        if (value === 'on' && !captionsOn) {
+	    
+        if (value === 'on' && !captionsOn) 
+	{
             VideoPlayerInterface.iframeWindow.rtc.player.toggleCC();
             $('#jsCCOnTick').show();
             $('#jsCCOffTick').hide();
-        } else if (value === 'off' && captionsOn) {
+        } 
+	
+	else if (value === 'off' && captionsOn) 
+	{
             VideoPlayerInterface.iframeWindow.rtc.player.toggleCC();
             $('#jsCCOffTick').show();
             $('#jsCCOnTick').hide();
@@ -279,20 +293,24 @@ var ContrastProgress = {
         $('#' + divId).clone(true).prop('id', newDivId).appendTo('#' + appendToDivID);
     },
 
-    addFixedDiv: function () {
+    addFixedDiv: function () 
+    {
         $("#jsTimelineContrast").wrapInner("<div id='jsTimelineContrastFixed'></div>");
-        $("#jsTimelineContrastFixed").css('width', $("#jsTimelineContainer").width() + "px");
+        $("#jsTimelineContrastFixed").css('left', $("#jsTimelineContainer").left() + "px");
     },
 
-    setContrastTimelineProgress: function (progress){
-        $("#jsTimelineContrast").width($("#jsTimelineContainer").width() * progress);
+    setContrastTimelineProgress: function (progress)
+    {
+        $("#jsTimelineContrast").left($("#jsTimelineContainer").left() * progress);
     },
 
     /**
      * Update the labels used on the Contrast Progress bar, by cloning them into the contrast div
      */
-    updateLabels: function() {
-        if (!ContrastProgress.enabled) {
+    updateLabels: function() 
+    {
+        if (!ContrastProgress.enabled) 
+	{
             return;
         }
 
@@ -304,7 +322,8 @@ var ContrastProgress = {
          * @param {number} i       the index
          * @param {jQuery} chapter the chapter element
          */
-        $(".jsTimelineChapter").each(function appendChapterToContrast(i, chapter) {
+        $(".jsTimelineChapter").each(function appendChapterToContrast(i, chapter) 
+        {
             $(chapter).clone(true).appendTo("#jsTimelineContrastFixed");
         });
     }

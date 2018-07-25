@@ -550,6 +550,10 @@ border-bottom-right-radius: 6%;
 
 .timeline-progress {
     background-color: #060606;
+    background:url(images/timeline-marker-hi-res.png);
+    margin-left:-12px;
+    width:24px;
+    margin-top:-22px
 }
 
 .timeline-chapters--seen {

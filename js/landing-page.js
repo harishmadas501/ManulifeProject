@@ -1990,8 +1990,10 @@ var VolumeSlider = {
      *
      * @param value
      */
-    setVolume: function(value) {
-        if (typeof value == 'undefined') {
+    setVolume: function(value) 
+    {
+        if (typeof value == 'undefined') 
+        {
             return;
         }
 
@@ -2001,18 +2003,24 @@ var VolumeSlider = {
         $("#jsVolumeLevel").innerHeight(percent + "%");
         $("#jsVolumeButtonSRText").text("Volume (" + percent + "%)");
 
-        try {
-            if (VideoPlayerInterface.actions.volumeChange){
+        try 
+        {
+            if (VideoPlayerInterface.actions.volumeChange)
+            {
                 VideoPlayerInterface.actions.volumeChange(percent);
             }
-        } catch (exception) {
-            if (window.console) {
+        } 
+        catch (exception) 
+        {
+            if (window.console) 
+            {
                 console.error(exception);
             }
         }
 
         // Set volume logo bars
-        if (value > 0.85){
+        if (value > 0.85)
+        {
             // 3 Bars
             VolumeSlider.setVolumeIconBars(3)
         } else if (value > 0.5) {
@@ -2032,12 +2040,14 @@ var VolumeSlider = {
      *
      * @returns {number}
      */
-    getVolume: function() {
-        if ($("#jsVolumeLevel").width() === 0) {
+    getVolume: function() 
+    {
+        if ($("#jsVolumeLevel").height() === 0) 
+        {
             return 0;
         }
 
-        return $("#jsVolumeLevel").innerWidth() / $("#jsVolumeLevelContainer").width();
+        return $("#jsVolumeLevel").innerHeight() / $("#jsVolumeLevelContainer").height();
     },
 
     /**
@@ -2045,7 +2055,8 @@ var VolumeSlider = {
      *
      * @param bars
      */
-    setVolumeIconBars: function(bars) {
+    setVolumeIconBars: function(bars) 
+    {
         $('#jsVolumeButtonIcon')
             .removeClass("timeline__button-icon--volume-0")
             .removeClass("timeline__button-icon--volume-1")
@@ -2101,11 +2112,14 @@ var VolumeSlider = {
         volumeButtonClickEventHandler: function(e) 
         {
             // if volume is more than 0 then mute it, otherwise full volume
-            if (VolumeSlider.getVolume() > 0) {
+            if (VolumeSlider.getVolume() > 0) 
+            {
                 // Store the volume before muting so we can revert back to the original value when we unmute
                 VolumeSlider.mutedVolume = VolumeSlider.getVolume();
                 VolumeSlider.setVolume(0);
-            } else {
+            } 
+            else 
+            {
                 // Revert back to the original volume value
                 VolumeSlider.setVolume(VolumeSlider.mutedVolume);
             }
@@ -2114,14 +2128,16 @@ var VolumeSlider = {
         /**
          * Set the volume by clicking on the slider
          */
-        volumeLevelClick: function(e) {
+        volumeLevelClick: function(e) 
+        {
             var volumeBar = $("#jsVolumeLevelContainer"),
                 volumeBall = $("#jsVolumeBall");
 
-            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
-                var widthOfBar = volumeBar.innerWidth(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
-                    newVol = (pxFromLeftOfBar / widthOfBar);
+            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) 
+            {
+                var heightOfBar = volumeBar.innerHeight(),
+                    pxFromLeftOfBar = e.pageY - volumeBar.offset().bottom,
+                    newVol = (pxFromLeftOfBar / heightOfBar);
 
                 VolumeSlider.setVolume(newVol);
             }
@@ -2131,8 +2147,10 @@ var VolumeSlider = {
          * Toggle drag state if we're dragging the slider, and hide the popup if
          * releasing the slider outside the popup area
          */
-        documentMouseup: function(e) {
-            if (VolumeSlider.events.isDragging) {
+        documentMouseup: function(e) 
+        {
+            if (VolumeSlider.events.isDragging) 
+            {
                 e.preventDefault();
                 VolumeSlider.events.isDragging = false;
             }
@@ -2155,18 +2173,19 @@ var VolumeSlider = {
             if (VolumeSlider.events.isDragging) 
             {
                 var volumeBar = $("#jsVolumeLevelContainer"),
-                    widthOfBar = volumeBar.innerHeight(),
+                    heightOfBar = volumeBar.innerHeight(),
                     pxFromLeftOfBar = e.pageY - volumeBar.offset().bottom;
 
-                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) 
+                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= heightOfBar) 
                 {
-                    VolumeSlider.setVolume(pxFromLeftOfBar / widthOfBar);
+                    VolumeSlider.setVolume(pxFromLeftOfBar / heightOfBar);
                 }
             }
         }
     }
 };
-var iFrameCommunication = function() {
+var iFrameCommunication = function() 
+{
     var object = {
         initialize: init
     };

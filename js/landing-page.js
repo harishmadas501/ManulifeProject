@@ -2114,13 +2114,13 @@ var VolumeSlider = {
             var volumeBar = $("#jsVolumeLevelContainer"),
                 volumeBall = $("#jsVolumeBall");
 
-            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
-                var widthOfBar = volumeBar.innerHeight(),
-                    pxFromLeftOfBar = e.pageY - volumeBar.offset().top,
-                    newVol = (pxFromLeftOfBar / widthOfBar);
+//             if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
+//                 var widthOfBar = volumeBar.innerHeight(),
+//                     pxFromLeftOfBar = e.pageY - volumeBar.offset().top,
+//                     newVol = (pxFromLeftOfBar / widthOfBar);
 
-                VolumeSlider.setVolume(newVol);
-            }
+//                 VolumeSlider.setVolume(newVol);
+//             }
         },
 
         /**

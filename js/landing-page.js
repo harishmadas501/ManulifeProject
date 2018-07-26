@@ -2136,7 +2136,7 @@ var VolumeSlider = {
             if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) 
             {
                 var heightOfBar = volumeBar.innerHeight(),
-                    pxFromLeftOfBar = e.pageY - volumeBar.offset().bottom,
+                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
                     newVol = (pxFromLeftOfBar / heightOfBar);
 
                 VolumeSlider.setVolume(newVol);
@@ -2174,7 +2174,7 @@ var VolumeSlider = {
             {
                 var volumeBar = $("#jsVolumeLevelContainer"),
                     heightOfBar = volumeBar.innerHeight(),
-                    pxFromLeftOfBar = e.pageY - volumeBar.offset().bottom;
+                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
 
                 if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= heightOfBar) 
                 {
@@ -2186,7 +2186,8 @@ var VolumeSlider = {
 };
 var iFrameCommunication = function() 
 {
-    var object = {
+    var object = 
+    {
         initialize: init
     };
 
@@ -2195,9 +2196,12 @@ var iFrameCommunication = function()
     /**
      * Initialize iFrame communication
      */
-    function init() {
-        try {
-            if (VideoPlayerInterface.iframeWindow.rtc.utils.isPostMessageSupported()) {
+    function init() 
+    {
+        try 
+        {
+            if (VideoPlayerInterface.iframeWindow.rtc.utils.isPostMessageSupported()) 
+            {
                 postMessageCommunication();
             } else {
                 fallbackCommunication();

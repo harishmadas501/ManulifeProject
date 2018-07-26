@@ -2035,7 +2035,7 @@ var VolumeSlider = {
      * @returns {number}
      */
     getVolume: function() {
-        if ($("#jsVolumeLevel").width() === 0) {
+        if ($("#jsVolumeLevel").height() === 0) {
             return 0;
         }
 
@@ -2119,9 +2119,10 @@ var VolumeSlider = {
             var volumeBar = $("#jsVolumeLevelContainer"),
                 volumeBall = $("#jsVolumeBall");
 
-            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
-                var widthOfBar = volumeBar.innerWidth(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
+            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) 
+            {
+                var widthOfBar = volumeBar.innerHeight(),
+                    pxFromLeftOfBar = e.pageY - volumeBar.offset().bottom,
                     newVol = (pxFromLeftOfBar / widthOfBar);
 
                 VolumeSlider.setVolume(newVol);
@@ -2151,12 +2152,14 @@ var VolumeSlider = {
          * If dragging volume slider, adjust volume as necessary
          */
         documentMousemove: function(e) {
-            if (VolumeSlider.events.isDragging) {
+            if (VolumeSlider.events.isDragging) 
+            {
                 var volumeBar = $("#jsVolumeLevelContainer"),
-                    widthOfBar = volumeBar.innerWidth(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
+                    widthOfBar = volumeBar.innerHeight(),
+                    pxFromLeftOfBar = e.pageY - volumeBar.offset().bottom;
 
-                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) {
+                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) 
+                {
                     VolumeSlider.setVolume(pxFromLeftOfBar / widthOfBar);
                 }
             }

@@ -146,7 +146,8 @@ var BufferStatus = {
 
         bufferTimeline.children().remove();
 
-        $('.jsTimelineState').each(function () {
+        $('.jsTimelineState').each(function ()
+         {
             var stateTemplate = $(bufferSectionHTMLTemplate).clone();
             var stateName = $(this).data('state');
             var stateWidth = $(this).data('percent-width');
@@ -160,39 +161,51 @@ var BufferStatus = {
         BufferStatus.applyBufferSettings();
     },
 
-    applyBufferSettings: function () {
+    applyBufferSettings: function () 
+    {
         var opacity = Timeline.SettingsJsonObject.BufferBarOpacity;
         var color = Timeline.SettingsJsonObject.BufferBarColor;
     },
 
     updateBuffer: function () 
     {
-        if(LanguageSelector.currentLanguageObj !== {}){
+        if(LanguageSelector.currentLanguageObj !== {})
+	{
             try {
-                var videoTimes = VideoPlayerInterface.iframeWindow.rtc.player.getVideoTimes(),
-                    currentState = Timeline.getStateFromProgress(),
+                    var videoTimes = VideoPlayerInterface.iframeWindow.rtc.player.getVideoTimes(),
+                    
+		    currentState = Timeline.getStateFromProgress(),
                     chapters = VideoPlayerInterface.getVideoChapters();
 
-                //Checks if the video has reached the end and prevents the introduction buffer bar loading
-                if(Timeline.getProgress() !== 1){
-                    if(isInArray(currentState,BufferStatus.seenStates)){
-                        $.each(chapters, function(state, chapter) {
-                            if (videoTimes.buffered > chapter.start + chapter.duration) {
-                                BufferStatus.updateStateBufferProgress(state, 100);
-                            } else {
-                                BufferStatus.updateStateBufferProgress(
-                                    state,
+                    //Checks if the video has reached the end and prevents the introduction buffer bar loading
+                    if(Timeline.getProgress() !== 1)
+		    {
+                    	if(isInArray(currentState,BufferStatus.seenStates))
+			{
+                             $.each(chapters, function(state, chapter) 
+		             {
+                            	if (videoTimes.buffered > chapter.start + chapter.duration) 
+				{
+                                	BufferStatus.updateStateBufferProgress(state, 100);
+                            	} 
+				else 
+				{
+                                	BufferStatus.updateStateBufferProgress( state,
                                     ((videoTimes.buffered - chapter.start) / chapter.duration) * 100
                                 );
                             }
                         });
                     }
                 }
-                if(!isInArray(currentState,BufferStatus.seenStates)){
+                
+		if(!isInArray(currentState,BufferStatus.seenStates))
+		{
                     BufferStatus.seenStates.push(currentState);
                 }
-                BufferStatus.clearOldBuffers(currentState);
-            } catch (e) {}
+                
+		BufferStatus.clearOldBuffers(currentState);
+       
+	    } catch (e) {}
         }
     },
 
@@ -256,13 +269,15 @@ var ClosedCaptionSelector = {
             $('.jsTimelineSettingsCaption').click(ClosedCaptionSelector.events.ccItemClickEventHandler);
         },
 
-        closeCCMenu: function (e) {
+        closeCCMenu: function (e) 
+	{
             $('#jsSettingsButtonPopout').show();
             $('#jsCCSelectorPopout').hide();
             $("#jsCCMenuItem").focus();
         },
 
-        ccItemClickEventHandler: function(e) {
+        ccItemClickEventHandler: function(e) 
+	{
             //off or on
             var newValue = $(this).data('value');
             ClosedCaptionSelector.setClosedCaptions(newValue);
@@ -289,7 +304,8 @@ var ContrastProgress = {
         ContrastProgress.addFixedDiv();
     },
 
-    cloneDivAppendTo: function (divId, newDivId, appendToDivID) {
+    cloneDivAppendTo: function (divId, newDivId, appendToDivID) 
+    {
         $('#' + divId).clone(true).prop('id', newDivId).appendTo('#' + appendToDivID);
     },
 
@@ -331,12 +347,14 @@ var ContrastProgress = {
 
 var KeyboardInputController = {
 
-    initialise: function () {
+    initialise: function () 
+    {
         KeyboardInputController.initKeyboardControls();
         KeyboardInputController.hideOutlines();
     },
 
-    hideOutlines: function () {
+    hideOutlines: function () 
+    {
         $('a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]')
             .not('[disabled]').removeClass('focusable').addClass('no-focus');
     },
@@ -346,52 +364,73 @@ var KeyboardInputController = {
             .not('[disabled]').removeClass('no-focus').addClass('focusable');
     },
 
-    initKeyboardControls: function() {
+    initKeyboardControls: function() 
+    {
         var keyStart = {37: null, 39: null};
         var keyEnd = {37: null, 39: null};
 
         //Add a listener on the body of videoPlayer.php
-        $(document).keydown(function(e) {
+        $(document).keydown(function(e)
+	{
             //Then, if the element in focus isn't an input, select, textarea or form, allow the user to control the video player
             var inputActive = $("input, select, textarea, form").is(":focus");
             var currentDate = new Date();
 
-            if(inputActive === false) {
-                switch (e.keyCode) {
+            if(inputActive === false) 
+	    {
+                switch (e.keyCode) 
+		{
                     //Space bar
-                    case 32:
-                        e.preventDefault();
-                        if (VideoPlayerInterface.iframeWindow.rtc.player.video.status().paused) {
+                    case 32: e.preventDefault();
+                        
+			if (VideoPlayerInterface.iframeWindow.rtc.player.video.status().paused) 
+			{
                             VideoPlayerInterface.iframeWindow.rtc.player.controls.resume();
-                        } else {
+                        } 
+			else 
+			{
                             VideoPlayerInterface.iframeWindow.rtc.player.controls.pause();
                         }
 
                         VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.spacebar");
-                        break;
+                        
+			break;
                     //Left and right arrow keys
                     case 37:
-                    case 39:
-                        //Record the time the keypress started
-                        if(keyStart[e.keyCode] === null) {
+                    case 39://Record the time the keypress started
+                        
+			if(keyStart[e.keyCode] === null) 
+			{
                             keyStart[e.keyCode] = new Date();
                         }
 
                         //Then if the current time is a second after the key press started, rewind or fast-forward the video
-                        if(currentDate.getTime() > keyStart[e.keyCode].getTime() + 500) {
-                            if(VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration !== 0 && VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration < 10) {
-                                if(e.keyCode == 37) {
+                        
+			if(currentDate.getTime() > keyStart[e.keyCode].getTime() + 500) 
+			{
+                            if(VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration !== 0 && VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration < 10) 
+			    {
+                                if(e.keyCode == 37) 
+				{
                                     VideoPlayerInterface.iframeWindow.rtc.player.skipPrevious();
                                     VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.skip-previous");
-                                } else {
+                                } 
+				else 
+				{
                                     VideoPlayerInterface.iframeWindow.rtc.player.skipNext();
                                     VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.skip-next");
                                 }
-                            } else if(VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration !== 0) {
-                                if(e.keyCode == 37) {
+                            
+			    } 
+			    else if(VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration !== 0) 
+			    {
+                                if(e.keyCode == 37) 
+				{
                                     VideoPlayerInterface.iframeWindow.rtc.player.vars.currentTime -= 10;
                                     VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.rewind", "newTime=" + rtc.player.vars.currentTime);
-                                } else {
+                                } 
+				else 
+				{
                                     VideoPlayerInterface.iframeWindow.rtc.player.vars.currentTime += 10;
                                     VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.fast-forward", "newTime=" + rtc.player.vars.currentTime);
                                 }
@@ -416,31 +455,39 @@ var KeyboardInputController = {
             }
         });
 
-        $(document).keyup(function(e) {
+        $(document).keyup(function(e) 
+	{
             //If the element in focus isn't an input, select, textarea or form, allow the user to control the video player
             var inputActive = $("input, select, textarea, form").is(":focus");
             var currentDate = new Date();
 
-            if(inputActive === false) {
-                switch (e.keyCode) {
+            if(inputActive === false) 
+	    {
+                switch (e.keyCode) 
+		{
                     //Left and right arrow keys
                     case 37:
-                    case 39:
-                        keyStart[e.keyCode] = null;
+                    case 39:keyStart[e.keyCode] = null;
 
                         //If the user has pressed an arrow key twice, skip the section
-                        if(keyEnd[e.keyCode] !== null) {
-                            if(e.keyCode == 37 && currentDate.getTime() < keyEnd[37].getTime() + 1000) {
+                        if(keyEnd[e.keyCode] !== null) 
+			{
+                            if(e.keyCode == 37 && currentDate.getTime() < keyEnd[37].getTime() + 1000) 
+			    {
                                 VideoPlayerInterface.iframeWindow.rtc.player.skipPrevious();
                                 VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.skip-previous");
-                            } else if(e.keyCode == 39 && currentDate.getTime() < keyEnd[39].getTime() + 1000) {
+                            } 
+			    
+			    else if(e.keyCode == 39 && currentDate.getTime() < keyEnd[39].getTime() + 1000) 
+			    {
                                 VideoPlayerInterface.iframeWindow.rtc.player.skipNext();
                                 VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.skip-next");
                             }
                         }
 
                         //Record the time the keyup started
-                        if(keyEnd[e.keyCode] === null || currentDate.getTime() >= keyEnd[e.keyCode].getTime() + 1000) {
+                        if(keyEnd[e.keyCode] === null || currentDate.getTime() >= keyEnd[e.keyCode].getTime() + 1000) 
+			{
                             keyEnd[e.keyCode] = new Date();
                         }
                         break;
@@ -461,7 +508,8 @@ var LanguageSelector = {
      *
      * @param {Object} languageSettings settings for the language selector
      */
-    initialise: function(languageSettings) {
+    initialise: function(languageSettings) 
+    {
         LanguageSelector.settings = languageSettings;
 
         // Generate the language selector options
@@ -480,31 +528,34 @@ var LanguageSelector = {
      *
      * @param {object} languages the languages object as defined in the settings (langCode: langName)
      */
-    generateOptions: function(languages) {
-        var languageSelector = $("#jsLanguageSelectorPopout");
+    generateOptions: function(languages) 
+                     {
+        		var languageSelector = $("#jsLanguageSelectorPopout");
 
-        /**
+       /**
          * Generate a language option in the language selection menu
          *
          * @param {string} langCode the language code
          * @param {string} langName the friendly name/label of the language
          */
-        $.each(languages, function generateLangOption(langCode, langName) {
-            var option = $("<div class='timeline__settings-item jsTimelineSettingsLanguage no-focus' tabindex='0'></div>"),
-                label = $("<div class='timeline__settings-text'>" + langName + "</div>"),
-                icon = $("<div class='timeline__settings-icon timeline__settings-icon--right'></div>"),
-                iconInner = $("<div class='timeline__button-icon timeline__button-icon--tick jsSelectedLanguage'></div>");
+       			$.each(languages, function generateLangOption(langCode, langName) 
+			{
+            		   var option = $("<div class='timeline__settings-item jsTimelineSettingsLanguage no-focus' tabindex='0'></div>"),
+                
+			   label = $("<div class='timeline__settings-text'>" + langName + "</div>"),
+                	   icon = $("<div class='timeline__settings-icon timeline__settings-icon--right'></div>"),
+                	   iconInner = $("<div class='timeline__button-icon timeline__button-icon--tick jsSelectedLanguage'></div>");
 
-            option.data("language", langCode);
+            		   option.data("language", langCode);
 
-            icon.append(iconInner);
-            option.append(label);
-            option.append(icon);
-            option.append("<div class='clearfix'></div>");
+            	           icon.append(iconInner);
+            		   option.append(label);
+            		   option.append(icon);
+            		   option.append("<div class='clearfix'></div>");
 
-            languageSelector.append(option);
-        });
-    },
+            		   languageSelector.append(option);
+        	        });
+    		    },
 
     /**
      * Gets the initial language for the landing page.
@@ -516,19 +567,23 @@ var LanguageSelector = {
      *
      * @return {string} the language code to initially load
      */
-    getStartingLanguage: function() {
-        var availableLanguages = LanguageSelector.getNavigatorLanguages(navigator),
+    getStartingLanguage: function() 
+	{
+            var availableLanguages = LanguageSelector.getNavigatorLanguages(navigator),
             languageFromParam = LanguageSelector.getLanguageFromParam(window),
             languageFromLocale = LanguageSelector.getLanguageFromLocale(availableLanguages);
 
-        if (languageFromParam) {
-            return languageFromParam;
-        } else if (languageFromLocale) {
-            return languageFromLocale;
-        }
+            if (languageFromParam) 
+	    {
+            	return languageFromParam;
+            } 
+	    else if (languageFromLocale) 
+	    {
+            	return languageFromLocale;
+            }
 
-        return LanguageSelector.settings.defaultLanguage;
-    },
+       	   return LanguageSelector.settings.defaultLanguage;
+        },
 
     /**
      * Attempts to determine the language from the 'language' URL parameter
@@ -537,15 +592,19 @@ var LanguageSelector = {
      *
      * @return {string|boolean} the language code if a valid one was found, otherwise false
      */
-    getLanguageFromParam: function(windowObj) {
-        if (windowObj.location.search.search(/language=[a-z][a-z]/) != -1) {
-            var langArray = windowObj.location.search.match(/language=[a-z][a-z]/),
-                langCode = langArray[0].replace("language=", "");
+    getLanguageFromParam: function(windowObj) 
+	{
+            if (windowObj.location.search.search(/language=[a-z][a-z]/) != -1) 
+	    {
+            	var langArray = windowObj.location.search.match(/language=[a-z][a-z]/),
+                
+		langCode = langArray[0].replace("language=", "");
 
-            if (LanguageSelector.settings.languages.hasOwnProperty(langCode)) {
-                return langCode;
-            }
-        }
+            	if (LanguageSelector.settings.languages.hasOwnProperty(langCode)) 
+		{
+                	return langCode;
+            	}
+             }
 
         return false;
     },
@@ -557,20 +616,24 @@ var LanguageSelector = {
      *
      * @return {string|boolean} the language code if a valid one was found, otherwise false
      */
-    getLanguageFromLocale: function(languages) {
+    getLanguageFromLocale: function(languages) 
+     {
         var langCode = false;
 
-        if (languages) {
+        if (languages) 
+	{
             /**
              * Check the users locale is supported by the landing page
              *
              * @param {number} i the locale index
              * @param {string} language the language/locale code
              */
-            $.each(languages, function checkLocaleSupported(i, language) {
+            $.each(languages, function checkLocaleSupported(i, language) 
+            {
                 var locale = language.substr(0, 2).toLowerCase();
 
-                if (LanguageSelector.settings.languages.hasOwnProperty(locale)) {
+                if (LanguageSelector.settings.languages.hasOwnProperty(locale)) 
+		{
                     langCode = locale;
                     return false;
                 }
@@ -585,46 +648,60 @@ var LanguageSelector = {
      *
      * @param value
      */
-    setLanguage: function(langCode) {
-        $('.jsTimelineSettingsLanguage').each(function() {
-            if ($(this).data('language') === langCode) {
+    setLanguage: function(langCode) 
+    {
+        $('.jsTimelineSettingsLanguage').each(function() 
+ 	{
+            if ($(this).data('language') === langCode) 
+	    {
                 LanguageSelector.currentLanguageCode = $(this).data('language');
                 $(this).find('.jsSelectedLanguage').show();
-            } else {
+            } 
+	    else 
+	    {
                 $(this).find('.jsSelectedLanguage').hide();
             }
         });
     },
 
-    loadLanguageJSON: function(langCode){
+    loadLanguageJSON: function(langCode)
+     {
         var langFileUrl = "./language/" + langCode + ".js";
 
         /**
          * Updates the page based on the translations loaded
          */
-        $.getScript(langFileUrl, function loadTranslationsSuccess() {
+        $.getScript(langFileUrl, function loadTranslationsSuccess() 
+	{
             LanguageSelector.currentLanguageObj = Translations;
             LanguageSelector.updateLanguage(langCode);
         });
     },
 
-    updateLanguage: function(langCode) {
+    updateLanguage: function(langCode) 
+    {
         Timeline.render(LanguageSelector.currentLanguageObj.ChapterSettings);
         $("#jsTopWrapper").removeClass("top-wrapper--no-cta top-wrapper--no-promo");
         $("#jsBottomWrapper").removeClass("bottom-wrapper--no-cta bottom-wrapper--no-promo");
 
         // Checks whether promo or cta button content exists. If it doesn't then it adds in a css class to resize the other elements.
-        if (isEmpty(LanguageSelector.currentLanguageObj.CtaButtonSettings)) {
+        if (isEmpty(LanguageSelector.currentLanguageObj.CtaButtonSettings)) 
+	{
             $("#jsTopWrapper").addClass("top-wrapper--no-cta");
             $("#jsBottomWrapper").addClass("bottom-wrapper--no-cta");
-        } else {
+        } 
+	else 
+	{
             CtaButtons.render(LanguageSelector.currentLanguageObj.CtaButtonSettings);
         }
 
-        if (isEmpty(LanguageSelector.currentLanguageObj.PromoSettings)) {
+        if (isEmpty(LanguageSelector.currentLanguageObj.PromoSettings)) 
+	{
             $("#jsTopWrapper").addClass("top-wrapper--no-promo");
             $("#jsBottomWrapper").addClass("bottom-wrapper--no-promo");
-        } else {
+        } 
+	else 
+	{
             Promos.render(LanguageSelector.currentLanguageObj.PromoSettings);
         }
 
@@ -646,28 +723,36 @@ var LanguageSelector = {
         * If the iframe is present and its src path already contains language=xx
         * then replace the lang code with new code else append the language parameter to iframe src url
         */
-        if (document.getElementById('videoPlayerIframe') != null) {
+        if (document.getElementById('videoPlayerIframe') != null) 
+	{
             var iframe = document.getElementById("videoPlayerIframe"),
                 videoUrl = iframe.src;
 
-            if (videoUrl.search(/language=[a-z][a-z]/) != -1) {
+            if (videoUrl.search(/language=[a-z][a-z]/) != -1) 
+	    {
                 videoUrl = videoUrl.replace(/language=../, "language=" + langCode);
-            } else if ("en" != langCode) {
+            } 
+	    else if ("en" != langCode) 
+	    {
                 videoUrl += '&language=' + langCode;
             }
 
-            if (videoUrl != iframe.src) {
+            if (videoUrl != iframe.src) 
+	    {
                 iframe.src = videoUrl;
             }
         }
     },
 
-    updateLangTag: function(newLangCode){
+    updateLangTag: function(newLangCode)
+    {
         $('html').attr('lang', newLangCode);
     },
 
-    getTextByKey: function (key) {
-        if(typeof LanguageSelector.currentLanguageObj[key] === 'string'){
+    getTextByKey: function (key) 
+    {
+        if(typeof LanguageSelector.currentLanguageObj[key] === 'string')
+	{
             return LanguageSelector.currentLanguageObj[key];
         }
         return false;
@@ -680,22 +765,27 @@ var LanguageSelector = {
      *
      * @return {array|boolean}
      */
-    getNavigatorLanguages: function(nav) {
-        if (nav.languages) {
+    getNavigatorLanguages: function(nav) 
+    {
+        if (nav.languages) 
+	{
             return nav.languages
         }
 
         var languages = [];
 
-        if (nav.language) {
+        if (nav.language) 
+	{
             languages.push(nav.language);
         }
 
-        if (nav.userLanguage) {
+        if (nav.userLanguage) 
+	{
             languages.push(nav.userLanguage);
         }
 
-        if (nav.browserLanguage) {
+        if (nav.browserLanguage) 
+	{
             languages.push(nav.browserLanguage);
         }
 
@@ -709,18 +799,21 @@ var LanguageSelector = {
         /**
          * Link up the events and the event handlers
          */
-        initialise: function() {
+        initialise: function() 
+	{
             $('#jsLanguageMenuTitle').click(LanguageSelector.events.closeLanguageMenu);
             $('.jsTimelineSettingsLanguage').click(LanguageSelector.events.languageItemClickEventHandler);
         },
 
-        closeLanguageMenu: function (e) {
+        closeLanguageMenu: function (e) 
+	{
             $('#jsSettingsButtonPopout').show();
             $('#jsLanguageSelectorPopout').hide();
             $("#jsLangMenuItem").focus();
         },
 
-        languageItemClickEventHandler: function(e) {
+        languageItemClickEventHandler: function(e) 
+	{
             var newLang = $(this).data('language');
             LanguageSelector.loadLanguageJSON(newLang);
             LanguageSelector.setLanguage(newLang);
@@ -736,7 +829,8 @@ var Promos = {
     /**
      * Initialises the promo areas
      */
-    initialise: function() {
+    initialise: function() 
+    {
         Promos.events.initialise();
     },
 
@@ -745,9 +839,11 @@ var Promos = {
      *
      * @param {object} promos the promo areas to render
      */
-    render: function(promos) {
+    render: function(promos) 
+    {
         Promos.SettingsJsonObject = promos;
-        $(".jsPromoContainer").empty();
+        
+	$(".jsPromoContainer").empty();
 
         /**
          * Generates an individual promo area (by default, one for desktop and one for mobile breakpoints)
@@ -755,7 +851,8 @@ var Promos = {
          * @param {number} areaIndex the array index
          * @param {string} area      the area being generated
          */
-        $.each(["Desktop", "Mobile"], function generatePromoArea(areaIndex, area) {
+        $.each(["Desktop", "Mobile"], function generatePromoArea(areaIndex, area) 
+	{
             var i = 0;
 
             /**
@@ -764,7 +861,8 @@ var Promos = {
              * @param {string} name the internal name of the promo item
              * @param {object} promo the promo area object
              */
-            $.each(promos, function generatePromoItem(name, promo) {
+            $.each(promos, function generatePromoItem(name, promo) 
+            {
                 var item = $("<div class='promo__item'></div>"),
                     link = $("<a href='#' class='promo__link jsPromoLink'></a>"),
                     image = $("<div class='promo__image'></div>"),
@@ -794,19 +892,23 @@ var Promos = {
      *
      * @param {object} promoName the internal name of the promo area
      */
-    click: function(promoName) {
+    click: function(promoName) 
+    {
         var promo = Promos.SettingsJsonObject[promoName];
 
-        if (VideoPlayerInterface.iframeWindow) {
+        if (VideoPlayerInterface.iframeWindow) 
+	{
             VideoPlayerInterface.actions.pause();
 
             // Log the click event
-            VideoPlayerInterface.iframeWindow.rtc.utils.track(
+            VideoPlayerInterface.iframeWindow.rtc.utils.track
+	    (
                 "promo.click",
-                JSON.stringify({
-                    trackingName: promo.trackingName,
-                    url: promo.url
-                })
+                
+		JSON.stringify({
+                    		trackingName: promo.trackingName,
+                    		url: promo.url
+                	      })
             );
         }
 
@@ -814,12 +916,15 @@ var Promos = {
         window.open(promo.url, "_blank");
     },
 
-    events: {
-        initialise: function () {
+    events: 
+    {
+        initialise: function () 
+	{
             $(".jsPromoContainer").on("click", ".jsPromoLink", Promos.events.click);
         },
 
-        click: function(e) {
+        click: function(e) 
+	{
             Promos.click($(this).data("promo"));
         }
     }
@@ -828,20 +933,24 @@ var Promos = {
 /**
  * All the possible quality settings that must be accounted for
  */
-var QualitySettings = {
+var QualitySettings = 
+ {
     AUTO : "auto",
     LOW : "360p",
     MEDIUM : "540p",
     HIGH : "720p",
     FULL_HD : "1080p"
-}
+ }
 
-var QualitySelector = {
+var QualitySelector = 
+{
     /**
      * Initialise the quality selector
      */
-    initialise: function(startingQuality) {
-        if (VideoPlayerInterface.iframeWindow.rtc != null && VideoPlayerInterface.iframeWindow.rtc.player.quality.getLastResolution() != null) {
+    initialise: function(startingQuality) 
+    {
+        if (VideoPlayerInterface.iframeWindow.rtc != null && VideoPlayerInterface.iframeWindow.rtc.player.quality.getLastResolution() != null) 
+	{
             QualitySelector.loaded = true;
 
             // Events for quality selector
@@ -851,15 +960,21 @@ var QualitySelector = {
 
             // Set initial state.
             QualitySelector.removeItemSelection();
-            if (VideoPlayerInterface.iframeWindow.rtc.player.quality.getAuto()) {
+            
+	    if (VideoPlayerInterface.iframeWindow.rtc.player.quality.getAuto()) 
+	    {
                 QualitySelector.setAutoTrue();
-            } else {
+            } 
+	    else 
+	    {
                 QualitySelector.setSelected(VideoPlayerInterface.iframeWindow.rtc.player.quality.getSelected());
             }
 
             // Update auto selected resolution during playback.
-            VideoPlayerInterface.iframeWindow.rtc.events.subscribe('player.quality.lastResolution', function (e, data) {
-                if (VideoPlayerInterface.iframeWindow.rtc.player.quality.getAuto()) {
+            VideoPlayerInterface.iframeWindow.rtc.events.subscribe('player.quality.lastResolution', function (e, data) 
+	    {
+                if (VideoPlayerInterface.iframeWindow.rtc.player.quality.getAuto()) 
+		{
                     QualitySelector.removeItemSelection();
                     $("#jsQualityAutoTick").show();
                     QualitySelector.setButtonHd(data.lastResolution);
@@ -870,12 +985,14 @@ var QualitySelector = {
 
     loaded: false,
 
-    setButtonHd: function(quality) {
+    setButtonHd: function(quality) 
+    {
         var hdOn = VideoPlayerInterface.iframeWindow.rtc.player.quality.isHd(quality);
         $settingsBtn = $("#jsSettingsButtonIcon");
         $qualityIcon = $("#jsQualityMenuIcon, #jsQualityMenuAutoIcon");
 
-        if (hdOn) {
+        if (hdOn) 
+	{
             $settingsBtn.addClass('timeline__button-icon--settings--hd');
             $qualityIcon.addClass('timeline__button-icon--hd');
 
@@ -931,25 +1048,32 @@ var QualitySelector = {
         /**
          * Link up the events and the event handlers
          */
-        initialise: function() {
+        initialise: function() 
+	{
             $(".jsTimelineSettingsQuality").click(QualitySelector.events.selectQuality);
         },
 
-        selectQuality: function(e) {
+        selectQuality: function(e) 
+	{
             var qualityButton = $(this);
             var quality = qualityButton.data("quality");
 
             QualitySelector.removeItemSelection();
-            if (quality == "auto") {
+            
+	    if (quality == "auto") 
+	    {
                 VideoPlayerInterface.iframeWindow.rtc.player.quality.setAutoTrue();
                 QualitySelector.setAutoTrue();
-            } else {
+            } 
+	    else 
+	    {
                 VideoPlayerInterface.iframeWindow.rtc.player.quality.setSelected(quality);
                 QualitySelector.setSelected(quality);
             }
         },
 
-        closeQualityMenu: function (e) {
+        closeQualityMenu: function (e) 
+	{
             $('#jsSettingsButtonPopout').show();
             $('#jsQualitySelectorPopout').hide();
             $("#jsQualityMenuItem").focus();
@@ -957,9 +1081,11 @@ var QualitySelector = {
     }
 };
 
-var SettingsPanel = {
+var SettingsPanel = 
+{
 
-    initMenu: function() {
+    initMenu: function() 
+    {
         $("#jsQualityMenuTitle").click(QualitySelector.events.closeQualityMenu);
 
         if (!Timeline.SettingsJsonObject.ClosedCaptionsSupported) {
@@ -1301,7 +1427,8 @@ var Timeline = {
         Timeline.update();
     },
 
-    loadSettings: function(settings){
+    loadSettings: function(settings)
+    {
         Timeline.SettingsJsonObject = settings;
         SettingsPanel.initMenu();
     },
@@ -1311,7 +1438,8 @@ var Timeline = {
      *
      * @param {Array} chapters Chapters which should be rendered
      */
-    render: function(chapters) {
+    render: function(chapters) 
+    {
         var container = $("#jsTimelineContainer"),
             start = 0;
 
@@ -1323,7 +1451,8 @@ var Timeline = {
          * @param {number} i        Chapter index
          * @param {Object} settings Chapter settings
          */
-        $.each(chapters, function createChapter(i, settings) {
+        $.each(chapters, function createChapter(i, settings) 
+	{
             var chapter = $("<div class='jsTimelineChapter timeline-chapters__chapter'></div>"),
                 label = $("<span class='jsTimelineChapterLabel timeline-chapters__label'>" + settings.label + "</span>"),
                 width = 0;
@@ -1334,7 +1463,8 @@ var Timeline = {
              * @param {number} j     State index
              * @param {Object} state State settings
              */
-            $.each(settings.states, function createChapterState(j, state) {
+            $.each(settings.states, function createChapterState(j, state) 
+            {
                 var div = $("<div class='timeline-chapters__state jsTimelineState'></div>");
 
                 div.data("percent-width", state.width)
@@ -1360,7 +1490,8 @@ var Timeline = {
     /**
      * Set the video progress along the timeline
      */
-    setProgress: function(progress) {
+    setProgress: function(progress) 
+    {
         Timeline.progress = progress;
         Timeline.update();
     },
@@ -1368,17 +1499,20 @@ var Timeline = {
     /**
      * Get the video progress along the timeline
      */
-    getProgress: function() {
+    getProgress: function() 
+    {
         return Timeline.progress;
     },
 
     /**
      * Update the timeline
      */
-    update: function(checkMainWidth) {
+    update: function(checkMainWidth) 
+    {
         var timelineWidth = $("#jsTimelineContainer").width();
 
-        if (checkMainWidth) {
+        if (checkMainWidth) 
+	{
             timelineWidth = checkMainWidth;
         }
 
@@ -1388,10 +1522,13 @@ var Timeline = {
         $("#jsTimelineProgress").width(progressWidth);
 
         /* On mobile devices, ensure the progress ball appears within the screen boundaries */
-        if ($("#jsTimelineIndicator").is(":visible") && $("#jsTimelineCover").length === 0) {
+        if ($("#jsTimelineIndicator").is(":visible") && $("#jsTimelineCover").length === 0) 
+	{
             $("#jsTimelineIndicatorBall").show();
             $("#jsTimelineIndicator").width(Math.min(Math.max(progressWidth, ballWidth / 2), timelineWidth - ballWidth / 2));
-        } else {
+        } 
+	else 
+	{
             $("#jsTimelineIndicatorBall").hide();
         }
 
@@ -1402,11 +1539,15 @@ var Timeline = {
     /**
      * Update the play/pause button to have the appropriate icon
      */
-    updatePlayPauseButton: function() {
-        if (VideoPlayerInterface.isPlaying) {
+    updatePlayPauseButton: function() 
+    {
+        if (VideoPlayerInterface.isPlaying) 
+	{
             $('#jsPlayPauseSRText').text('Pause');
             $('#jsPlayPauseButton span').removeClass('timeline__button-icon--play').addClass('timeline__button-icon--pause');
-        } else {
+        } 
+	else 
+	{
             $('#jsPlayPauseSRText').text('Play');
             $('#jsPlayPauseButton span').removeClass('timeline__button-icon--pause').addClass('timeline__button-icon--play');
         }
@@ -1415,8 +1556,10 @@ var Timeline = {
     /**
      * Remove the timeline cover element that blocks interaction before the video is loaded
      */
-    enableTimelineIfNecessary: function() {
-        if ($("#jsTimelineCover") && VideoPlayerInterface.isSourceSet) {
+    enableTimelineIfNecessary: function()
+    {
+        if ($("#jsTimelineCover") && VideoPlayerInterface.isSourceSet) 
+	{
             $("#jsTimelineCover").remove();
         }
     },
@@ -1424,20 +1567,24 @@ var Timeline = {
     /**
      * Add timeline cover element that blocks interaction on video timeline bar
      */
-    disableTimelineIfNecessary: function() {
+    disableTimelineIfNecessary: function() 
+    {
         $('<div id="jsTimelineCover" class="timeline__cover"></div>').prependTo('#jsTimeline');
     },
 
     /**
      * Update the timeline state and progress
      */
-    updateStateAndProgress: function(state, progress) {
-        if (state == "END") {
+    updateStateAndProgress: function(state, progress) 
+    {
+        if (state == "END") 
+	{
             Timeline.setProgress(1);
             return;
         }
 
-        if (Timeline.events.isDragging) {
+        if (Timeline.events.isDragging) 
+	{
             return;
         }
 
@@ -1449,7 +1596,8 @@ var Timeline = {
         Timeline.setProgress(totalTimelinePercent);
         Timeline.updateMobileActiveState(stateTimelineElem);
 
-        if (!customErrorOpen) {
+        if (!customErrorOpen) 
+	{
             Timeline.enableTimelineIfNecessary();
         }
     },
@@ -1462,10 +1610,12 @@ var Timeline = {
      *
      * @return {number} Timeline progress
      */
-    calculateProgressInState: function(state, progress) {
+    calculateProgressInState: function(state, progress) 
+    {
         var chapters = VideoPlayerInterface.getVideoChapters();
 
-        if (progress > 0 && chapters && Object.keys(chapters).length > 1) {
+        if (progress > 0 && chapters && Object.keys(chapters).length > 1) 
+	{
             var videoDuration = VideoPlayerInterface.getVideoDuration(),
                 chapters = VideoPlayerInterface.getVideoChapters(),
                 chapter = chapters[state];
@@ -1476,12 +1626,16 @@ var Timeline = {
         return progress;
     },
 
-    updateSeenChapterColors: function(){
+    updateSeenChapterColors: function()
+    {
         var currentProgress = Timeline.getProgress() * 100;
-        $(".jsTimelineState").each(function (){
+        $(".jsTimelineState").each(function ()
+	{
             var stateNameFriendly = $(this).data('state');
             var percentStart = parseFloat($(this).data('percent-start'));
-            if (percentStart < currentProgress) {
+            
+	    if (percentStart < currentProgress) 
+	    {
                 $(this).siblings(".jsTimelineChapterLabel").addClass("timeline-chapters--seen");
             }
         });
@@ -1490,7 +1644,8 @@ var Timeline = {
     /**
      * Updates the active state on the timeline, which is shown on mobile devices
      */
-    updateMobileActiveState: function(stateElem) {
+    updateMobileActiveState: function(stateElem) 
+    {
         var stateLabel = $(stateElem).parent().find(".jsTimelineChapterLabel").text();
         $("#jsTimelineMobileActiveState").text(stateLabel);
     },
@@ -1498,17 +1653,23 @@ var Timeline = {
     /**
      * Get the timeline state from the video progress
      */
-    getStateFromProgress: function() {
+    getStateFromProgress: function() 
+    {
         var pc_progress = Timeline.getProgress() * 100;
         var state = 'START';
-        $('.jsTimelineState').each(function() {
+       
+	$('.jsTimelineState').each(function() 
+	{
             var start = parseFloat($(this).data('percent-start'));
             var end = parseFloat($(this).data('percent-start')) + parseFloat($(this).data('percent-width'));
-            if (pc_progress >= start && pc_progress < end) {
+            
+	    if (pc_progress >= start && pc_progress < end) 
+	    {
                 state = $(this).data('state');
             }
         });
-        return state;
+        
+	return state;
     },
 
     /**
@@ -1519,45 +1680,55 @@ var Timeline = {
      *
      * @return {number} Progress through the current state as a percentage
      */
-    getProgressInState: function(chapters, videoDuration, progress) {
-        var state = Timeline.getStateFromProgress(),
+    getProgressInState: function(chapters, videoDuration, progress) 
+    {
+            var state = Timeline.getStateFromProgress(),
             stateTimelineElem = Timeline.getStateElementByName(state),
             progress = Timeline.getProgress(),
             stateStart = parseFloat(stateTimelineElem.data('percent-start')),
             stateWidth = parseFloat(stateTimelineElem.data('percent-width')),
             progressInState = ((progress * 100) - stateStart) / stateWidth;
 
-        if (Object.keys(chapters).length == 1) {
-            return progressInState;
-        }
+            if (Object.keys(chapters).length == 1) 
+	    {
+               return progressInState;
+            }
 
-        return (chapters[state].start + (chapters[state].duration * progressInState)) / videoDuration;
+            return (chapters[state].start + (chapters[state].duration * progressInState)) / videoDuration;
     },
 
     /**
      * Get a state HTML element by it's friendly name
      */
-    getStateElementByName: function(stateName) {
+    getStateElementByName: function(stateName) 
+    {
         var state = null;
-        $('.jsTimelineState').each(function(key, value) {
-            if (typeof stateName != 'undefined' && stateName == $(value).data('state')) {
+        $('.jsTimelineState').each(function(key, value) 
+	{
+            if (typeof stateName != 'undefined' && stateName == $(value).data('state')) 
+	    {
                 state = $(this);
             }
         });
-        return state;
+        
+	return state;
     },
 
     /**
      * Update the video
      */
-    updateInVideo: function() {
+    updateInVideo: function() 
+    {
         var state = Timeline.getStateFromProgress(),
             chapters = VideoPlayerInterface.getVideoChapters(),
             videoDuration = VideoPlayerInterface.getVideoDuration();
 
-        if (state in chapters) {
+        if (state in chapters) 
+	{
             VideoPlayerInterface.actions.timelinePosition(Timeline.getProgressInState(chapters, videoDuration));
-        } else {
+        } 
+	else 
+	{
             VideoPlayerInterface.actions.selectState(state);
         }
     },
@@ -1569,7 +1740,8 @@ var Timeline = {
         /**
          * Initialise events for timeline
          */
-        initialise: function() {
+        initialise: function() 
+	{
             $('#jsTimelineContainer')
                 .mousemove(Timeline.events.timelineMousemove)
                 .mouseleave(Timeline.events.timelineMouseleave)
@@ -1600,24 +1772,30 @@ var Timeline = {
         /**
          * Show faint background when hovering over timeline.
          */
-        timelineMousemove: function(e) {
+        timelineMousemove: function(e) 
+	{
             $('#jsTimelineProgressHover').width(e.pageX - $('#jsTimelineProgress').offset().left);
         },
 
         /**
          * Hide faint background when leaving timeline.
          */
-        timelineMouseleave: function() {
+        timelineMouseleave: function() 
+	{
             $('#jsTimelineProgressHover').width(0);
         },
 
         /**
          * Handle the timeline click event
          */
-        timelineClick: function(e) {
+        timelineClick: function(e) 
+	{
             e.preventDefault();
-            var container = $('#jsTimelineIndicator');
-            if (!container.is(e.target) && container.has(e.target).length === 0) {
+           
+	    var container = $('#jsTimelineIndicator');
+            
+	    if (!container.is(e.target) && container.has(e.target).length === 0) 
+	    {
                 var timeline_width = $('#jsTimelineContainer').width();
                 Timeline.setProgress((e.pageX - $('#jsTimelineProgress').offset().left) / timeline_width);
                 Timeline.updateInVideo();
@@ -1627,7 +1805,8 @@ var Timeline = {
         /**
          * Handle the timeline indicator mousedown event
          */
-        timelineIndicatorMousedown: function(e) {
+        timelineIndicatorMousedown: function(e) 
+	{
             e.preventDefault();
             Timeline.events.isDragging = true;
         },
@@ -1635,8 +1814,10 @@ var Timeline = {
         /**
          * Handle the document mouseup event
          */
-        documentMouseup: function(e) {
-            if (Timeline.events.isDragging) {
+        documentMouseup: function(e) 
+	{
+            if (Timeline.events.isDragging)
+	    {
                 e.preventDefault();
                 Timeline.events.isDragging = false;
                 Timeline.updateInVideo();
@@ -1646,11 +1827,15 @@ var Timeline = {
         /**
          * Handle the document mousemove event
          */
-        documentMousemove: function(e) {
-            if (Timeline.events.isDragging) {
+        documentMousemove: function(e) 
+	{
+            if (Timeline.events.isDragging)
+	    {
                 var timeline_width = $('#jsTimelineContainer').width();
                 var e_location = e.pageX - $('#jsTimelineProgress').offset().left;
-                if (e_location >= 0 && e_location <= timeline_width) {
+                
+		if (e_location >= 0 && e_location <= timeline_width) 
+		{
                     Timeline.setProgress(e_location / timeline_width);
                 }
             }
@@ -1659,10 +1844,14 @@ var Timeline = {
         /**
          * Pause/play the video when the pause/play button is clicked
          */
-        playPauseButtonClick: function() {
-            if (VideoPlayerInterface.isPlaying) {
+        playPauseButtonClick: function() 
+	{
+            if (VideoPlayerInterface.isPlaying)
+	    {
                 VideoPlayerInterface.actions.pause();
-            } else {
+            } 
+            else 
+	    {
                 VideoPlayerInterface.actions.play();
             }
         },
@@ -1670,66 +1859,73 @@ var Timeline = {
         /**
          * Skip back to the last state in the video
          */
-        skipBack: function() {
+        skipBack: function() 
+	{
             VideoPlayerInterface.actions.skipBack();
         },
 
         /**
          * Skip forward to the next state in the video
          */
-        skipForward: function() {
+        skipForward: function() 
+	{
             VideoPlayerInterface.actions.skipForward();
         },
 
         /**
          * Toggle the fullscreen version of the landing page
          */
-        toggleFullscreen: function() {
+        toggleFullscreen: function() 
+	{
             FullScreenHandler.toggle();
         }
     }
 };
 
 var VideoPlayerInterface = {
-    iframeWindow: null,
+    				iframeWindow: null,
 
-    updateInterval: null,
+    				updateInterval: null,
 
-    RTCVisit: {},
+    				RTCVisit: {},
 
-    isPlaying: false,
+    				isPlaying: false,
 
-    isSourceSet: false,
+    				isSourceSet: false,
 
-    StateEngine: {},
+    				StateEngine: {},
 
-    globalVolume: 0,
+    				globalVolume: 0,
 
-    currentState: '',
+    				currentState: '',
 
-    firstRun: true,
+    				firstRun: true,
 
-    /**
-     * Initialise the video player interface.
-     * This class is a proxy that handles all interaction with the video player itself
-     */
-    initialise: function() {
-        try {
-            VideoPlayerInterface.iframeWindow = document.getElementById("videoPlayerIframe").contentWindow;
-            VideoPlayerInterface.updateFromVideo();
-            VideoPlayerInterface.updateInterval = setInterval(function() {
-                VideoPlayerInterface.updateFromVideo();
-            }, 250);
-        } catch(e) {
-            console.log("Unable to initialise the VideoPlayerInterface.", e.message);
-        }
+    				/**
+     				* Initialise the video player interface.
+    				* This class is a proxy that handles all interaction with the video player itself
+     				*/
+    				initialise: function() 
+				{
+        			  try {
+            				VideoPlayerInterface.iframeWindow = document.getElementById("videoPlayerIframe").contentWindow;
+            				VideoPlayerInterface.updateFromVideo();
+            				VideoPlayerInterface.updateInterval = setInterval(function() 
+                                        {
+                				VideoPlayerInterface.updateFromVideo();
+            			      	}, 250);
+        			     } catch(e) 
+				       {
+            				   console.log("Unable to initialise the VideoPlayerInterface.", e.message);
+        			       }
 
-        // Set a click handler on the resume splash screen
-        $("#jsResumeSplash").click(function() {
-            VideoPlayerInterface.actions.play();
-        });
+        			// Set a click handler on the resume splash screen
+        			    $("#jsResumeSplash").click(function() 
+				    {
+            				VideoPlayerInterface.actions.play();
+				    });
 
-    },
+    				},
 
     /**
      * Get the latest video data and update all affected landing page elements.
@@ -1739,7 +1935,8 @@ var VideoPlayerInterface = {
         try {
             if (VideoPlayerInterface.iframeWindow.rtc && VideoPlayerInterface.iframeWindow.rtc.player && VideoPlayerInterface.iframeWindow.rtc.player.playersReady()) {
                 // Wait until the player is ready to initalise the quality selector
-                if (!QualitySelector.loaded) {
+                if (!QualitySelector.loaded) 
+		{
                     QualitySelector.initialise();
                 }
 
@@ -1933,20 +2130,25 @@ var VideoPlayerInterface = {
             VideoPlayerInterface.iframeWindow.rtc.player.controls.fastForward();
         },
 
-        selectState: function(clickedState) {
+        selectState: function(clickedState) 
+	{
             CtaButtons.closeAllSideCards();
             VideoPlayerInterface.hideResumeSplash();
             VideoPlayerInterface.iframeWindow.rtc.timeline.gotoState(clickedState);
         },
 
-        timelinePosition: function(percentage) {
+        timelinePosition: function(percentage) 
+	{
             CtaButtons.closeAllSideCards();
             VideoPlayerInterface.iframeWindow.$("#jquery_jplayer_videoplayer").jPlayer("playHead", percentage * 100);
         },
 
-        volumeChange: function(vol) {
-            try {
-                if (isNaN(vol)) {
+        volumeChange: function(vol) 
+	{
+            try 
+	    {
+                if (isNaN(vol)) 
+		{
                     return;
                 }
 
@@ -1955,11 +2157,15 @@ var VideoPlayerInterface = {
                     && VideoPlayerInterface.iframeWindow.rtc
                     && VideoPlayerInterface.iframeWindow.rtc.utils.storeLocal
                     && VideoPlayerInterface.iframeWindow.rtc.player.controls.changeVolume
-                ) {
+                ) 
+		{
                     VideoPlayerInterface.iframeWindow.rtc.player.controls.changeVolume(vol);
                 }
-            } catch (exception) {
-                if (window.console) {
+            } 
+	    catch (exception) 
+	    {
+                if (window.console) 
+		{
                     console.error(exception); // TODO: change this line
                 }
             }
@@ -1988,8 +2194,10 @@ var VolumeSlider = {
     /**
      * Initialise the volume slider
      */
-    initialise: function(startingVolume) {
-        if (Utils.userAgentInList(navigator.userAgent, VolumeSlider.disabledDevices)) {
+    initialise: function(startingVolume) 
+     
+        if (Utils.userAgentInList(navigator.userAgent, VolumeSlider.disabledDevices)) 
+	{
             VolumeSlider.disable();
             return;
         }
@@ -1998,9 +2206,11 @@ var VolumeSlider = {
         VolumeSlider.events.initialise();
 
         // Starting value
-        if (typeof startingVolume == 'undefined' || startingVolume > 1 || startingVolume < 0) {
+        if (typeof startingVolume == 'undefined' || startingVolume > 1 || startingVolume < 0) 
+	{
             startingVolume = 0.5;
         }
+        
         VolumeSlider.setVolume(startingVolume);
     },
 
@@ -2010,7 +2220,9 @@ var VolumeSlider = {
      * @param value
      */
     setVolume: function(value) {
-        if (typeof value == 'undefined') {
+        
+	if (typeof value == 'undefined') 
+	{
             return;
         }
 
@@ -2020,27 +2232,39 @@ var VolumeSlider = {
         $("#jsVolumeLevel").innerWidth(percent + "%");
         $("#jsVolumeButtonSRText").text("Volume (" + percent + "%)");
 
-        try {
-            if (VideoPlayerInterface.actions.volumeChange){
+        try 
+	{
+            if (VideoPlayerInterface.actions.volumeChange)
+	    {
                 VideoPlayerInterface.actions.volumeChange(percent);
             }
-        } catch (exception) {
-            if (window.console) {
+        } 
+	catch (exception) 
+	{
+            if (window.console) 
+	    {
                 console.error(exception);
             }
         }
 
         // Set volume logo bars
-        if (value > 0.85){
+        if (value > 0.85)
+	{
             // 3 Bars
             VolumeSlider.setVolumeIconBars(3)
-        } else if (value > 0.5) {
+        } 
+	else if (value > 0.5) 
+	{
             // 2 bars
             VolumeSlider.setVolumeIconBars(2);
-        } else if (value > 0.05) {
+        } 
+	else if (value > 0.05) 
+	{
             // 1 bar
             VolumeSlider.setVolumeIconBars(1);
-        } else {
+        } 
+	else 
+	{
             // no bars
             VolumeSlider.setVolumeIconBars(0);
         }
@@ -2052,7 +2276,8 @@ var VolumeSlider = {
      * @returns {number}
      */
     getVolume: function() {
-        if ($("#jsVolumeLevel").width() === 0) {
+        if ($("#jsVolumeLevel").width() === 0) 
+	{
             return 0;
         }
 
@@ -2089,13 +2314,13 @@ var VolumeSlider = {
         /**
          * Link up the events and the event handlers
          */
-        initialise: function() {
+        initialise: function() 
+	{
             $('#jsVolumeButton').click(VolumeSlider.events.volumeButtonClickEventHandler);
             $('#jsVolumeBar').click(VolumeSlider.events.volumeLevelClick);
             $('#jsVolumeLevel').click(VolumeSlider.events.volumeLevelClick);
             $('#jsVolumeBall').mousedown(VolumeSlider.events.volumeBallMousedown);
-            $(document).mouseup(VolumeSlider.events.documentMouseup)
-                .mousemove(VolumeSlider.events.documentMousemove);
+            $(document).mouseup(VolumeSlider.events.documentMouseup).mousemove(VolumeSlider.events.documentMousemove);
         },
 
         /**
@@ -2115,13 +2340,17 @@ var VolumeSlider = {
         /**
          * Mute/unmute the volume
          */
-        volumeButtonClickEventHandler: function(e) {
+        volumeButtonClickEventHandler: function(e) 
+	{
             // if volume is more than 0 then mute it, otherwise full volume
-            if (VolumeSlider.getVolume() > 0) {
+            if (VolumeSlider.getVolume() > 0) 
+	    {
                 // Store the volume before muting so we can revert back to the original value when we unmute
                 VolumeSlider.mutedVolume = VolumeSlider.getVolume();
                 VolumeSlider.setVolume(0);
-            } else {
+            } 
+            else 
+	    {
                 // Revert back to the original volume value
                 VolumeSlider.setVolume(VolumeSlider.mutedVolume);
             }
@@ -2132,11 +2361,13 @@ var VolumeSlider = {
         /**
          * Set the volume by clicking on the slider
          */
-        volumeLevelClick: function(e) {
+        volumeLevelClick: function(e) 
+	 {
             var volumeBar = $("#jsVolumeLevelContainer"),
                 volumeBall = $("#jsVolumeBall");
 
-            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
+            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) 
+	    {
                 var widthOfBar = volumeBar.innerWidth(),
                     pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
                     newVol = (pxFromLeftOfBar / widthOfBar);
@@ -2149,8 +2380,10 @@ var VolumeSlider = {
          * Toggle drag state if we're dragging the slider, and hide the popup if
          * releasing the slider outside the popup area
          */
-        documentMouseup: function(e) {
-            if (VolumeSlider.events.isDragging) {
+        documentMouseup: function(e) 
+	{
+            if (VolumeSlider.events.isDragging) 
+	    {
                 e.preventDefault();
                 VolumeSlider.events.isDragging = false;
             }
@@ -2167,20 +2400,24 @@ var VolumeSlider = {
         /**
          * If dragging volume slider, adjust volume as necessary
          */
-        documentMousemove: function(e) {
-            if (VolumeSlider.events.isDragging) {
+        documentMousemove: function(e) 
+	{
+            if (VolumeSlider.events.isDragging) 
+	    {
                 var volumeBar = $("#jsVolumeLevelContainer"),
                     widthOfBar = volumeBar.innerWidth(),
                     pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
 
-                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) {
+                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) 
+		{
                     VolumeSlider.setVolume(pxFromLeftOfBar / widthOfBar);
                 }
             }
         }
     }
 };
-var iFrameCommunication = function() {
+var iFrameCommunication = function() 
+{
     var object = {
         initialize: init
     };
@@ -2208,8 +2445,11 @@ var iFrameCommunication = function() {
      * Add listener to post messages from rtc iFrame
      */
     function postMessageCommunication() {
-        window.addEventListener("message", function(e) {
-            switch (e.data.message) {
+	    
+        window.addEventListener("message", function(e) 
+	{
+            switch (e.data.message) 
+	    {
                 case "showCustomError":
                     iFrameEvents.showErrorCard(e.data.data);
                     break;
@@ -2226,14 +2466,17 @@ var iFrameCommunication = function() {
     /**
      * Fake listener based on data attributes to support IE7 and other browsers which not supports window.postMessage
      */
-    function fallbackCommunication() {
+    function fallbackCommunication() 
+	{
         var $postHandler = VideoPlayerInterface.iframeWindow.rtc.utils.$getIFrameListener();
 
-        var interval = setInterval(function() {
+        var interval = setInterval(function() 
+	{
             var message = $postHandler.data("message");
             var value = $postHandler.data("value");
 
-            switch (message) {
+            switch (message) 
+	    {
                 case "showCustomError":
                     iFrameEvents.showErrorCard(value);
                     resetPostHandler($postHandler);
@@ -2339,7 +2582,8 @@ var MobileOrientationHandler = {
      * Automatically scrolls the window to the top of the video area
      */
     scrollToVideo: function() {
-        if (MobileOrientationHandler.shouldEnable()) {
+        if (MobileOrientationHandler.shouldEnable()) 
+	{
                 $("html, body").animate(
                 { scrollTop: $("#jsPlayerIframe").offset().top },
                 1000
@@ -2351,12 +2595,18 @@ var MobileOrientationHandler = {
      * Resizes the video/cta/timeline area to ensure it fits within a non 16/9 screen.
      */
     resizeVideoArea: function() {
-        var mainWidth;
-        if ($(window).innerWidth() / $(window).innerHeight() >= 16 / 9 && MobileOrientationHandler.shouldEnable() && $("#jsTopWrapper").hasClass("top-wrapper--no-cta")) {
+	var mainWidth;
+        
+	if ($(window).innerWidth() / $(window).innerHeight() >= 16 / 9 && MobileOrientationHandler.shouldEnable() && $("#jsTopWrapper").hasClass("top-wrapper--no-cta")) 
+	{
             mainWidth = (Math.ceil($(window).innerHeight() * (16 / 9))) - $(".cta--side").width();
-        } else if ($(window).innerWidth() / $(window).innerHeight() > 16 / 9 && MobileOrientationHandler.shouldEnable()) {
+        } 
+	else if ($(window).innerWidth() / $(window).innerHeight() > 16 / 9 && MobileOrientationHandler.shouldEnable()) 
+	{
             mainWidth = Math.ceil($(window).innerHeight() * (16 / 9));
-        } else {
+        } 
+	else 
+	{
             mainWidth = "";
         }
         $("#jsMain").css("width", (mainWidth));
@@ -2378,20 +2628,25 @@ var MobileOrientationHandler = {
             var height = $(window).height(),
                 width = $(window).width();
 
-            if (height <= width && MobileOrientationHandler.orientation === "portrait") {
+            if (height <= width && MobileOrientationHandler.orientation === "portrait") 
+	    {
                 MobileOrientationHandler.orientation = "landscape";
                 MobileOrientationHandler.scrollToVideo();
-            } else if (height > width && MobileOrientationHandler.orientation === "landscape") {
-                MobileOrientationHandler.orientation = "portrait";
+            } 
+		else if (height > width && MobileOrientationHandler.orientation === "landscape")
+		{
+                	MobileOrientationHandler.orientation = "portrait";
 
-                // When switching from landscape to portrait on android, exit fullscreen if necessary
-                if (FullScreenHandler.isActive() && navigator.userAgent.match(/Android/i)) {
-                    FullScreenHandler.exitFullScreen();
-                }
-            }
+                	// When switching from landscape to portrait on android, exit fullscreen if necessary
+                	
+			if (FullScreenHandler.isActive() && navigator.userAgent.match(/Android/i)) 
+			{
+                    		FullScreenHandler.exitFullScreen();
+                	}
+            	}
 
-            MobileOrientationHandler.resizeVideoArea();
-        }
+            		MobileOrientationHandler.resizeVideoArea();
+	}
     }
 };
 

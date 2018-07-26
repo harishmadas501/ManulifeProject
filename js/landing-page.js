@@ -2042,12 +2042,12 @@ var VolumeSlider = {
      */
     getVolume: function() 
     {
-        if ($("#jsVolumeLevel").height() === 0) 
+        if ($("#jsVolumeLevel").width() === 0) 
         {
             return 0;
         }
 
-        return $("#jsVolumeLevel").innerHeight() / $("#jsVolumeLevelContainer").height();
+        return $("#jsVolumeLevel").innerHeight() / $("#jsVolumeLevelContainer").width();
     },
 
     /**

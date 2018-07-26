@@ -2111,8 +2111,8 @@ var VolumeSlider = {
          * Set the volume by clicking on the slider
          */
         volumeLevelClick: function(e) {
-            var volumeBar = $("#jsVolumeLevelContainer"),
-                volumeBall = $("#jsVolumeBall");
+//             var volumeBar = $("#jsVolumeLevelContainer"),
+//                 volumeBall = $("#jsVolumeBall");
 
 //             if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
 //                 var widthOfBar = volumeBar.innerHeight(),
@@ -2127,20 +2127,20 @@ var VolumeSlider = {
          * Toggle drag state if we're dragging the slider, and hide the popup if
          * releasing the slider outside the popup area
          */
-        documentMouseup: function(e) {
-            if (VolumeSlider.events.isDragging) {
-                e.preventDefault();
-                VolumeSlider.events.isDragging = false;
-            }
-        },
+//         documentMouseup: function(e) {
+//             if (VolumeSlider.events.isDragging) {
+//                 e.preventDefault();
+//                 VolumeSlider.events.isDragging = false;
+//             }
+//         },
 
         /**
          * Start dragging the volume slider ball
          */
-        volumeBallMousedown: function(e) {
-            e.preventDefault();
-            VolumeSlider.events.isDragging = true;
-        },
+//         volumeBallMousedown: function(e) {
+//             e.preventDefault();
+//             VolumeSlider.events.isDragging = true;
+//         },
 
         /**
          * If dragging volume slider, adjust volume as necessary

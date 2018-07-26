@@ -2111,16 +2111,16 @@ var VolumeSlider = {
          * Set the volume by clicking on the slider
          */
         volumeLevelClick: function(e) {
-            var volumeBar = $("#jsVolumeLevelContainer"),
-                volumeBall = $("#jsVolumeBall");
+//             var volumeBar = $("#jsVolumeLevelContainer"),
+//                 volumeBall = $("#jsVolumeBall");
 
-            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
-                var widthOfBar = volumeBar.innerWidth(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
-                    newVol = (pxFromLeftOfBar / widthOfBar);
+//             if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
+//                 var widthOfBar = volumeBar.innerWidth(),
+//                     pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
+//                     newVol = (pxFromLeftOfBar / widthOfBar);
 
-                VolumeSlider.setVolume(newVol);
-            }
+//                 VolumeSlider.setVolume(newVol);
+//             }
         },
 
         /**
@@ -2146,15 +2146,15 @@ var VolumeSlider = {
          * If dragging volume slider, adjust volume as necessary
          */
         documentMousemove: function(e) {
-            if (VolumeSlider.events.isDragging) {
-                var volumeBar = $("#jsVolumeLevelContainer"),
-                    widthOfBar = volumeBar.innerWidth(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
+//             if (VolumeSlider.events.isDragging) {
+//                 var volumeBar = $("#jsVolumeLevelContainer"),
+//                     widthOfBar = volumeBar.innerWidth(),
+//                     pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
 
-                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) {
-                    VolumeSlider.setVolume(pxFromLeftOfBar / widthOfBar);
-                }
-            }
+//                 if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) {
+//                     VolumeSlider.setVolume(pxFromLeftOfBar / widthOfBar);
+//                 }
+//             }
         }
     }
 };

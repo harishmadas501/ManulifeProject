@@ -2000,27 +2000,21 @@ var VolumeSlider = {
         var percent = Math.ceil(value * 100);
         percent = percent > 100 ? 100 : percent;
 
-        $("#jsVolumeLevel").innerHeight(percent + "%");
+        $("#jsVolumeLevel").innerWidth(percent + "%");
         $("#jsVolumeButtonSRText").text("Volume (" + percent + "%)");
 
-        try 
-        {
-            if (VideoPlayerInterface.actions.volumeChange)
-            {
+        try {
+            if (VideoPlayerInterface.actions.volumeChange){
                 VideoPlayerInterface.actions.volumeChange(percent);
             }
-        } 
-        catch (exception) 
-        {
-            if (window.console) 
-            {
+        } catch (exception) {
+            if (window.console) {
                 console.error(exception);
             }
         }
 
         // Set volume logo bars
-        if (value > 0.85)
-        {
+        if (value > 0.85){
             // 3 Bars
             VolumeSlider.setVolumeIconBars(3)
         } else if (value > 0.5) {
@@ -2040,14 +2034,12 @@ var VolumeSlider = {
      *
      * @returns {number}
      */
-    getVolume: function() 
-    {
-        if ($("#jsVolumeLevel").width() === 0) 
-        {
+    getVolume: function() {
+        if ($("#jsVolumeLevel").width() === 0) {
             return 0;
         }
 
-        return $("#jsVolumeLevel").innerHeight() / $("#jsVolumeLevelContainer").width();
+        return $("#jsVolumeLevel").innerWidth() / $("#jsVolumeLevelContainer").width();
     },
 
     /**
@@ -2068,8 +2060,7 @@ var VolumeSlider = {
     /**
      * Hide the volume button and bar on devices where volume cannot be controlled by the player.
      */
-    disable: function() 
-    {
+    disable: function() {
         $("#jsVolume, #jsVolumeButton").hide();
         $("#jsTimeline").addClass("timeline--no-volume");
     },
@@ -2077,8 +2068,7 @@ var VolumeSlider = {
     /**
      * Define the event handlers for the volume slider
      */
-    events: 
-    {
+    events: {
         /**
          * Link up the events and the event handlers
          */
@@ -2109,17 +2099,13 @@ var VolumeSlider = {
         /**
          * Mute/unmute the volume
          */
-        volumeButtonClickEventHandler: function(e) 
-        {
+        volumeButtonClickEventHandler: function(e) {
             // if volume is more than 0 then mute it, otherwise full volume
-            if (VolumeSlider.getVolume() > 0) 
-            {
+            if (VolumeSlider.getVolume() > 0) {
                 // Store the volume before muting so we can revert back to the original value when we unmute
                 VolumeSlider.mutedVolume = VolumeSlider.getVolume();
                 VolumeSlider.setVolume(0);
-            } 
-            else 
-            {
+            } else {
                 // Revert back to the original volume value
                 VolumeSlider.setVolume(VolumeSlider.mutedVolume);
             }
@@ -2133,11 +2119,10 @@ var VolumeSlider = {
             var volumeBar = $("#jsVolumeLevelContainer"),
                 volumeBall = $("#jsVolumeBall");
 
-            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) 
-            {
-                var heightOfBar = volumeBar.innerHeight(),
+            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
+                var widthOfBar = volumeBar.innerWidth(),
                     pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
-                    newVol = (pxFromLeftOfBar / heightOfBar);
+                    newVol = (pxFromLeftOfBar / widthOfBar);
 
                 VolumeSlider.setVolume(newVol);
             }
@@ -2147,10 +2132,8 @@ var VolumeSlider = {
          * Toggle drag state if we're dragging the slider, and hide the popup if
          * releasing the slider outside the popup area
          */
-        documentMouseup: function(e) 
-        {
-            if (VolumeSlider.events.isDragging) 
-            {
+        documentMouseup: function(e) {
+            if (VolumeSlider.events.isDragging) {
                 e.preventDefault();
                 VolumeSlider.events.isDragging = false;
             }
@@ -2159,8 +2142,7 @@ var VolumeSlider = {
         /**
          * Start dragging the volume slider ball
          */
-        volumeBallMousedown: function(e) 
-        {
+        volumeBallMousedown: function(e) {
             e.preventDefault();
             VolumeSlider.events.isDragging = true;
         },
@@ -2168,26 +2150,21 @@ var VolumeSlider = {
         /**
          * If dragging volume slider, adjust volume as necessary
          */
-        documentMousemove: function(e) 
-        {
-            if (VolumeSlider.events.isDragging) 
-            {
+        documentMousemove: function(e) {
+            if (VolumeSlider.events.isDragging) {
                 var volumeBar = $("#jsVolumeLevelContainer"),
-                    heightOfBar = volumeBar.innerHeight(),
+                    widthOfBar = volumeBar.innerWidth(),
                     pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
 
-                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= heightOfBar) 
-                {
-                    VolumeSlider.setVolume(pxFromLeftOfBar / heightOfBar);
+                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) {
+                    VolumeSlider.setVolume(pxFromLeftOfBar / widthOfBar);
                 }
             }
         }
     }
 };
-var iFrameCommunication = function() 
-{
-    var object = 
-    {
+var iFrameCommunication = function() {
+    var object = {
         initialize: init
     };
 
@@ -2196,12 +2173,9 @@ var iFrameCommunication = function()
     /**
      * Initialize iFrame communication
      */
-    function init() 
-    {
-        try 
-        {
-            if (VideoPlayerInterface.iframeWindow.rtc.utils.isPostMessageSupported()) 
-            {
+    function init() {
+        try {
+            if (VideoPlayerInterface.iframeWindow.rtc.utils.isPostMessageSupported()) {
                 postMessageCommunication();
             } else {
                 fallbackCommunication();

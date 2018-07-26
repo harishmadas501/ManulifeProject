@@ -2039,7 +2039,7 @@ var VolumeSlider = {
             return 0;
         }
 
-        return $("#jsVolumeLevel").innerWidth() / $("#jsVolumeLevelContainer").width();
+        return $("#jsVolumeLevel").innerHeight() / $("#jsVolumeLevelContainer").height();
     },
 
     /**

@@ -1998,7 +1998,7 @@ var VolumeSlider = {
         var percent = Math.ceil(value * 100);
         percent = percent > 100 ? 100 : percent;
 
-        $("#jsVolumeLevel").innerWidth(percent + "%");
+        $("#jsVolumeLevel").innerHeight(percent + "%");
         $("#jsVolumeButtonSRText").text("Volume (" + percent + "%)");
 
         try {

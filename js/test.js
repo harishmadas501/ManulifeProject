@@ -1,5 +1,13 @@
 $("#jsVolumeBall").mousemove(function(){
     var height = $("#jsVolumeLevel").height();
-	$("#jsVolumeLevel").css('height', height+1);
+	if(height!=100)
+		$("#jsVolumeLevel").css('height', height+1);
+	$("#jsVolumeLevel").css('width', '0px');
+});
+
+$("#jsVolumeBall").mousedown(function(){
+    var height = $("#jsVolumeLevel").height();
+	if(height!=0)
+		$("#jsVolumeLevel").css('height', height-1);
 	$("#jsVolumeLevel").css('width', '0px');
 });

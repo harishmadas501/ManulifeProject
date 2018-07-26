@@ -2057,7 +2057,8 @@ var VolumeSlider = {
     /**
      * Hide the volume button and bar on devices where volume cannot be controlled by the player.
      */
-    disable: function() {
+    disable: function() 
+    {
         $("#jsVolume, #jsVolumeButton").hide();
         $("#jsTimeline").addClass("timeline--no-volume");
     },
@@ -2065,11 +2066,13 @@ var VolumeSlider = {
     /**
      * Define the event handlers for the volume slider
      */
-    events: {
+    events: 
+    {
         /**
          * Link up the events and the event handlers
          */
-        initialise: function() {
+        initialise: function() 
+        {
             $('#jsVolumeButton').click(VolumeSlider.events.volumeButtonClickEventHandler);
             $('#jsVolumeBar').click(VolumeSlider.events.volumeLevelClick);
             $('#jsVolumeLevel').click(VolumeSlider.events.volumeLevelClick);
@@ -2095,7 +2098,8 @@ var VolumeSlider = {
         /**
          * Mute/unmute the volume
          */
-        volumeButtonClickEventHandler: function(e) {
+        volumeButtonClickEventHandler: function(e) 
+        {
             // if volume is more than 0 then mute it, otherwise full volume
             if (VolumeSlider.getVolume() > 0) {
                 // Store the volume before muting so we can revert back to the original value when we unmute
@@ -2137,7 +2141,8 @@ var VolumeSlider = {
         /**
          * Start dragging the volume slider ball
          */
-        volumeBallMousedown: function(e) {
+        volumeBallMousedown: function(e) 
+        {
             e.preventDefault();
             VolumeSlider.events.isDragging = true;
         },
@@ -2145,13 +2150,16 @@ var VolumeSlider = {
         /**
          * If dragging volume slider, adjust volume as necessary
          */
-        documentMousemove: function(e) {
-            if (VolumeSlider.events.isDragging) {
+        documentMousemove: function(e) 
+        {
+            if (VolumeSlider.events.isDragging) 
+            {
                 var volumeBar = $("#jsVolumeLevelContainer"),
-                    widthOfBar = volumeBar.innerWidth(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
+                    widthOfBar = volumeBar.innerHeight(),
+                    pxFromLeftOfBar = e.pageY - volumeBar.offset().bottom;
 
-                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) {
+                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) 
+                {
                     VolumeSlider.setVolume(pxFromLeftOfBar / widthOfBar);
                 }
             }

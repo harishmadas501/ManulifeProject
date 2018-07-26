@@ -1275,16 +1275,14 @@ var Timeline = {
      * @var progress         {number} The initial time in seconds
      * @var timelineSettings {object} JSON object of settings for the timeline
      */
-    initialise: function(progress, timelineSettings) 
-    {
+    initialise: function(progress, timelineSettings) {
         Timeline.loadSettings(timelineSettings);
         Timeline.events.initialise();
         Timeline.progress = progress;
         Timeline.update();
     },
 
-    loadSettings: function(settings)
-    {
+    loadSettings: function(settings){
         Timeline.SettingsJsonObject = settings;
         SettingsPanel.initMenu();
     },
@@ -1294,8 +1292,7 @@ var Timeline = {
      *
      * @param {Array} chapters Chapters which should be rendered
      */
-    render: function(chapters) 
-    {
+    render: function(chapters) {
         var container = $("#jsTimelineContainer"),
             start = 0;
 
@@ -1307,8 +1304,7 @@ var Timeline = {
          * @param {number} i        Chapter index
          * @param {Object} settings Chapter settings
          */
-        $.each(chapters, function createChapter(i, settings) 
-        {
+        $.each(chapters, function createChapter(i, settings) {
             var chapter = $("<div class='jsTimelineChapter timeline-chapters__chapter'></div>"),
                 label = $("<span class='jsTimelineChapterLabel timeline-chapters__label'>" + settings.label + "</span>"),
                 width = 0;
@@ -1319,8 +1315,7 @@ var Timeline = {
              * @param {number} j     State index
              * @param {Object} state State settings
              */
-            $.each(settings.states, function createChapterState(j, state) 
-            {
+            $.each(settings.states, function createChapterState(j, state) {
                 var div = $("<div class='timeline-chapters__state jsTimelineState'></div>");
 
                 div.data("percent-width", state.width)
@@ -1361,8 +1356,7 @@ var Timeline = {
     /**
      * Update the timeline
      */
-    update: function(checkMainWidth) 
-    {
+    update: function(checkMainWidth) {
         var timelineWidth = $("#jsTimelineContainer").width();
 
         if (checkMainWidth) {
@@ -1375,13 +1369,10 @@ var Timeline = {
         $("#jsTimelineProgress").width(progressWidth);
 
         /* On mobile devices, ensure the progress ball appears within the screen boundaries */
-        if ($("#jsTimelineIndicator").is(":visible") && $("#jsTimelineCover").length === 0) 
-        {
+        if ($("#jsTimelineIndicator").is(":visible") && $("#jsTimelineCover").length === 0) {
             $("#jsTimelineIndicatorBall").show();
             $("#jsTimelineIndicator").width(Math.min(Math.max(progressWidth, ballWidth / 2), timelineWidth - ballWidth / 2));
-        } 
-        else 
-        {
+        } else {
             $("#jsTimelineIndicatorBall").hide();
         }
 
@@ -1392,15 +1383,11 @@ var Timeline = {
     /**
      * Update the play/pause button to have the appropriate icon
      */
-    updatePlayPauseButton: function() 
-    {
-        if (VideoPlayerInterface.isPlaying) 
-        {
+    updatePlayPauseButton: function() {
+        if (VideoPlayerInterface.isPlaying) {
             $('#jsPlayPauseSRText').text('Pause');
             $('#jsPlayPauseButton span').removeClass('timeline__button-icon--play').addClass('timeline__button-icon--pause');
-        } 
-        else 
-        {
+        } else {
             $('#jsPlayPauseSRText').text('Play');
             $('#jsPlayPauseButton span').removeClass('timeline__button-icon--pause').addClass('timeline__button-icon--play');
         }
@@ -1409,10 +1396,8 @@ var Timeline = {
     /**
      * Remove the timeline cover element that blocks interaction before the video is loaded
      */
-    enableTimelineIfNecessary: function() 
-    {
-        if ($("#jsTimelineCover") && VideoPlayerInterface.isSourceSet) 
-        {
+    enableTimelineIfNecessary: function() {
+        if ($("#jsTimelineCover") && VideoPlayerInterface.isSourceSet) {
             $("#jsTimelineCover").remove();
         }
     },
@@ -1420,24 +1405,20 @@ var Timeline = {
     /**
      * Add timeline cover element that blocks interaction on video timeline bar
      */
-    disableTimelineIfNecessary: function() 
-    {
+    disableTimelineIfNecessary: function() {
         $('<div id="jsTimelineCover" class="timeline__cover"></div>').prependTo('#jsTimeline');
     },
 
     /**
      * Update the timeline state and progress
      */
-    updateStateAndProgress: function(state, progress) 
-    {
-        if (state == "END") 
-        {
+    updateStateAndProgress: function(state, progress) {
+        if (state == "END") {
             Timeline.setProgress(1);
             return;
         }
 
-        if (Timeline.events.isDragging) 
-        {
+        if (Timeline.events.isDragging) {
             return;
         }
 
@@ -1476,16 +1457,12 @@ var Timeline = {
         return progress;
     },
 
-    updateSeenChapterColors: function()
-    {
+    updateSeenChapterColors: function(){
         var currentProgress = Timeline.getProgress() * 100;
-        
-        $(".jsTimelineState").each(function ()
-        {
+        $(".jsTimelineState").each(function (){
             var stateNameFriendly = $(this).data('state');
             var percentStart = parseFloat($(this).data('percent-start'));
-            if (percentStart < currentProgress) 
-            {
+            if (percentStart < currentProgress) {
                 $(this).siblings(".jsTimelineChapterLabel").addClass("timeline-chapters--seen");
             }
         });
@@ -1494,8 +1471,7 @@ var Timeline = {
     /**
      * Updates the active state on the timeline, which is shown on mobile devices
      */
-    updateMobileActiveState: function(stateElem) 
-    {
+    updateMobileActiveState: function(stateElem) {
         var stateLabel = $(stateElem).parent().find(".jsTimelineChapterLabel").text();
         $("#jsTimelineMobileActiveState").text(stateLabel);
     },
@@ -1503,16 +1479,13 @@ var Timeline = {
     /**
      * Get the timeline state from the video progress
      */
-    getStateFromProgress: function() 
-    {
+    getStateFromProgress: function() {
         var pc_progress = Timeline.getProgress() * 100;
         var state = 'START';
-        $('.jsTimelineState').each(function() 
-        {
+        $('.jsTimelineState').each(function() {
             var start = parseFloat($(this).data('percent-start'));
             var end = parseFloat($(this).data('percent-start')) + parseFloat($(this).data('percent-width'));
-            if (pc_progress >= start && pc_progress < end) 
-            {
+            if (pc_progress >= start && pc_progress < end) {
                 state = $(this).data('state');
             }
         });
@@ -1535,8 +1508,7 @@ var Timeline = {
             stateWidth = parseFloat(stateTimelineElem.data('percent-width')),
             progressInState = ((progress * 100) - stateStart) / stateWidth;
 
-        if (Object.keys(chapters).length == 1) 
-        {
+        if (Object.keys(chapters).length == 1) {
             return progressInState;
         }
 
@@ -1559,8 +1531,7 @@ var Timeline = {
     /**
      * Update the video
      */
-    updateInVideo: function() 
-    {
+    updateInVideo: function() {
         var state = Timeline.getStateFromProgress(),
             chapters = VideoPlayerInterface.getVideoChapters(),
             videoDuration = VideoPlayerInterface.getVideoDuration();
@@ -1579,8 +1550,7 @@ var Timeline = {
         /**
          * Initialise events for timeline
          */
-        initialise: function() 
-        {
+        initialise: function() {
             $('#jsTimelineContainer')
                 .mousemove(Timeline.events.timelineMousemove)
                 .mouseleave(Timeline.events.timelineMouseleave)
@@ -1611,29 +1581,24 @@ var Timeline = {
         /**
          * Show faint background when hovering over timeline.
          */
-        timelineMousemove: function(e) 
-        {
+        timelineMousemove: function(e) {
             $('#jsTimelineProgressHover').width(e.pageX - $('#jsTimelineProgress').offset().left);
         },
 
         /**
          * Hide faint background when leaving timeline.
          */
-        timelineMouseleave: function() 
-        {
+        timelineMouseleave: function() {
             $('#jsTimelineProgressHover').width(0);
         },
 
         /**
          * Handle the timeline click event
          */
-        timelineClick: function(e) 
-        {
+        timelineClick: function(e) {
             e.preventDefault();
             var container = $('#jsTimelineIndicator');
-            
-            if (!container.is(e.target) && container.has(e.target).length === 0) 
-            {
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
                 var timeline_width = $('#jsTimelineContainer').width();
                 Timeline.setProgress((e.pageX - $('#jsTimelineProgress').offset().left) / timeline_width);
                 Timeline.updateInVideo();
@@ -1643,8 +1608,7 @@ var Timeline = {
         /**
          * Handle the timeline indicator mousedown event
          */
-        timelineIndicatorMousedown: function(e) 
-        {
+        timelineIndicatorMousedown: function(e) {
             e.preventDefault();
             Timeline.events.isDragging = true;
         },
@@ -1652,10 +1616,8 @@ var Timeline = {
         /**
          * Handle the document mouseup event
          */
-        documentMouseup: function(e) 
-        {
-            if (Timeline.events.isDragging) 
-            {
+        documentMouseup: function(e) {
+            if (Timeline.events.isDragging) {
                 e.preventDefault();
                 Timeline.events.isDragging = false;
                 Timeline.updateInVideo();
@@ -1665,15 +1627,11 @@ var Timeline = {
         /**
          * Handle the document mousemove event
          */
-        documentMousemove: function(e) 
-        {
-            if (Timeline.events.isDragging) 
-            {
+        documentMousemove: function(e) {
+            if (Timeline.events.isDragging) {
                 var timeline_width = $('#jsTimelineContainer').width();
                 var e_location = e.pageX - $('#jsTimelineProgress').offset().left;
-                
-                if (e_location >= 0 && e_location <= timeline_width) 
-                {
+                if (e_location >= 0 && e_location <= timeline_width) {
                     Timeline.setProgress(e_location / timeline_width);
                 }
             }
@@ -1758,10 +1716,8 @@ var VideoPlayerInterface = {
      * Get the latest video data and update all affected landing page elements.
      * This function fires at least once every second.
      */
-    updateFromVideo: function() 
-    {
-        try 
-        {
+    updateFromVideo: function() {
+        try {
             if (VideoPlayerInterface.iframeWindow.rtc && VideoPlayerInterface.iframeWindow.rtc.player && VideoPlayerInterface.iframeWindow.rtc.player.playersReady()) {
                 // Wait until the player is ready to initalise the quality selector
                 if (!QualitySelector.loaded) {
@@ -1811,11 +1767,8 @@ var VideoPlayerInterface = {
                     VolumeSlider.setVolume(globalVolumeFromVideo);
                 }
             }
-        } 
-        catch (exception) 
-        {
-            if (window.console) 
-            {
+        } catch (exception) {
+            if (window.console) {
                 // NOTE: This line is only for debugging.
                 // TODO: Comment out or remove the line below when deploying into production
                 console.error(exception);
@@ -1827,9 +1780,7 @@ var VideoPlayerInterface = {
 
         // Update volume slider
         var globalVolumeFromVideo = VideoPlayerInterface.iframeWindow.globalVolume;
-        
-        if (VideoPlayerInterface.globalVolume != globalVolumeFromVideo) 
-        {
+        if (VideoPlayerInterface.globalVolume != globalVolumeFromVideo) {
             VideoPlayerInterface.globalVolume = globalVolumeFromVideo;
             VolumeSlider.setVolume(globalVolumeFromVideo);
         }
@@ -1838,21 +1789,17 @@ var VideoPlayerInterface = {
     /**
      * Gets the name property from data-dict-name. Updates prepared for text with name if exists
      */
-    updatePreparedForName: function() 
-    {
+    updatePreparedForName: function() {
         var preparedForText = LanguageSelector.getTextByKey("PreparedForText");
         var nameProperty = $("#jsPreparedForName").data("dict-name");
         var preparedName = VideoPlayerInterface.RTCVisit.videoVisitData[nameProperty];
 
-        if (preparedName != null && preparedName.length > 0) 
-        {
-            if ($("#jsPreparedFor").text() !== preparedForText) 
-            {
+        if (preparedName != null && preparedName.length > 0) {
+            if ($("#jsPreparedFor").text() !== preparedForText) {
                 $("#jsPreparedFor").text(preparedForText + " ");
             }
 
-            if ($("#jsPreparedForName").text() !== preparedName) 
-            {
+            if ($("#jsPreparedForName").text() !== preparedName) {
                 $("#jsPreparedForName").text(preparedName);
             }
         }
@@ -1861,8 +1808,7 @@ var VideoPlayerInterface = {
     /**
      * Get the video visit data
      */
-    getVisitData: function() 
-    {
+    getVisitData: function() {
         VideoPlayerInterface.RTCVisit = VideoPlayerInterface.iframeWindow.RTCVisit;
         VideoPlayerInterface.updatePreparedForName();
     },
@@ -1892,20 +1838,16 @@ var VideoPlayerInterface = {
     /**
      * Toggle the resume splash screen that appears over the video when paused
      */
-    toggleResumeSplash: function() 
-    {
+    toggleResumeSplash: function() {
         var resumeVisible = $("#jsResumeSplash").is(":visible");
         var aboutDialogVisible = VideoPlayerInterface.iframeWindow.$("#aboutModal").is(":visible");
         var times = VideoPlayerInterface.iframeWindow.rtc.player.getVideoTimes();
         var cardsOpen = VideoPlayerInterface.iframeWindow.rtc.card.isCardVisible();
         var customErrorOpen = VideoPlayerInterface.iframeWindow.rtc.card.isFailoverMessageVisible();
 
-        if (!VideoPlayerInterface.isPlaying && !resumeVisible && !aboutDialogVisible && times.play > 0 && !cardsOpen && !customErrorOpen) 
-        {
+        if (!VideoPlayerInterface.isPlaying && !resumeVisible && !aboutDialogVisible && times.play > 0 && !cardsOpen && !customErrorOpen) {
             VideoPlayerInterface.showResumeSplash();
-        } 
-        else if((VideoPlayerInterface.isPlaying || cardsOpen) && resumeVisible) 
-        {
+        } else if((VideoPlayerInterface.isPlaying || cardsOpen) && resumeVisible) {
             VideoPlayerInterface.hideResumeSplash();
         }
     },
@@ -2027,10 +1969,8 @@ var VolumeSlider = {
     /**
      * Initialise the volume slider
      */
-    initialise: function(startingVolume) 
-    {
-        if (Utils.userAgentInList(navigator.userAgent, VolumeSlider.disabledDevices))
-        {
+    initialise: function(startingVolume) {
+        if (Utils.userAgentInList(navigator.userAgent, VolumeSlider.disabledDevices)) {
             VolumeSlider.disable();
             return;
         }
@@ -2039,8 +1979,7 @@ var VolumeSlider = {
         VolumeSlider.events.initialise();
 
         // Starting value
-        if (typeof startingVolume == 'undefined' || startingVolume > 1 || startingVolume < 0) 
-        {
+        if (typeof startingVolume == 'undefined' || startingVolume > 1 || startingVolume < 0) {
             startingVolume = 0.5;
         }
         VolumeSlider.setVolume(startingVolume);
@@ -2051,51 +1990,38 @@ var VolumeSlider = {
      *
      * @param value
      */
-    setVolume: function(value) 
-    {
-        if (typeof value == 'undefined') 
-        {
+    setVolume: function(value) {
+        if (typeof value == 'undefined') {
             return;
         }
 
         var percent = Math.ceil(value * 100);
         percent = percent > 100 ? 100 : percent;
 
-        $("#jsVolumeLevel").innerHeight(percent + "%");
+        $("#jsVolumeLevel").innerWidth(percent + "%");
         $("#jsVolumeButtonSRText").text("Volume (" + percent + "%)");
 
-        try 
-        {
-            if (VideoPlayerInterface.actions.volumeChange)
-            {
+        try {
+            if (VideoPlayerInterface.actions.volumeChange){
                 VideoPlayerInterface.actions.volumeChange(percent);
             }
-        } catch (exception) 
-          {
-            if (window.console) 
-            {
+        } catch (exception) {
+            if (window.console) {
                 console.error(exception);
             }
-          }
+        }
 
         // Set volume logo bars
-        if (value > 0.85)
-        {
+        if (value > 0.85){
             // 3 Bars
             VolumeSlider.setVolumeIconBars(3)
-        } 
-        else if (value > 0.5) 
-        {
+        } else if (value > 0.5) {
             // 2 bars
             VolumeSlider.setVolumeIconBars(2);
-        } 
-        else if (value > 0.05) 
-        {
+        } else if (value > 0.05) {
             // 1 bar
             VolumeSlider.setVolumeIconBars(1);
-        } 
-        else 
-        {
+        } else {
             // no bars
             VolumeSlider.setVolumeIconBars(0);
         }
@@ -2106,14 +2032,12 @@ var VolumeSlider = {
      *
      * @returns {number}
      */
-    getVolume: function() 
-    {
-        if ($("#jsVolumeLevel").height() === 0) 
-        {
+    getVolume: function() {
+        if ($("#jsVolumeLevel").width() === 0) {
             return 0;
         }
 
-        return $("#jsVolumeLevel").innerHeight() / $("#jsVolumeLevelContainer").height();
+        return $("#jsVolumeLevel").innerWidth() / $("#jsVolumeLevelContainer").width();
     },
 
     /**
@@ -2121,8 +2045,7 @@ var VolumeSlider = {
      *
      * @param bars
      */
-    setVolumeIconBars: function(bars) 
-    {
+    setVolumeIconBars: function(bars) {
         $('#jsVolumeButtonIcon')
             .removeClass("timeline__button-icon--volume-0")
             .removeClass("timeline__button-icon--volume-1")
@@ -2134,8 +2057,7 @@ var VolumeSlider = {
     /**
      * Hide the volume button and bar on devices where volume cannot be controlled by the player.
      */
-    disable: function() 
-    {
+    disable: function() {
         $("#jsVolume, #jsVolumeButton").hide();
         $("#jsTimeline").addClass("timeline--no-volume");
     },
@@ -2147,8 +2069,7 @@ var VolumeSlider = {
         /**
          * Link up the events and the event handlers
          */
-        initialise: function() 
-        {
+        initialise: function() {
             $('#jsVolumeButton').click(VolumeSlider.events.volumeButtonClickEventHandler);
             $('#jsVolumeBar').click(VolumeSlider.events.volumeLevelClick);
             $('#jsVolumeLevel').click(VolumeSlider.events.volumeLevelClick);
@@ -2174,17 +2095,13 @@ var VolumeSlider = {
         /**
          * Mute/unmute the volume
          */
-        volumeButtonClickEventHandler: function(e) 
-        {
+        volumeButtonClickEventHandler: function(e) {
             // if volume is more than 0 then mute it, otherwise full volume
-            if (VolumeSlider.getVolume() > 0) 
-            {
+            if (VolumeSlider.getVolume() > 0) {
                 // Store the volume before muting so we can revert back to the original value when we unmute
                 VolumeSlider.mutedVolume = VolumeSlider.getVolume();
                 VolumeSlider.setVolume(0);
-            } 
-            else 
-            {
+            } else {
                 // Revert back to the original volume value
                 VolumeSlider.setVolume(VolumeSlider.mutedVolume);
             }
@@ -2193,15 +2110,13 @@ var VolumeSlider = {
         /**
          * Set the volume by clicking on the slider
          */
-        volumeLevelClick: function(e) 
-        {
+        volumeLevelClick: function(e) {
             var volumeBar = $("#jsVolumeLevelContainer"),
                 volumeBall = $("#jsVolumeBall");
 
-            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) 
-            {
-                var widthOfBar = volumeBar.innerHeight(),
-                    pxFromLeftOfBar = e.pageY - volumeBar.offset().bottom,
+            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
+                var widthOfBar = volumeBar.innerWidth(),
+                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
                     newVol = (pxFromLeftOfBar / widthOfBar);
 
                 VolumeSlider.setVolume(newVol);
@@ -2212,10 +2127,8 @@ var VolumeSlider = {
          * Toggle drag state if we're dragging the slider, and hide the popup if
          * releasing the slider outside the popup area
          */
-        documentMouseup: function(e) 
-        {
-            if (VolumeSlider.events.isDragging) 
-            {
+        documentMouseup: function(e) {
+            if (VolumeSlider.events.isDragging) {
                 e.preventDefault();
                 VolumeSlider.events.isDragging = false;
             }
@@ -2224,8 +2137,7 @@ var VolumeSlider = {
         /**
          * Start dragging the volume slider ball
          */
-        volumeBallMousedown: function(e) 
-        {
+        volumeBallMousedown: function(e) {
             e.preventDefault();
             VolumeSlider.events.isDragging = true;
         },
@@ -2233,26 +2145,21 @@ var VolumeSlider = {
         /**
          * If dragging volume slider, adjust volume as necessary
          */
-        documentMousemove: function(e) 
-        {
-            if (VolumeSlider.events.isDragging) 
-            {
+        documentMousemove: function(e) {
+            if (VolumeSlider.events.isDragging) {
                 var volumeBar = $("#jsVolumeLevelContainer"),
-                    widthOfBar = volumeBar.innerHeight(),
-                    pxFromLeftOfBar = e.pageY - volumeBar.offset().bottom;
+                    widthOfBar = volumeBar.innerWidth(),
+                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
 
-                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) 
-                {
+                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) {
                     VolumeSlider.setVolume(pxFromLeftOfBar / widthOfBar);
                 }
             }
         }
     }
 };
-var iFrameCommunication = function() 
-{
-    var object = 
-    {
+var iFrameCommunication = function() {
+    var object = {
         initialize: init
     };
 
@@ -2261,21 +2168,14 @@ var iFrameCommunication = function()
     /**
      * Initialize iFrame communication
      */
-    function init() 
-    {
-        try 
-        {
-            if (VideoPlayerInterface.iframeWindow.rtc.utils.isPostMessageSupported()) 
-            {
+    function init() {
+        try {
+            if (VideoPlayerInterface.iframeWindow.rtc.utils.isPostMessageSupported()) {
                 postMessageCommunication();
-            } 
-            else 
-            {
+            } else {
                 fallbackCommunication();
             }
-        } 
-        catch(exception) 
-        {
+        } catch(exception) {
             postMessageCommunication();
         }
     }
@@ -2285,12 +2185,9 @@ var iFrameCommunication = function()
     /**
      * Add listener to post messages from rtc iFrame
      */
-    function postMessageCommunication() 
-    {
-        window.addEventListener("message", function(e) 
-        {
-            switch (e.data.message) 
-            {
+    function postMessageCommunication() {
+        window.addEventListener("message", function(e) {
+            switch (e.data.message) {
                 case "showCustomError":
                     iFrameEvents.showErrorCard(e.data.data);
                     break;
@@ -2301,7 +2198,7 @@ var iFrameCommunication = function()
                     iFrameEvents.showLowBandwidthInfo(e.data.data);
                     break;
             }
-         }, false);
+        }, false);
     }
 
     /**
@@ -2336,8 +2233,7 @@ var iFrameCommunication = function()
      *
      * @param {object} $postHandler Jquery object with post handler element
      */
-    function resetPostHandler($postHandler) 
-    {
+    function resetPostHandler($postHandler) {
         $postHandler.data("message", "");
         $postHandler.data("value", "");
     }
@@ -2349,12 +2245,10 @@ var iFrameEvents = {
      *
      * @param {string} element Id or class element that exist in iFrame with error
      */
-    showErrorCard: function(element) 
-    {
+    showErrorCard: function(element) {
         var $elem = $(VideoPlayerInterface.iframeWindow.$(element));
 
-        if ($elem.length > 0) 
-        {
+        if ($elem.length > 0) {
             CtaButtons.closeAllSideCards();
             VideoPlayerInterface.hideResumeSplash();
             VideoPlayerInterface.actions.pause(false);
@@ -2367,12 +2261,10 @@ var iFrameEvents = {
      *
      * @param {string} element Id or class element that exist in iFrame with error
      */
-    closeLowBandwidthCard: function(element) 
-    {
+    closeLowBandwidthCard: function(element) {
         var $lowBandwidthBar = $(VideoPlayerInterface.iframeWindow.$(element));
 
-        if ($lowBandwidthBar.length > 0) 
-        {
+        if ($lowBandwidthBar.length > 0) {
             $lowBandwidthBar.prependTo("#jsHeaderLowBandwidth");
         }
 
@@ -2383,12 +2275,10 @@ var iFrameEvents = {
      *
      * @param {string} element Id or class element that should exist in iFrame with low bandwidth info
      */
-    showLowBandwidthInfo: function(element) 
-    {
+    showLowBandwidthInfo: function(element) {
         var $lowBandwidthBar = $(element);
 
-        if ($lowBandwidthBar.length > 0) 
-        {
+        if ($lowBandwidthBar.length > 0) {
             $(element).fadeIn();
         }
     }
@@ -2400,14 +2290,10 @@ var MobileOrientationHandler = {
     /**
      * Initialises the MobileOrientationHandler
      */
-    initialise: function() 
-    {
-        if ($(window).height() <= $(window).width()) 
-        {
+    initialise: function() {
+        if ($(window).height() <= $(window).width()) {
             MobileOrientationHandler.orientation = "landscape";
-        } 
-        else 
-        {
+        } else {
             MobileOrientationHandler.orientation = "portrait";
         }
 
@@ -2423,27 +2309,26 @@ var MobileOrientationHandler = {
      *
      * @return {boolean} true if the automatic scrolling/resizing should be enabled, otherwise false
      */
-    shouldEnable: function() 
-    {
+    shouldEnable: function() {
         return $("#jsTimelineIndicator").is(":visible") && navigator.userAgent.match(/Android|iPhone|Windows Phone|iPod/i);
     },
 
     /**
      * Automatically scrolls the window to the top of the video area
      */
-    scrollToVideo: function() 
-    {
-        if (MobileOrientationHandler.shouldEnable()) 
-        {
-                $("html, body").animate({ scrollTop: $("#jsPlayerIframe").offset().top },1000);
+    scrollToVideo: function() {
+        if (MobileOrientationHandler.shouldEnable()) {
+                $("html, body").animate(
+                { scrollTop: $("#jsPlayerIframe").offset().top },
+                1000
+            );
         }
     },
 
     /**
      * Resizes the video/cta/timeline area to ensure it fits within a non 16/9 screen.
      */
-    resizeVideoArea: function() 
-    {
+    resizeVideoArea: function() {
         var mainWidth;
         if ($(window).innerWidth() / $(window).innerHeight() >= 16 / 9 && MobileOrientationHandler.shouldEnable() && $("#jsTopWrapper").hasClass("top-wrapper--no-cta")) {
             mainWidth = (Math.ceil($(window).innerHeight() * (16 / 9))) - $(".cta--side").width();
@@ -2593,16 +2478,13 @@ var FullScreenHandler = {
         /**
          * Toggles the fullscreen HTML changes (inc. classes) on the landing page
          */
-        toggleHtmlChanges: function() 
-        {
+        toggleHtmlChanges: function() {
             $("html").toggleClass("fullscreen");
             $("#jsFullScreenIcon").toggleClass("timeline__button-icon--fullscreen timeline__button-icon--fullscreen-in");
 
-            if (!FullScreenHandler.isActive()) 
-            {
+            if (!FullScreenHandler.isActive()) {
                 $("#jsHeader").prepend($("#jsSocialIconsTop"));
-            } 
-            else {
+            } else {
                 $("#jsMain").append($("#jsSocialIconsTop"));
             }
         },

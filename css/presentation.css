@@ -578,13 +578,15 @@ border-bottom-right-radius: 6%;
     border: none;
 }
 
-.timeline-volume__bg {
+.timeline-volume__bg 
+{
     background-color: #717171;
     border-radius: 5px;
 }
 
-.timeline-volume__level {
-    background-color: #704a1e;
+.timeline-volume__level 
+{
+    background-color: #3fdfef;
     border-radius: 5px;
 }
 

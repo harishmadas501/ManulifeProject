@@ -2050,8 +2050,10 @@ var VolumeSlider = {
     /**
      * Initialise the volume slider
      */
-    initialise: function(startingVolume) {
-        if (Utils.userAgentInList(navigator.userAgent, VolumeSlider.disabledDevices)) {
+    initialise: function(startingVolume) 
+	{
+        if (Utils.userAgentInList(navigator.userAgent, VolumeSlider.disabledDevices)) 
+	{
             VolumeSlider.disable();
             return;
         }
@@ -2060,10 +2062,11 @@ var VolumeSlider = {
         VolumeSlider.events.initialise();
 
         // Starting value
-        if (typeof startingVolume == 'undefined' || startingVolume > 1 || startingVolume < 0) {
+        if (typeof startingVolume == 'undefined' || startingVolume > 1 || startingVolume < 0) 
+	{
             startingVolume = 0.5;
         }
-        VolumeSlider.setVolume(startingVolume);
+        VolumeSlider.setVolume(startingVolume).css("orientation","vertical");
     },
 
     /**
@@ -2071,18 +2074,21 @@ var VolumeSlider = {
      *
      * @param value
      */
-    setVolume: function(value) {
-        if (typeof value == 'undefined') {
+    setVolume: function(value) 
+    {
+        if (typeof value == 'undefined') 
+	{
             return;
         }
 
         var percent = Math.ceil(value * 100);
         percent = percent > 100 ? 100 : percent;
-
-        $("#jsVolumeLevel").innerWidth(percent + "%");
+        
+        $("#jsVolumeLevel").innerHeight(percent + "%");
         $("#jsVolumeButtonSRText").text("Volume (" + percent + "%)");
 
-        try {
+        try 
+	{
             if (VideoPlayerInterface.actions.volumeChange){
                 VideoPlayerInterface.actions.volumeChange(percent);
             }

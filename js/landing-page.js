@@ -172,6 +172,7 @@ var BufferStatus =
             stateTemplate.data('interaction-id', stateName);
             stateTemplate.find('.timeline__buffer-section-inner').attr('id', 'jsSectionInner' + stateName);
             stateTemplate.css('left', stateWidth + "%");
+            stateTemplate.css("background","url(images/timeline-marker-hi-res.png)");
             bufferTimeline.append(stateTemplate);
             counter++;
         });

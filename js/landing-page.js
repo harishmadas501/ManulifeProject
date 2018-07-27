@@ -360,7 +360,7 @@ var ContrastProgress =
          * @param {jQuery} chapter the chapter element
          */
         $(".jsTimelineChapter").each(function appendChapterToContrast(i, chapter) 
-		{
+	{
             $(chapter).clone(true).appendTo("#jsTimelineContrastFixed");
         });
     }
@@ -2066,7 +2066,7 @@ var VolumeSlider = {
 	{
             startingVolume = 0.5;
         }
-        VolumeSlider.setVolume(startingVolume).css("orientation","vertical");
+        VolumeSlider.setVolume(startingVolume);
     },
 
     /**
@@ -2089,26 +2089,36 @@ var VolumeSlider = {
 
         try 
 	{
-            if (VideoPlayerInterface.actions.volumeChange){
+            if (VideoPlayerInterface.actions.volumeChange)
+	    {
                 VideoPlayerInterface.actions.volumeChange(percent);
             }
-        } catch (exception) {
-            if (window.console) {
+        } catch (exception) 
+	  {
+            if (window.console) 
+	    {
                 console.error(exception);
             }
         }
 
         // Set volume logo bars
-        if (value > 0.85){
+        if (value > 0.85)
+	{
             // 3 Bars
             VolumeSlider.setVolumeIconBars(3)
-        } else if (value > 0.5) {
+        } 
+        else if (value > 0.5) 
+	{
             // 2 bars
             VolumeSlider.setVolumeIconBars(2);
-        } else if (value > 0.05) {
+        } 
+	else if (value > 0.05) 
+	{
             // 1 bar
             VolumeSlider.setVolumeIconBars(1);
-        } else {
+        } 
+	else 
+	{
             // no bars
             VolumeSlider.setVolumeIconBars(0);
         }
@@ -2119,12 +2129,14 @@ var VolumeSlider = {
      *
      * @returns {number}
      */
-    getVolume: function() {
-        if ($("#jsVolumeLevel").width() === 0) {
+    getVolume: function() 
+    {
+        if ($("#jsVolumeLevel").height() === 0) 
+	{
             return 0;
         }
 
-        return $("#jsVolumeLevel").innerWidth() / $("#jsVolumeLevelContainer").width();
+        return $("#jsVolumeLevel").innerHeight() / $("#jsVolumeLevelContainer").height();
     },
 
     /**
@@ -2132,7 +2144,8 @@ var VolumeSlider = {
      *
      * @param bars
      */
-    setVolumeIconBars: function(bars) {
+    setVolumeIconBars: function(bars) 
+    {
         $('#jsVolumeButtonIcon')
             .removeClass("timeline__button-icon--volume-0")
             .removeClass("timeline__button-icon--volume-1")

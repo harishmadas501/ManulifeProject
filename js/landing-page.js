@@ -1,30 +1,22 @@
-function isInArray(value, array) 
-{
+function isInArray(value, array) {
     return array.indexOf(value) > -1;
 }
 
-function isEmpty(obj) 
-{
-    for (var key in obj) 
-	{
-        if (obj.hasOwnProperty(key)) 
-		{
+function isEmpty(obj) {
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
             return false;
         }
     }
     return true;
 }
 
-if (!Object.keys) 
-{
-    Object.keys = function(obj) 
-	{
+if (!Object.keys) {
+    Object.keys = function(obj) {
         var keys = [];
 
-        for ( var i in obj) 
-		{
-            if (obj.hasOwnProperty(i)) 
-			{
+        for ( var i in obj) {
+            if (obj.hasOwnProperty(i)) {
                 keys.push(i);
             }
         }
@@ -33,8 +25,7 @@ if (!Object.keys)
     };
 }
 
-$(document).ready(function() 
-{
+$(document).ready(function() {
 
     $("#jsDate").text(Utils.getFullYear());
     /**
@@ -108,8 +99,7 @@ var Utils = {
      *
      * @return {boolean} whether the current user agent is in the list
      */
-    userAgentInList: function(userAgent, userAgentList) 
-	{
+    userAgentInList: function(userAgent, userAgentList) {
         var inList = false;
         userAgent = userAgent.toLowerCase();
 
@@ -119,10 +109,8 @@ var Utils = {
          * @param {number} index the array index
          * @param {string} agentExpression the regular expression to test
          */
-        $.each(userAgentList, function testEachAgent(index, agentExpression) 
-		{
-            if (agentExpression.test(userAgent)) 
-			{
+        $.each(userAgentList, function testEachAgent(index, agentExpression) {
+            if (agentExpression.test(userAgent)) {
                 inList = true;
                 return false;
             }
@@ -131,27 +119,22 @@ var Utils = {
         return inList;
     },
 
-    getFullYear: function() 
-	{
+    getFullYear: function() {
         return (new Date()).getFullYear();
     }
 };
 
-var BufferStatus = 
-{
+var BufferStatus = {
 
     seenStates: [],
 
-    initBuffer: function () 
-	{
-        if(Timeline.SettingsJsonObject.BufferBarEnabled)
-		{
+    initBuffer: function () {
+        if(Timeline.SettingsJsonObject.BufferBarEnabled){
             BufferStatus.createBufferDivs();
         }
     },
 
-    createBufferDivs: function () 
-	{
+    createBufferDivs: function () {
         var counter = 1;
 
         var bufferSectionHTMLTemplate =
@@ -163,113 +146,87 @@ var BufferStatus =
 
         bufferTimeline.children().remove();
 
-        $('.jsTimelineState').each(function () 
-		{
+        $('.jsTimelineState').each(function () {
             var stateTemplate = $(bufferSectionHTMLTemplate).clone();
             var stateName = $(this).data('state');
             var stateWidth = $(this).data('percent-width');
             stateTemplate.attr('id', 'jsBufferSection'+counter);
             stateTemplate.data('interaction-id', stateName);
             stateTemplate.find('.timeline__buffer-section-inner').attr('id', 'jsSectionInner' + stateName);
-            stateTemplate.css('left', stateWidth + "%");
+            stateTemplate.css('width', stateWidth + "%");
             bufferTimeline.append(stateTemplate);
             counter++;
         });
         BufferStatus.applyBufferSettings();
     },
 
-    applyBufferSettings: function () 
-	{
+    applyBufferSettings: function () {
         var opacity = Timeline.SettingsJsonObject.BufferBarOpacity;
         var color = Timeline.SettingsJsonObject.BufferBarColor;
     },
 
-    updateBuffer: function () 
-	{
-        if(LanguageSelector.currentLanguageObj !== {})
-		{
-            try 
-			{
+    updateBuffer: function () {
+        if(LanguageSelector.currentLanguageObj !== {}){
+            try {
                 var videoTimes = VideoPlayerInterface.iframeWindow.rtc.player.getVideoTimes(),
                     currentState = Timeline.getStateFromProgress(),
                     chapters = VideoPlayerInterface.getVideoChapters();
 
                 //Checks if the video has reached the end and prevents the introduction buffer bar loading
-                if(Timeline.getProgress() !== 1)
-				{
-                    if(isInArray(currentState,BufferStatus.seenStates))
-					{
-                        $.each(chapters, function(state, chapter) 
-						{
-                            if (videoTimes.buffered > chapter.start + chapter.duration) 
-							{
+                if(Timeline.getProgress() !== 1){
+                    if(isInArray(currentState,BufferStatus.seenStates)){
+                        $.each(chapters, function(state, chapter) {
+                            if (videoTimes.buffered > chapter.start + chapter.duration) {
                                 BufferStatus.updateStateBufferProgress(state, 100);
-                            } 
-							else 
-							{
-                                BufferStatus.updateStateBufferProgress(state,((videoTimes.buffered - chapter.start) / chapter.duration) * 100);
+                            } else {
+                                BufferStatus.updateStateBufferProgress(
+                                    state,
+                                    ((videoTimes.buffered - chapter.start) / chapter.duration) * 100
+                                );
                             }
                         });
                     }
                 }
-                
-				if(!isInArray(currentState,BufferStatus.seenStates))
-				{
+                if(!isInArray(currentState,BufferStatus.seenStates)){
                     BufferStatus.seenStates.push(currentState);
                 }
-                
-				BufferStatus.clearOldBuffers(currentState);
-            
-			} 
-			catch (e) {}
+                BufferStatus.clearOldBuffers(currentState);
+            } catch (e) {}
         }
     },
 
-    clearOldBuffers: function (currentState) 
-	{
-        for (var i=0; i < BufferStatus.seenStates.length; i++)
-		{
+    clearOldBuffers: function (currentState) {
+        for (var i=0; i < BufferStatus.seenStates.length; i++){
             var state = BufferStatus.seenStates[i];
-         
-			if(state !== currentState) 
-			{
+            if(state !== currentState) {
                 BufferStatus.updateStateBufferProgress(state,0);
             }
         }
     },
 
     //State is the id of the interaction card as a string.
-    updateStateBufferProgress: function(state, percentage) 
-	{
-        if (typeof state === "string")
-		{
+    updateStateBufferProgress: function(state, percentage) {
+        if (typeof state === "string"){
             $('#jsSectionInner'+state).css('width', percentage + "%");
         }
     }
 };
 
-var ClosedCaptionSelector = 
-{
+var ClosedCaptionSelector = {
 
-    initialise: function () 
-	{
+    initialise: function () {
         ClosedCaptionSelector.events.initialise();
         $('#jsCCOffTick').show();
         $('#jsCCOnTick').hide();
     },
 
-    setClosedCaptions: function(value)
-	{
+    setClosedCaptions: function(value){
         var captionsOn = VideoPlayerInterface.iframeWindow.rtc.player.vars.showCaptions;
-    
-		if (value === 'on' && !captionsOn) 
-		{
+        if (value === 'on' && !captionsOn) {
             VideoPlayerInterface.iframeWindow.rtc.player.toggleCC();
             $('#jsCCOnTick').show();
             $('#jsCCOffTick').hide();
-        } 
-		else if (value === 'off' && captionsOn) 
-		{
+        } else if (value === 'off' && captionsOn) {
             VideoPlayerInterface.iframeWindow.rtc.player.toggleCC();
             $('#jsCCOffTick').show();
             $('#jsCCOnTick').hide();
@@ -280,21 +237,18 @@ var ClosedCaptionSelector =
         /**
          * Link up the events and the event handlers
          */
-        initialise: function() 
-		{
+        initialise: function() {
             $('#jsCCMenuTitle').click(ClosedCaptionSelector.events.closeCCMenu);
             $('.jsTimelineSettingsCaption').click(ClosedCaptionSelector.events.ccItemClickEventHandler);
         },
 
-        closeCCMenu: function (e) 
-		{
+        closeCCMenu: function (e) {
             $('#jsSettingsButtonPopout').show();
             $('#jsCCSelectorPopout').hide();
             $("#jsCCMenuItem").focus();
         },
 
-        ccItemClickEventHandler: function(e) 
-		{
+        ccItemClickEventHandler: function(e) {
             //off or on
             var newValue = $(this).data('value');
             ClosedCaptionSelector.setClosedCaptions(newValue);
@@ -302,22 +256,18 @@ var ClosedCaptionSelector =
     }
 };
 
-var ContrastProgress = 
-{
+var ContrastProgress = {
     enabled: false,
 
-    initialise: function (timelineSettings)
-	{
+    initialise: function (timelineSettings){
         ContrastProgress.enabled = timelineSettings.ContrastProgressBarEnabled;
 
-        if (ContrastProgress.enabled) 
-		{
+        if (ContrastProgress.enabled) {
             ContrastProgress.createContrastTimeline();
         }
     },
 
-    createContrastTimeline: function ()
-	{
+    createContrastTimeline: function (){
         ContrastProgress.cloneDivAppendTo("jsTimelineContainer", "jsTimelineContrast", "jsTimelineControlsCenter");
         $("#jsTimelineContrast").addClass("timeline-contrast");
         $("#jsTimelineProgressHover").addClass("timeline-contrast-hover");
@@ -325,29 +275,24 @@ var ContrastProgress =
         ContrastProgress.addFixedDiv();
     },
 
-    cloneDivAppendTo: function (divId, newDivId, appendToDivID) 
-	{
+    cloneDivAppendTo: function (divId, newDivId, appendToDivID) {
         $('#' + divId).clone(true).prop('id', newDivId).appendTo('#' + appendToDivID);
     },
 
-    addFixedDiv: function () 
-	{
+    addFixedDiv: function () {
         $("#jsTimelineContrast").wrapInner("<div id='jsTimelineContrastFixed'></div>");
         $("#jsTimelineContrastFixed").css('width', $("#jsTimelineContainer").width() + "px");
     },
 
-    setContrastTimelineProgress: function (progress)
-	{
+    setContrastTimelineProgress: function (progress){
         $("#jsTimelineContrast").width($("#jsTimelineContainer").width() * progress);
     },
 
     /**
      * Update the labels used on the Contrast Progress bar, by cloning them into the contrast div
      */
-    updateLabels: function() 
-	{
-        if (!ContrastProgress.enabled) 
-		{
+    updateLabels: function() {
+        if (!ContrastProgress.enabled) {
             return;
         }
 
@@ -359,98 +304,75 @@ var ContrastProgress =
          * @param {number} i       the index
          * @param {jQuery} chapter the chapter element
          */
-        $(".jsTimelineChapter").each(function appendChapterToContrast(i, chapter) 
-		{
+        $(".jsTimelineChapter").each(function appendChapterToContrast(i, chapter) {
             $(chapter).clone(true).appendTo("#jsTimelineContrastFixed");
         });
     }
 };
 
-var KeyboardInputController = 
-{
-    initialise: function () 
-	{
+var KeyboardInputController = {
+
+    initialise: function () {
         KeyboardInputController.initKeyboardControls();
         KeyboardInputController.hideOutlines();
     },
 
-    hideOutlines: function () 
-	{
+    hideOutlines: function () {
         $('a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]')
             .not('[disabled]').removeClass('focusable').addClass('no-focus');
     },
 
-    showOutlines: function () 
-	{
+    showOutlines: function () {
         $('a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]')
             .not('[disabled]').removeClass('no-focus').addClass('focusable');
     },
 
-    initKeyboardControls: function() 
-	{
+    initKeyboardControls: function() {
         var keyStart = {37: null, 39: null};
         var keyEnd = {37: null, 39: null};
 
         //Add a listener on the body of videoPlayer.php
-        $(document).keydown(function(e) 
-		{
+        $(document).keydown(function(e) {
             //Then, if the element in focus isn't an input, select, textarea or form, allow the user to control the video player
             var inputActive = $("input, select, textarea, form").is(":focus");
             var currentDate = new Date();
 
-            if(inputActive === false) 
-			{
-                switch (e.keyCode) 
-				{
+            if(inputActive === false) {
+                switch (e.keyCode) {
                     //Space bar
-                    case 32: e.preventDefault();
-                        
-						if (VideoPlayerInterface.iframeWindow.rtc.player.video.status().paused) 
-						{
+                    case 32:
+                        e.preventDefault();
+                        if (VideoPlayerInterface.iframeWindow.rtc.player.video.status().paused) {
                             VideoPlayerInterface.iframeWindow.rtc.player.controls.resume();
-                        } 
-						else 
-						{
+                        } else {
                             VideoPlayerInterface.iframeWindow.rtc.player.controls.pause();
                         }
 
                         VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.spacebar");
-                        
-						break;
+                        break;
                     //Left and right arrow keys
                     case 37:
                     case 39:
                         //Record the time the keypress started
-                        if(keyStart[e.keyCode] === null) 
-						{
+                        if(keyStart[e.keyCode] === null) {
                             keyStart[e.keyCode] = new Date();
                         }
 
                         //Then if the current time is a second after the key press started, rewind or fast-forward the video
-                        if(currentDate.getTime() > keyStart[e.keyCode].getTime() + 500) 
-						{
-                            if(VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration !== 0 && VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration < 10) 
-							{
-                                if(e.keyCode == 37) 
-								{
+                        if(currentDate.getTime() > keyStart[e.keyCode].getTime() + 500) {
+                            if(VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration !== 0 && VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration < 10) {
+                                if(e.keyCode == 37) {
                                     VideoPlayerInterface.iframeWindow.rtc.player.skipPrevious();
                                     VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.skip-previous");
-                                } 
-								else 
-								{
+                                } else {
                                     VideoPlayerInterface.iframeWindow.rtc.player.skipNext();
                                     VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.skip-next");
                                 }
-                            } 
-							else if(VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration !== 0) 
-							{
-                                if(e.keyCode == 37) 
-								{
+                            } else if(VideoPlayerInterface.iframeWindow.rtc.player.vars.videoDuration !== 0) {
+                                if(e.keyCode == 37) {
                                     VideoPlayerInterface.iframeWindow.rtc.player.vars.currentTime -= 10;
                                     VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.rewind", "newTime=" + rtc.player.vars.currentTime);
-                                } 
-								else 
-								{
+                                } else {
                                     VideoPlayerInterface.iframeWindow.rtc.player.vars.currentTime += 10;
                                     VideoPlayerInterface.iframeWindow.rtc.utils.track("keyboard.fast-forward", "newTime=" + rtc.player.vars.currentTime);
                                 }
@@ -462,13 +384,11 @@ var KeyboardInputController =
                         }
                         break;
                     // Enter key
-                    
-					case 13: if (document.activeElement.type !== "button" && !document.activeElement.href) 
-					         {
-                            	$(document.activeElement).click();
-                        	 }
-                        	
-							 break;
+                    case 13:
+                        if (document.activeElement.type !== "button" && !document.activeElement.href) {
+                            $(document.activeElement).click();
+                        }
+                        break;
                     // Tab key
                     case 9:
                         KeyboardInputController.showOutlines();
@@ -477,8 +397,7 @@ var KeyboardInputController =
             }
         });
 
-        $(document).keyup(function(e) 
-		{
+        $(document).keyup(function(e) {
             //If the element in focus isn't an input, select, textarea or form, allow the user to control the video player
             var inputActive = $("input, select, textarea, form").is(":focus");
             var currentDate = new Date();
@@ -2540,8 +2459,7 @@ var FullScreenHandler = {
             document.mozCancelFullScreen();
         } else if (document.webkitExitFullscreen) {
             document.webkitExitFullscreen();
-        
-		css("orientation","vertical")
+        }
     },
 
     events: {

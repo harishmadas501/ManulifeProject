@@ -45,29 +45,34 @@ var Translations = {
      *
      * If the CTA buttons are not required then remove the content from the variable - "CtaButtonSettings": {};
      */
-    "CtaButtonSettings": {
-        "button1": {
-            "card": "0598b6a6",
+    "CtaButtonSettings": 
+    {
+        "button1": 
+        {
+            "card": "e87c2eec",
             "label": "Contact",
             "icon": "contact"
         },
-        "button2": {
+        "button2": 
+        {
             "url": "http://www.realtimecontent.com/",
             "label": "Website",
             "icon": "website"
         },
-        "button3": {
-            "card": "77467215",
+        "button3": 
+        {
+            "card": "9518c31e",
             "label": "Feedback",
             "icon": "Feedback"
         },
-        "button4": {
-            "card": "3eac4551",
+        "button4": 
+        {
+            "card": "fbbc1aaf",
             "label": "Save",
             "icon": "save"
         },
         "button5": {
-            "card": "c2040229",
+            "card": "99d7e923",
             "label": "Share",
             "icon": "share"
         }

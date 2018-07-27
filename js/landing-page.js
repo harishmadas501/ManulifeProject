@@ -2129,7 +2129,7 @@ var VolumeSlider = {
         volumeLevelClick: function(e) 
         {
             var volumeBar = $("#jsVolumeLevelContainer").css("orientation","vertical"),
-                volumeBall = $("#jsVolumeBall");
+                volumeBall = $("#jsVolumeBall").css("orientation","vertical");
 
             if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) 
             {
@@ -2166,13 +2166,16 @@ var VolumeSlider = {
         /**
          * If dragging volume slider, adjust volume as necessary
          */
-        documentMousemove: function(e) {
-            if (VolumeSlider.events.isDragging) {
-                var volumeBar = $("#jsVolumeLevelContainer"),
-                    widthOfBar = volumeBar.innerWidth(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
+        documentMousemove: function(e) 
+        {
+            if (VolumeSlider.events.isDragging) 
+            {
+                var volumeBar = $("#jsVolumeLevelContainer").css("orientation","vertical"),
+                    widthOfBar = volumeBar.innerHeight(),
+                    pxFromLeftOfBar = e.pageX - volumeBar.offset().botoom;
 
-                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) {
+                if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) 
+                {
                     VolumeSlider.setVolume(pxFromLeftOfBar / widthOfBar);
                 }
             }

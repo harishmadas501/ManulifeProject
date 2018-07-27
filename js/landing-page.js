@@ -1990,23 +1990,30 @@ var VolumeSlider = {
      *
      * @param value
      */
-    setVolume: function(value) {
-        if (typeof value == 'undefined') {
+    setVolume: function(value) 
+    {
+        if (typeof value == 'undefined') 
+        {
             return;
         }
 
         var percent = Math.ceil(value * 100);
         percent = percent > 100 ? 100 : percent;
-
-        $("#jsVolumeLevel").innerWidth(percent + "%");
+       
+        $("#jsVolumeLevel").innerHeight(percent + "%");
         $("#jsVolumeButtonSRText").text("Volume (" + percent + "%)");
 
-        try {
-            if (VideoPlayerInterface.actions.volumeChange){
+        try 
+        {
+            if (VideoPlayerInterface.actions.volumeChange)
+            {
                 VideoPlayerInterface.actions.volumeChange(percent);
             }
-        } catch (exception) {
-            if (window.console) {
+        } 
+        catch (exception) 
+        {
+            if (window.console) 
+            {
                 console.error(exception);
             }
         }
@@ -2032,12 +2039,14 @@ var VolumeSlider = {
      *
      * @returns {number}
      */
-    getVolume: function() {
-        if ($("#jsVolumeLevel").width() === 0) {
+    getVolume: function() 
+    {
+        if ($("#jsVolumeLevel").height() === 0) 
+        {
             return 0;
         }
 
-        return $("#jsVolumeLevel").innerWidth() / $("#jsVolumeLevelContainer").width();
+        return $("#jsVolumeLevel").innerHeight() / $("#jsVolumeLevelContainer").height();
     },
 
     /**
@@ -2045,7 +2054,8 @@ var VolumeSlider = {
      *
      * @param bars
      */
-    setVolumeIconBars: function(bars) {
+    setVolumeIconBars: function(bars) 
+    {
         $('#jsVolumeButtonIcon')
             .removeClass("timeline__button-icon--volume-0")
             .removeClass("timeline__button-icon--volume-1")
@@ -2057,7 +2067,8 @@ var VolumeSlider = {
     /**
      * Hide the volume button and bar on devices where volume cannot be controlled by the player.
      */
-    disable: function() {
+    disable: function() 
+    {
         $("#jsVolume, #jsVolumeButton").hide();
         $("#jsTimeline").addClass("timeline--no-volume");
     },
@@ -2069,7 +2080,8 @@ var VolumeSlider = {
         /**
          * Link up the events and the event handlers
          */
-        initialise: function() {
+        initialise: function() 
+        {
             $('#jsVolumeButton').click(VolumeSlider.events.volumeButtonClickEventHandler);
             $('#jsVolumeBar').click(VolumeSlider.events.volumeLevelClick);
             $('#jsVolumeLevel').click(VolumeSlider.events.volumeLevelClick);
@@ -2095,13 +2107,17 @@ var VolumeSlider = {
         /**
          * Mute/unmute the volume
          */
-        volumeButtonClickEventHandler: function(e) {
+        volumeButtonClickEventHandler: function(e) 
+        {
             // if volume is more than 0 then mute it, otherwise full volume
-            if (VolumeSlider.getVolume() > 0) {
+            if (VolumeSlider.getVolume() > 0) 
+            {
                 // Store the volume before muting so we can revert back to the original value when we unmute
                 VolumeSlider.mutedVolume = VolumeSlider.getVolume();
                 VolumeSlider.setVolume(0);
-            } else {
+            } 
+            else 
+            {
                 // Revert back to the original volume value
                 VolumeSlider.setVolume(VolumeSlider.mutedVolume);
             }
@@ -2110,13 +2126,15 @@ var VolumeSlider = {
         /**
          * Set the volume by clicking on the slider
          */
-        volumeLevelClick: function(e) {
-            var volumeBar = $("#jsVolumeLevelContainer"),
+        volumeLevelClick: function(e) 
+        {
+            var volumeBar = $("#jsVolumeLevelContainer").css("orientation","vertical"),
                 volumeBall = $("#jsVolumeBall");
 
-            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
-                var widthOfBar = volumeBar.innerWidth(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
+            if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) 
+            {
+                var widthOfBar = volumeBar.innerHeight(),
+                    pxFromLeftOfBar = e.pageX - volumeBar.offset().bottom,
                     newVol = (pxFromLeftOfBar / widthOfBar);
 
                 VolumeSlider.setVolume(newVol);
@@ -2127,8 +2145,10 @@ var VolumeSlider = {
          * Toggle drag state if we're dragging the slider, and hide the popup if
          * releasing the slider outside the popup area
          */
-        documentMouseup: function(e) {
-            if (VolumeSlider.events.isDragging) {
+        documentMouseup: function(e) 
+        {
+            if (VolumeSlider.events.isDragging) 
+            {
                 e.preventDefault();
                 VolumeSlider.events.isDragging = false;
             }
@@ -2137,7 +2157,8 @@ var VolumeSlider = {
         /**
          * Start dragging the volume slider ball
          */
-        volumeBallMousedown: function(e) {
+        volumeBallMousedown: function(e) 
+        {
             e.preventDefault();
             VolumeSlider.events.isDragging = true;
         },

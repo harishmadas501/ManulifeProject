@@ -579,7 +579,7 @@ div.promo__item.promo__item--bottom {
 .timeline-volume__bg 
 {
     margin-top: 35px;
-    width: 113%;
+    width: 115%;
     height: 23px;
 }
 
@@ -838,8 +838,8 @@ div.promo__item.promo__item--bottom {
     }
 
     .timeline-volume__bg {
-       margin-top: -159px;
-       margin-left: 75px;px;
+           margin-top: -83px;
+           margin-left: 0px;
     }
 
     .timeline-volume__container {

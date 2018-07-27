@@ -2115,8 +2115,8 @@ var VolumeSlider = {
                 volumeBall = $("#jsVolumeBall");
 
             if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) {
-                var widthOfBar = volumeBar.innerHeight(),
-                    pxFromLeftOfBar = e.pageY - volumeBar.offset().top,
+                var widthOfBar = volumeBar.innerWidth(),
+                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
                     newVol = (pxFromLeftOfBar / widthOfBar);
 
                 VolumeSlider.setVolume(newVol);

@@ -1385,10 +1385,13 @@ var Timeline = {
         $("#jsTimelineProgress").width(progressWidth);
 
         /* On mobile devices, ensure the progress ball appears within the screen boundaries */
-        if ($("#jsTimelineIndicator").is(":visible") && $("#jsTimelineCover").length === 0) {
+        if ($("#jsTimelineIndicator").is(":visible") && $("#jsTimelineCover").length === 0) 
+        {
             $("#jsTimelineIndicatorBall").show();
             $("#jsTimelineIndicator").width(Math.min(Math.max(progressWidth, ballWidth / 2), timelineWidth - ballWidth / 2));
-        } else {
+        } 
+        else 
+        {
             $("#jsTimelineIndicatorBall").hide();
         }
 
@@ -1399,11 +1402,15 @@ var Timeline = {
     /**
      * Update the play/pause button to have the appropriate icon
      */
-    updatePlayPauseButton: function() {
-        if (VideoPlayerInterface.isPlaying) {
+    updatePlayPauseButton: function() 
+    {
+        if (VideoPlayerInterface.isPlaying) 
+        {
             $('#jsPlayPauseSRText').text('Pause');
             $('#jsPlayPauseButton span').removeClass('timeline__button-icon--play').addClass('timeline__button-icon--pause');
-        } else {
+        } 
+        else 
+        {
             $('#jsPlayPauseSRText').text('Play');
             $('#jsPlayPauseButton span').removeClass('timeline__button-icon--pause').addClass('timeline__button-icon--play');
         }
@@ -1412,8 +1419,10 @@ var Timeline = {
     /**
      * Remove the timeline cover element that blocks interaction before the video is loaded
      */
-    enableTimelineIfNecessary: function() {
-        if ($("#jsTimelineCover") && VideoPlayerInterface.isSourceSet) {
+    enableTimelineIfNecessary: function() 
+    {
+        if ($("#jsTimelineCover") && VideoPlayerInterface.isSourceSet) 
+        {
             $("#jsTimelineCover").remove();
         }
     },
@@ -1421,20 +1430,24 @@ var Timeline = {
     /**
      * Add timeline cover element that blocks interaction on video timeline bar
      */
-    disableTimelineIfNecessary: function() {
+    disableTimelineIfNecessary: function() 
+    {
         $('<div id="jsTimelineCover" class="timeline__cover"></div>').prependTo('#jsTimeline');
     },
 
     /**
      * Update the timeline state and progress
      */
-    updateStateAndProgress: function(state, progress) {
-        if (state == "END") {
+    updateStateAndProgress: function(state, progress) 
+    {
+        if (state == "END") 
+        {
             Timeline.setProgress(1);
             return;
         }
 
-        if (Timeline.events.isDragging) {
+        if (Timeline.events.isDragging) 
+        {
             return;
         }
 
@@ -1597,24 +1610,28 @@ var Timeline = {
         /**
          * Show faint background when hovering over timeline.
          */
-        timelineMousemove: function(e) {
+        timelineMousemove: function(e) 
+        {
             $('#jsTimelineProgressHover').width(e.pageX - $('#jsTimelineProgress').offset().left);
         },
 
         /**
          * Hide faint background when leaving timeline.
          */
-        timelineMouseleave: function() {
+        timelineMouseleave: function() 
+        {
             $('#jsTimelineProgressHover').width(0);
         },
 
         /**
          * Handle the timeline click event
          */
-        timelineClick: function(e) {
+        timelineClick: function(e) 
+        {
             e.preventDefault();
             var container = $('#jsTimelineIndicator');
-            if (!container.is(e.target) && container.has(e.target).length === 0) {
+            if (!container.is(e.target) && container.has(e.target).length === 0) 
+            {
                 var timeline_width = $('#jsTimelineContainer').width();
                 Timeline.setProgress((e.pageX - $('#jsTimelineProgress').offset().left) / timeline_width);
                 Timeline.updateInVideo();
@@ -1647,7 +1664,8 @@ var Timeline = {
             if (Timeline.events.isDragging) {
                 var timeline_width = $('#jsTimelineContainer').width();
                 var e_location = e.pageX - $('#jsTimelineProgress').offset().left;
-                if (e_location >= 0 && e_location <= timeline_width) {
+                if (e_location >= 0 && e_location <= timeline_width) 
+                {
                     Timeline.setProgress(e_location / timeline_width);
                 }
             }
@@ -1656,10 +1674,14 @@ var Timeline = {
         /**
          * Pause/play the video when the pause/play button is clicked
          */
-        playPauseButtonClick: function() {
-            if (VideoPlayerInterface.isPlaying) {
+        playPauseButtonClick: function() 
+        {
+            if (VideoPlayerInterface.isPlaying) 
+            {
                 VideoPlayerInterface.actions.pause();
-            } else {
+            } 
+            else 
+            {
                 VideoPlayerInterface.actions.play();
             }
         },
@@ -1667,21 +1689,24 @@ var Timeline = {
         /**
          * Skip back to the last state in the video
          */
-        skipBack: function() {
+        skipBack: function() 
+        {
             VideoPlayerInterface.actions.skipBack();
         },
 
         /**
          * Skip forward to the next state in the video
          */
-        skipForward: function() {
+        skipForward: function() 
+        {
             VideoPlayerInterface.actions.skipForward();
         },
 
         /**
          * Toggle the fullscreen version of the landing page
          */
-        toggleFullscreen: function() {
+        toggleFullscreen: function() 
+        {
             FullScreenHandler.toggle();
         }
     }
@@ -1710,19 +1735,26 @@ var VideoPlayerInterface = {
      * Initialise the video player interface.
      * This class is a proxy that handles all interaction with the video player itself
      */
-    initialise: function() {
-        try {
+    initialise: function() 
+    {
+        try 
+        {
             VideoPlayerInterface.iframeWindow = document.getElementById("videoPlayerIframe").contentWindow;
             VideoPlayerInterface.updateFromVideo();
-            VideoPlayerInterface.updateInterval = setInterval(function() {
+            
+            VideoPlayerInterface.updateInterval = setInterval(function() 
+            {
                 VideoPlayerInterface.updateFromVideo();
             }, 250);
-        } catch(e) {
+        } 
+        catch(e) 
+        {
             console.log("Unable to initialise the VideoPlayerInterface.", e.message);
         }
 
         // Set a click handler on the resume splash screen
-        $("#jsResumeSplash").click(function() {
+        $("#jsResumeSplash").click(function() 
+        {
             VideoPlayerInterface.actions.play();
         });
 
@@ -1732,11 +1764,15 @@ var VideoPlayerInterface = {
      * Get the latest video data and update all affected landing page elements.
      * This function fires at least once every second.
      */
-    updateFromVideo: function() {
-        try {
-            if (VideoPlayerInterface.iframeWindow.rtc && VideoPlayerInterface.iframeWindow.rtc.player && VideoPlayerInterface.iframeWindow.rtc.player.playersReady()) {
+    updateFromVideo: function() 
+    {
+        try 
+        {
+            if (VideoPlayerInterface.iframeWindow.rtc && VideoPlayerInterface.iframeWindow.rtc.player && VideoPlayerInterface.iframeWindow.rtc.player.playersReady()) 
+            {
                 // Wait until the player is ready to initalise the quality selector
-                if (!QualitySelector.loaded) {
+                if (!QualitySelector.loaded) 
+                {
                     QualitySelector.initialise();
                 }
 
@@ -1969,7 +2005,7 @@ var VideoPlayerInterface = {
     }
 };
 
-var VolumeSlider = $(#jsVolumeButton").hover(function()
+var VolumeSlider = 
    { 
     /**  
      * Devices where volume cannot be controlled by the player
@@ -1988,7 +2024,6 @@ var VolumeSlider = $(#jsVolumeButton").hover(function()
         /playbook/
     ],
     
-      $(this,#jsVolume).show();
 
     /**
      * Initialise the volume slider

@@ -49,7 +49,7 @@ var Translations = {
     {
         "button1": 
         {
-            "card": "e87c2eec",
+            "card": "d0bc6b55",
             "label": "Contact",
             "icon": "contact"
         },

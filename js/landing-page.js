@@ -2110,12 +2110,12 @@ var VolumeSlider =
      */
     getVolume: function() 
     {
-        if ($("#jsVolumeLevel").height() === 0) 
+        if ($("#jsVolumeLevel").width() === 0) 
         {
             return 0;
         }
 
-        return $("#jsVolumeLevel").innerHeight() / $("#jsVolumeLevelContainer").height();
+        return $("#jsVolumeLevel").innerWidth() / $("#jsVolumeLevelContainer").width();
     },
 
     /**
@@ -2241,7 +2241,7 @@ var VolumeSlider =
             {
                 var volumeBar = $("#jsVolumeLevelContainer"),
                     widthOfBar = volumeBar.innerWidth(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().top;
+                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left;
 
                 if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) 
                 {

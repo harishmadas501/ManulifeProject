@@ -153,7 +153,7 @@ var BufferStatus = {
             stateTemplate.attr('id', 'jsBufferSection'+counter);
             stateTemplate.data('interaction-id', stateName);
             stateTemplate.find('.timeline__buffer-section-inner').attr('id', 'jsSectionInner' + stateName);
-            stateTemplate.css('width', stateWidth + "%");
+            stateTemplate.css('left', stateWidth + "%");
             bufferTimeline.append(stateTemplate);
             counter++;
         });
@@ -165,20 +165,30 @@ var BufferStatus = {
         var color = Timeline.SettingsJsonObject.BufferBarColor;
     },
 
-    updateBuffer: function () {
-        if(LanguageSelector.currentLanguageObj !== {}){
-            try {
+    updateBuffer: function () 
+    {
+        if(LanguageSelector.currentLanguageObj !== {})
+        {
+            try 
+            {
                 var videoTimes = VideoPlayerInterface.iframeWindow.rtc.player.getVideoTimes(),
                     currentState = Timeline.getStateFromProgress(),
                     chapters = VideoPlayerInterface.getVideoChapters();
 
                 //Checks if the video has reached the end and prevents the introduction buffer bar loading
-                if(Timeline.getProgress() !== 1){
-                    if(isInArray(currentState,BufferStatus.seenStates)){
-                        $.each(chapters, function(state, chapter) {
-                            if (videoTimes.buffered > chapter.start + chapter.duration) {
+                if(Timeline.getProgress() !== 1)
+                {
+                    if(isInArray(currentState,BufferStatus.seenStates))
+                    {
+                        $.each(chapters, function(state, chapter) 
+                        {
+                            if (videoTimes.buffered > chapter.start + chapter.duration) 
+                            {
                                 BufferStatus.updateStateBufferProgress(state, 100);
-                            } else {
+                            } 
+                            
+                            else 
+                            {
                                 BufferStatus.updateStateBufferProgress(
                                     state,
                                     ((videoTimes.buffered - chapter.start) / chapter.duration) * 100
@@ -267,7 +277,8 @@ var ContrastProgress = {
         }
     },
 
-    createContrastTimeline: function (){
+    createContrastTimeline: function ()
+    {
         ContrastProgress.cloneDivAppendTo("jsTimelineContainer", "jsTimelineContrast", "jsTimelineControlsCenter");
         $("#jsTimelineContrast").addClass("timeline-contrast");
         $("#jsTimelineProgressHover").addClass("timeline-contrast-hover");
@@ -275,11 +286,13 @@ var ContrastProgress = {
         ContrastProgress.addFixedDiv();
     },
 
-    cloneDivAppendTo: function (divId, newDivId, appendToDivID) {
+    cloneDivAppendTo: function (divId, newDivId, appendToDivID) 
+    {
         $('#' + divId).clone(true).prop('id', newDivId).appendTo('#' + appendToDivID);
     },
 
-    addFixedDiv: function () {
+    addFixedDiv: function () 
+    {
         $("#jsTimelineContrast").wrapInner("<div id='jsTimelineContrastFixed'></div>");
         $("#jsTimelineContrastFixed").css('width', $("#jsTimelineContainer").width() + "px");
     },
@@ -589,7 +602,8 @@ var LanguageSelector = {
         });
     },
 
-    updateLanguage: function(langCode) {
+    updateLanguage: function(langCode) 
+    {
         Timeline.render(LanguageSelector.currentLanguageObj.ChapterSettings);
         $("#jsTopWrapper").removeClass("top-wrapper--no-cta top-wrapper--no-promo");
         $("#jsBottomWrapper").removeClass("bottom-wrapper--no-cta bottom-wrapper--no-promo");
@@ -627,7 +641,8 @@ var LanguageSelector = {
         * If the iframe is present and its src path already contains language=xx
         * then replace the lang code with new code else append the language parameter to iframe src url
         */
-        if (document.getElementById('videoPlayerIframe') != null) {
+        if (document.getElementById('videoPlayerIframe') != null) 
+        {
             var iframe = document.getElementById("videoPlayerIframe"),
                 videoUrl = iframe.src;
 
@@ -690,7 +705,8 @@ var LanguageSelector = {
         /**
          * Link up the events and the event handlers
          */
-        initialise: function() {
+        initialise: function() 
+        {
             $('#jsLanguageMenuTitle').click(LanguageSelector.events.closeLanguageMenu);
             $('.jsTimelineSettingsLanguage').click(LanguageSelector.events.languageItemClickEventHandler);
         },
@@ -1838,7 +1854,8 @@ var VideoPlayerInterface = {
     /**
      * Toggle the resume splash screen that appears over the video when paused
      */
-    toggleResumeSplash: function() {
+    toggleResumeSplash: function() 
+    {
         var resumeVisible = $("#jsResumeSplash").is(":visible");
         var aboutDialogVisible = VideoPlayerInterface.iframeWindow.$("#aboutModal").is(":visible");
         var times = VideoPlayerInterface.iframeWindow.rtc.player.getVideoTimes();
@@ -1855,7 +1872,8 @@ var VideoPlayerInterface = {
     /**
      * Show the resume splash screen
      */
-    showResumeSplash: function() {
+    showResumeSplash: function() 
+    {
         $("#jsResumeSplash").show();
     },
 
@@ -1903,18 +1921,21 @@ var VideoPlayerInterface = {
         pause: function(showResumeSplash) {
             VideoPlayerInterface.iframeWindow.rtc.player.controls.pause();
 
-            if(showResumeSplash !== false) {
+            if(showResumeSplash !== false) 
+            {
                 VideoPlayerInterface.showResumeSplash();
             }
         },
 
-        skipForward: function(currentState) {
+        skipForward: function(currentState) 
+        {
             CtaButtons.closeAllSideCards();
             VideoPlayerInterface.hideResumeSplash();
             VideoPlayerInterface.iframeWindow.rtc.player.controls.fastForward();
         },
 
-        selectState: function(clickedState) {
+        selectState: function(clickedState) 
+        {
             CtaButtons.closeAllSideCards();
             VideoPlayerInterface.hideResumeSplash();
             VideoPlayerInterface.iframeWindow.rtc.timeline.gotoState(clickedState);
@@ -1948,8 +1969,9 @@ var VideoPlayerInterface = {
     }
 };
 
-var VolumeSlider = {
-    /**
+var VolumeSlider = $(#jsVolumeButton").hover(function()
+   { 
+    /**  
      * Devices where volume cannot be controlled by the player
      * Copied over from the default jPlayer 'novolume' object.
      */
@@ -1965,12 +1987,17 @@ var VolumeSlider = {
         /webos/,
         /playbook/
     ],
+    
+      $(this,#jsVolume).show();
 
     /**
      * Initialise the volume slider
      */
-    initialise: function(startingVolume) {
-        if (Utils.userAgentInList(navigator.userAgent, VolumeSlider.disabledDevices)) {
+   
+    initialise: function(startingVolume) 
+    {
+        if (Utils.userAgentInList(navigator.userAgent, VolumeSlider.disabledDevices)) 
+        {
             VolumeSlider.disable();
             return;
         }
@@ -1979,7 +2006,8 @@ var VolumeSlider = {
         VolumeSlider.events.initialise();
 
         // Starting value
-        if (typeof startingVolume == 'undefined' || startingVolume > 1 || startingVolume < 0) {
+        if (typeof startingVolume == 'undefined' || startingVolume > 1 || startingVolume < 0) 
+        {
             startingVolume = 0.5;
         }
         VolumeSlider.setVolume(startingVolume);
@@ -2000,7 +2028,6 @@ var VolumeSlider = {
         var percent = Math.ceil(value * 100);
         percent = percent > 100 ? 100 : percent;
         
-        $("#jsVolumeLevel").css("transform","rotate(deg-90)");
         $("#jsVolumeLevel").innerHeight(percent + "%");
         $("#jsVolumeButtonSRText").text("Volume (" + percent + "%)");
 
@@ -2140,8 +2167,8 @@ var VolumeSlider = {
 
             if (!volumeBall.is(e.target) && volumeBall.has(e.target).length === 0) 
             {
-                var widthOfBar = volumeBar.innerHeight(),
-                    pxFromLeftOfBar = e.pageX - volumeBar.offset().bottom,
+                var widthOfBar = volumeBar.innerWidth(),
+                    pxFromLeftOfBar = e.pageX - volumeBar.offset().left,
                     newVol = (pxFromLeftOfBar / widthOfBar);
 
                 VolumeSlider.setVolume(newVol);
@@ -2178,7 +2205,7 @@ var VolumeSlider = {
             if (VolumeSlider.events.isDragging)
             {
                 var volumeBar = $("#jsVolumeLevelContainer"),
-                    widthOfBar = volumeBar.innerHeight(),
+                    widthOfBar = volumeBar.innerWidth(),
                     pxFromLeftOfBar = e.pageX - volumeBar.offset().top;
 
                 if (pxFromLeftOfBar >= 0 && pxFromLeftOfBar <= widthOfBar) 
@@ -2189,7 +2216,8 @@ var VolumeSlider = {
         }
     }
 };
-var iFrameCommunication = function() {
+var iFrameCommunication = function() 
+{
     var object = {
         initialize: init
     };
@@ -2199,16 +2227,20 @@ var iFrameCommunication = function() {
     /**
      * Initialize iFrame communication
      */
-    function init() {
-        try {
-            if (VideoPlayerInterface.iframeWindow.rtc.utils.isPostMessageSupported()) {
+    function init() 
+    {
+        try 
+        {
+            if (VideoPlayerInterface.iframeWindow.rtc.utils.isPostMessageSupported()) 
+            {
                 postMessageCommunication();
             } else {
                 fallbackCommunication();
             }
-        } catch(exception) {
+        } catch(exception)
+          {
             postMessageCommunication();
-        }
+          }
     }
 
     //////////////////// PRIVATE //////////////////////
@@ -2235,14 +2267,17 @@ var iFrameCommunication = function() {
     /**
      * Fake listener based on data attributes to support IE7 and other browsers which not supports window.postMessage
      */
-    function fallbackCommunication() {
+    function fallbackCommunication() 
+    {
         var $postHandler = VideoPlayerInterface.iframeWindow.rtc.utils.$getIFrameListener();
 
-        var interval = setInterval(function() {
+        var interval = setInterval(function() 
+        {
             var message = $postHandler.data("message");
             var value = $postHandler.data("value");
 
-            switch (message) {
+            switch (message) 
+            {
                 case "showCustomError":
                     iFrameEvents.showErrorCard(value);
                     resetPostHandler($postHandler);
@@ -2264,7 +2299,8 @@ var iFrameCommunication = function() {
      *
      * @param {object} $postHandler Jquery object with post handler element
      */
-    function resetPostHandler($postHandler) {
+    function resetPostHandler($postHandler) 
+    {
         $postHandler.data("message", "");
         $postHandler.data("value", "");
     }

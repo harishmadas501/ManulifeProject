@@ -413,7 +413,7 @@ border-bottom-right-radius: 6%;
 
 #viewerProfile 
 {
-    top: 360px;
+    margin-bottom:30px
     width: 960px;
     left: 230px;
     position: relative;

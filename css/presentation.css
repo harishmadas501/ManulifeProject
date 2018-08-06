@@ -411,6 +411,18 @@ border-bottom-right-radius: 6%;
     height: 28px;
 }
 
+#viewerProfile 
+{
+    top: 360px;
+    width: 960px;
+    left: 230px;
+    position: relative;
+    text-align: center;
+    font-family: DINRegular, Arial, sans-serif;
+    font-size: 16px;
+    color: #88a0b7;
+}
+
 .timeline__button:hover .timeline__button-icon,
 .timeline__button:active .timeline__button-icon,
 .focusable.timeline__button:focus .timeline__button-icon {

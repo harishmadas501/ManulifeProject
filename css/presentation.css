@@ -821,7 +821,7 @@ border-bottom-right-radius: 6%;
 
     .footer 
 	{
-		height: 31px;
+		height: 22px;
 		position: relative;
 		top: -10px;
 		width: 1420px;
@@ -837,15 +837,15 @@ border-bottom-right-radius: 6%;
 	#extra_footer 
 	{
 		width: 1420px;
-		margin: 10px auto;
-		text-align: left;
-		margin-bottom: 30px;
-		padding: 30px;
-		border-top: 3px solid #74777d;
-		font-size: 15px;
-		line-height: 14px;
-		font-family: 'DINRegular', Arial, sans-serif;
-		color: #74777d;
+    		margin: 10px auto;
+    		text-align: left;
+    		margin-top: 25px;
+    		padding: 30px;
+    		border-top: 3px solid #74777d;
+    		font-size: 15px;
+    		line-height: 15px;
+    		font-family: 'DINRegular', Arial, sans-serif;
+    		color: #74777d;
 	}
 	
 	#extra_footer.heading 

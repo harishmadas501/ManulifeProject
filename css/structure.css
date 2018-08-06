@@ -788,9 +788,10 @@ div.promo__item.promo__item--bottom {
         margin-bottom: 4px;
     }
 
-    .player__wrapper {
+    .player__wrapper 
+    {
         width: 1184px;
-        height: 620px;
+        height: 576px;
     }
 
     .timeline,

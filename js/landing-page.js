@@ -2,7 +2,8 @@ function isInArray(value, array) {
     return array.indexOf(value) > -1;
 }
 
-function isEmpty(obj) {
+function isEmpty(obj) 
+{
     for (var key in obj) {
         if (obj.hasOwnProperty(key)) {
             return false;
@@ -11,12 +12,16 @@ function isEmpty(obj) {
     return true;
 }
 
-if (!Object.keys) {
-    Object.keys = function(obj) {
+if (!Object.keys) 
+{
+    Object.keys = function(obj) 
+    {
         var keys = [];
 
-        for ( var i in obj) {
-            if (obj.hasOwnProperty(i)) {
+        for ( var i in obj) 
+        {
+            if (obj.hasOwnProperty(i)) 
+            {
                 keys.push(i);
             }
         }
@@ -25,7 +30,8 @@ if (!Object.keys) {
     };
 }
 
-$(document).ready(function() {
+$(document).ready(function() 
+{
 
     $("#jsDate").text(Utils.getFullYear());
     /**
